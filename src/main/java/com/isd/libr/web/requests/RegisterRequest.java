@@ -3,9 +3,11 @@ package com.isd.libr.web.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
+@Data
+@NoArgsConstructor
 public class RegisterRequest {
     private String email;
     private String firstName;
@@ -14,9 +16,6 @@ public class RegisterRequest {
     private String passwd;
     private String role;
     private String phone;
-
-    public RegisterRequest() {
-    }
 
     @JsonCreator
     public RegisterRequest(@JsonProperty String email,
@@ -33,34 +32,6 @@ public class RegisterRequest {
         this.passwd = passwd;
         this.role = role;
         this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public String getPhone() {
-        return phone;
     }
 
 }
