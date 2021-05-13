@@ -1,6 +1,6 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.service.UserService;
+import com.isd.libr.service.PersonService;
 import com.isd.libr.web.entity.Person;
 import com.isd.libr.web.requests.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/person")
-public class UserController {
-    private final UserService userService;
+public class PersonController {
+    private final PersonService personService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService,
-                          PasswordEncoder passwordEncoder) {
-        this.userService = userService;
+    public PersonController(PersonService personService,
+                            PasswordEncoder passwordEncoder) {
+        this.personService = personService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -33,15 +33,15 @@ public class UserController {
         String lastName = request.getLastName();
         Integer age = request.getAge();
         String passwd = passwordEncoder.encode(request.getPasswd());
-        List<String> roles = request.getRoles();
+        String role = request.getRole();
         String phone = request.getPhone();
-        Person user = userService.create(Person.builder()
+        Person user = personService.create(Person.builder()
                 .email(email)
                 .firstName(firstName)
                 .lastName(lastName)
                 .age(age)
                 .passwd(passwd)
-                .roles(roles)
+                .roles(role)
                 .phone(phone)
                 .build());
 

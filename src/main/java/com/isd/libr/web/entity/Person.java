@@ -5,15 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Data
 @AllArgsConstructor
 @Builder
+@Table(name = "person")
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
     String email;
     @Column(name = "first_name")
@@ -23,8 +22,7 @@ public class Person {
     Integer age;
     @Column(name = "password")
     String passwd;
-    @ElementCollection
-    List<String> roles;
+    String roles;
     String phone;
 
     protected Person() {
