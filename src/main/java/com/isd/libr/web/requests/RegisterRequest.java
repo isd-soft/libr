@@ -13,6 +13,7 @@ public class RegisterRequest {
     private Integer age;
     private String passwd;
     private List<String> roles;
+    private String phone;
 
     public RegisterRequest() {
     }
@@ -23,13 +24,15 @@ public class RegisterRequest {
                            @JsonProperty String lastName,
                            @JsonProperty Integer age,
                            @JsonProperty("password") String passwd,
-                           @JsonProperty List<String> roles) {
+                           @JsonProperty List<String> roles,
+                           @JsonProperty String phone) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.passwd = passwd;
         this.roles = roles;
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -55,4 +58,9 @@ public class RegisterRequest {
     public List<String> getRoles() {
         return roles;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
 }

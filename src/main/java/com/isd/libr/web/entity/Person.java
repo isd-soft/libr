@@ -25,6 +25,7 @@ public class Person {
     String passwd;
     @ElementCollection
     List<String> roles;
+    String phone;
 
     protected Person() {
     }

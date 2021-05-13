@@ -34,6 +34,7 @@ public class UserController {
         Integer age = request.getAge();
         String passwd = passwordEncoder.encode(request.getPasswd());
         List<String> roles = request.getRoles();
+        String phone = request.getPhone();
         Person user = userService.create(Person.builder()
                 .email(email)
                 .firstName(firstName)
@@ -41,6 +42,7 @@ public class UserController {
                 .age(age)
                 .passwd(passwd)
                 .roles(roles)
+                .phone(phone)
                 .build());
 
         return ResponseEntity.ok(user);
