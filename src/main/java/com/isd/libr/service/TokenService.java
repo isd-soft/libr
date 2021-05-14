@@ -38,11 +38,9 @@ public class TokenService {
     public String createToken(Person person) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
-            Date now = new Date();
             return "Bearer " + JWT.create()
                     .withClaim("username", person.getUsername())
                     .withClaim("userId", person.getId().toString())
-                    .withExpiresAt(new Date(now.getTime() + TOKEN_VALIDITY))
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
             exception.printStackTrace();
