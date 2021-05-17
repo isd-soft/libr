@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,6 +28,12 @@ public class Person implements UserDetails {
     private String password;
     private String role;
     private String phone;
+
+    //relation missing one to many vlad mihalcea
+//    private List<BookAction> actions = new ArrayList<>();
+
+
+    //equals and haschode missing investigate on vlad mihalcea
 
     protected Person() {
     }
