@@ -30,10 +30,26 @@ public class Person implements UserDetails {
     private String phone;
 
     //relation missing one to many vlad mihalcea
-//    private List<BookAction> actions = new ArrayList<>();
+    @OneToMany(mappedBy = "person")
+    private List<BookAction> actions = new ArrayList<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
 
-    //equals and haschode missing investigate on vlad mihalcea
+        if (!(o instanceof Person))
+            return false;
+
+        Person other = (Person) o;
+
+        return id != null &&
+                id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
     protected Person() {
     }

@@ -1,6 +1,6 @@
 package com.isd.libr.config;
 
-import com.isd.libr.service.TokenService;
+import com.isd.libr.service.TokenServiceImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final TokenService tokenService;
+    private final TokenServiceImpl tokenService;
 
-    public JwtFilter(TokenService tokenService) {
+    public JwtFilter(TokenServiceImpl tokenService) {
         this.tokenService = tokenService;
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificationExecutor {
-    List<Book> findByTitle(String keyword);
+    List<Book> findAllByTitle(String keyword);
 
 
 }
