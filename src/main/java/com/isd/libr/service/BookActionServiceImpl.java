@@ -37,7 +37,8 @@ public class BookActionServiceImpl implements BookActionService {
     public BookActionDto updateStatus(UpdateBooksStatusRequest request) {
         Person person = personRepository.getById(request.getPersonId());
         Book book = bookRepository.getById(request.getBookId());
-        BookAction updatedBookAction = bookActionRepository.save(new BookAction(person, book, LocalDateTime.now(),  Status.valueOf(request.getNewStatus())));
+        BookAction bookAction = new BookAction(person, book, LocalDateTime.now(), Status.valueOf(request.getNewStatus()));
+        BookAction updatedBookAction = bookActionRepository.save(bookAction);
         // mapping Person object inside the updatedBookAction to PersonDto object
         PersonDto personDto = PersonDto.from(updatedBookAction.getPerson());
         // mapping Book object inside the updatedBookAction to BookDto object

@@ -1,26 +1,24 @@
 package com.isd.libr.service;
 
 import com.isd.libr.repo.BookRepository;
+import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.entity.Book;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 class BookServiceImpl implements BookService {
 
-    final BookRepository bookRepository;
-
-    public BookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
-
+    private final BookRepository bookRepository;
 
     @Override
-    public List<Book> findAll() {
-        return bookRepository.findAll();
+    public List<BookDto> findAll() {
+        return bookRepository.findAll().stream().map(BookDto::from).collect(Collectors.toList());
     }
-
 
     @Override
     public void save(Book book) {
@@ -33,11 +31,6 @@ class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
-
-    @Override
-    public List<Book> findBookByName(String keyword) {
-        return bookRepository.findAllByTitle(keyword);
-    }
 }
 
 

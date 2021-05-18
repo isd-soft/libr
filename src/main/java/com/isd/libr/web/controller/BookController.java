@@ -17,29 +17,18 @@ import java.util.List;
 @RequestMapping("/books")
 @RequiredArgsConstructor
 public class BookController {
-    //Program by Interface
     private final BookService bookService;
 
     @GetMapping
     public List<BookDto> listBooks() {
-//        bookService.findAll();
-        return null;
+        return bookService.findAll();
     }
-
     @DeleteMapping("/{id}")
     public void delete(@RequestParam("id") Long id) {
-//        bookService.deleteBookById(id);
+        bookService.deleteBookById(id);
     }
-
-    @GetMapping("/search")
-    public BookDto findBookByName(@RequestParam("keyword") String keyword) {
-//        bookService.findBookByName(keyword);
-        return null;
-    }
-
-    @PostMapping()
+    @PostMapping
     public void saveBook(Book book) {
-        // save the book
         bookService.save(book);
     }
 
