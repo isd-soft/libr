@@ -2,7 +2,6 @@ package com.isd.libr.web.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.List;
 @Table(name = "book")
 @Getter
 @Setter
-@ToString
+//@ToString
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -33,6 +33,14 @@ public class Person implements UserDetails {
     @OneToMany(mappedBy = "person")
     private List<BookAction> actions = new ArrayList<>();
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public List<BookAction> getActions() {
+        return actions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,6 +52,26 @@ public class Person implements UserDetails {
 
         return id != null &&
                 id.equals(other.getId());
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override

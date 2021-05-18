@@ -11,5 +11,5 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificationExecutor {
     List<Book> findAllByTitle(String keyword);
 
-
+    Book getById(Long id);
 }
