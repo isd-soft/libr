@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,6 +28,48 @@ public class Person implements UserDetails {
     private String password;
     private String role;
     private String phone;
+
+    //relation missing one to many vlad mihalcea
+    @OneToMany(mappedBy = "person")
+    private List<BookAction> actions = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Person))
+            return false;
+
+        Person other = (Person) o;
+
+        return id != null &&
+                id.equals(other.getId());
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
     protected Person() {
     }

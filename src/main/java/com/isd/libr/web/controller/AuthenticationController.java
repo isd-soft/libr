@@ -1,6 +1,5 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.repo.PersonRepository;
 import com.isd.libr.service.AuthenticationService;
 import com.isd.libr.service.TokenService;
 import com.isd.libr.web.entity.Person;
@@ -15,18 +14,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
-@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final AuthenticationService authenticationService;
-    private final PersonRepository personRepository;
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
 

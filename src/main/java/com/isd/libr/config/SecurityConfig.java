@@ -1,7 +1,7 @@
 package com.isd.libr.config;
 
-import com.isd.libr.service.AuthenticationService;
-import com.isd.libr.service.TokenService;
+import com.isd.libr.service.AuthenticationServiceImpl;
+import com.isd.libr.service.TokenServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,10 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationService authenticationService;
-    private final TokenService tokenService;
+    private final AuthenticationServiceImpl authenticationService;
+    private final TokenServiceImpl tokenService;
 
-    public SecurityConfig(AuthenticationService authenticationService, TokenService tokenService) {
+    public SecurityConfig(AuthenticationServiceImpl authenticationService, TokenServiceImpl tokenService) {
         this.authenticationService = authenticationService;
         this.tokenService = tokenService;
     }
@@ -56,6 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/register", "/auth/login").permitAll()
+                .antMatchers("/books/**").permitAll()
+                .antMatchers("/users/**").permitAll()
+                .antMatchers("/book-actions/**").permitAll()
+                .antMatchers("/**").permitAll()
+                .antMatchers("/dashboard/**").hasAnyRole("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
