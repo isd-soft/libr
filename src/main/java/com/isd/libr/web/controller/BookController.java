@@ -21,7 +21,7 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public List<BookDto> listBooks(Model model) {
+    public List<BookDto> listBooks() {
 //        bookService.findAll();
         return null;
     }

@@ -1,5 +1,7 @@
 package com.isd.libr.web.dto;
 
+import com.isd.libr.web.entity.Book;
+import com.isd.libr.web.entity.BookAction;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,4 +21,14 @@ public class BookActionDto {
     private PersonDto persons;
     private String status;
     private LocalDateTime actionDate;
+
+    public static BookActionDto from(BookAction bookAction, PersonDto personDto, BookDto bookDto) {
+        BookActionDto result = new BookActionDto();
+        result.setId(bookAction.getId());
+        result.setPersons(personDto);
+        result.setBooks(bookDto);
+        result.setStatus(String.valueOf(bookAction.getStatus()));
+        result.setActionDate(bookAction.getActionDate());
+        return result;
+    }
 }
