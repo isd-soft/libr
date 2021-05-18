@@ -1,10 +1,15 @@
 package com.isd.libr.web.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "book_action")
+@Setter
+@Getter
 public class BookAction {
     @Id
     private Long id;
@@ -18,6 +23,7 @@ public class BookAction {
     private Book book;
     //research one to many bidirectional approach
     private LocalDateTime actionDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Override

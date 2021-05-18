@@ -17,8 +17,6 @@ import java.util.List;
 @RequestMapping("/books")
 @RequiredArgsConstructor
 public class BookController {
-
-    @Autowired
     //Program by Interface
     private final BookService bookService;
 
@@ -39,7 +37,7 @@ public class BookController {
         return null;
     }
 
-    @PostMapping("/save")
+    @PostMapping()
     public void saveBook(Book book) {
         // save the book
         bookService.save(book);

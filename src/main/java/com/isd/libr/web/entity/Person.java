@@ -46,6 +46,26 @@ public class Person implements UserDetails {
                 id.equals(other.getId());
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public int hashCode() {
         return getClass().hashCode();
