@@ -6,6 +6,7 @@ import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.PersonDto;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.Person;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,8 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService{
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
     @Override
     public List<PersonDto> findAll() {
