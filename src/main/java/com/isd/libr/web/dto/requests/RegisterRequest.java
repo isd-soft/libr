@@ -1,4 +1,4 @@
-package com.isd.libr.web.requests;
+package com.isd.libr.web.dto.requests;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;

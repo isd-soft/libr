@@ -11,7 +11,5 @@ public interface PersonService {
 
     void save(Person person);
 
-    void deletePersonById(Long id);
-
-    Optional<PersonDto> findPersonByEmail(String email);
+    void deletePersonById(long id);
 }

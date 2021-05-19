@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.isd.libr.service.PersonService;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.PersonDto;
@@ -34,11 +35,4 @@ public class PersonController {
     public void delete(@PathVariable ("id") long id){
         personService.deletePersonById(id);
     }
-
-    @GetMapping("/{email}")
-    public Optional<PersonDto> findPersonByEmail(@PathVariable("email") String email){
-        return personService.findPersonByEmail(email);
-    }
-
-
 }

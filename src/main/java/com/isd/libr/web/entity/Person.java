@@ -33,6 +33,14 @@ public class Person implements UserDetails {
     @OneToMany(mappedBy = "person")
     private List<BookAction> actions = new ArrayList<>();
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public List<BookAction> getActions() {
+        return actions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -21,27 +21,16 @@ import java.util.Optional;
 public class BookController {
     private final BookService bookService;
 
-    @GetMapping("/**")
+    @GetMapping
     public List<BookDto> listBooks() {
         return bookService.findAll();
     }
-    // /books/1
+  
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") long id) {
-    bookService.deleteBookById(id);
+    public void delete(@RequestParam("id") Long id) {
+        bookService.deleteBookById(id);
     }
-
-    //books/effective
-    @GetMapping("/{keyword}")
-    public ResponseEntity<Optional<BookDto>> findBookByName(@PathVariable("keyword") String keyword) {
-        Optional<BookDto> bookByName = bookService.findBookByName(keyword);
-        return ResponseEntity.ok(bookByName);
-
-    }
+  
     @PostMapping
-    public void saveBook(@RequestBody Book book) {
-        bookService.save(book);
-    }
-
-
+    public void saveBook(Book book) {
 }

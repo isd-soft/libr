@@ -3,7 +3,7 @@ package com.isd.libr.service;
 
 import com.isd.libr.repo.PersonRepository;
 import com.isd.libr.web.entity.Person;
-import com.isd.libr.web.requests.RegisterRequest;
+import com.isd.libr.web.dto.requests.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
