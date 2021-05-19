@@ -22,7 +22,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class BookActionServiceImpl implements BookActionService {
+class BookActionServiceImpl implements BookActionService {
     private final BookActionRepository bookActionRepository;
     private final BookRepository bookRepository;
     private final PersonRepository personRepository;

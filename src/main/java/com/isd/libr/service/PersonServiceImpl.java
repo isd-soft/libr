@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class PersonServiceImpl implements PersonService {
+class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
 
     @Override

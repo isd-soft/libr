@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class TokenServiceImpl implements TokenService {
+class TokenServiceImpl implements TokenService {
 
     @Value("${jwt.token.secret")
     private String TOKEN_SECRET;
