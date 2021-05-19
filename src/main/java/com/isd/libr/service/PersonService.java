@@ -11,5 +11,5 @@ public interface PersonService {
 
     void save(Person person);
 
-    void deletePersonById(long id);
+    void deletePersonById(Long id);
 }
