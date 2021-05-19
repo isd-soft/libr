@@ -26,8 +26,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePersonById(long id) {
-
+    public void deletePersonById(Long id) {
         personRepository.deleteById(id);
+
     }
 }

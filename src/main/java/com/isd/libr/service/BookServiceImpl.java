@@ -18,7 +18,7 @@ class BookServiceImpl implements BookService {
     @Override
     public List<BookDto> findAll() {
         return bookRepository.findAll().stream().map(BookDto::from).collect(Collectors.toList());
-    }
+
 
     @Override
     public void save(Book book) {
@@ -31,6 +31,5 @@ class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
-}
 
 
