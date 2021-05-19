@@ -25,12 +25,14 @@ public class BookController {
     public List<BookDto> listBooks() {
         return bookService.findAll();
     }
-  
+
     @DeleteMapping("/{id}")
     public void delete(@RequestParam("id") Long id) {
         bookService.deleteBookById(id);
     }
-  
+
     @PostMapping
     public void saveBook(Book book) {
+        bookService.save(book);
+    }
 }
