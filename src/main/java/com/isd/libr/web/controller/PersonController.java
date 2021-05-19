@@ -1,26 +1,28 @@
 package com.isd.libr.web.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.isd.libr.service.PersonService;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.PersonDto;
 import com.isd.libr.web.entity.Person;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/person")
-@AllArgsConstructor
+@RequestMapping("/users")
+@RequiredArgsConstructor
 public class PersonController {
     private final PersonService personService;
 
-    @GetMapping("/**")
+    @GetMapping("/all")
     public List<PersonDto> listPerson() {
-
         return personService.findAll();
     }
 
@@ -33,5 +35,4 @@ public class PersonController {
     public void delete(@PathVariable ("id") long id){
         personService.deletePersonById(id);
     }
-
 }
