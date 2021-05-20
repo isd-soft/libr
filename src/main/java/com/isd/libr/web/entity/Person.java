@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 @Setter
 @Table(name = "person")
+@Setter
 public class Person implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
