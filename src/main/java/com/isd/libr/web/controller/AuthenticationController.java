@@ -1,10 +1,12 @@
 package com.isd.libr.web.controller;
 
 import com.isd.libr.service.AuthenticationService;
+import com.isd.libr.service.SamePasswordException;
 import com.isd.libr.service.TokenService;
-import com.isd.libr.web.entity.Person;
 import com.isd.libr.web.dto.requests.LoginRequest;
 import com.isd.libr.web.dto.requests.RegisterRequest;
+import com.isd.libr.web.dto.requests.UpdatePasswordRequest;
+import com.isd.libr.web.entity.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,4 +48,17 @@ public class AuthenticationController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+
+    @PutMapping("/password/{id}")
+    public ResponseEntity<?> updatePassword(@PathVariable("id") long id, @RequestBody UpdatePasswordRequest updatePasswordRequest) {
+        String hashedPassword = passwordEncoder.encode(updatePasswordRequest.getNewPassword());
+        try {
+            authenticationService.updatePassword(id, hashedPassword);
+        } catch (SamePasswordException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok().build();
+
+    }
+
 }

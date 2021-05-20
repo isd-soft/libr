@@ -2,6 +2,7 @@ package com.isd.libr.web.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @Builder
+@Setter
 @Table(name = "person")
 public class Person implements UserDetails {
     @Id
