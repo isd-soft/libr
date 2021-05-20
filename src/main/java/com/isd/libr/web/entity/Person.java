@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @Builder
-@Setter
 @Table(name = "person")
 @Setter
 public class Person implements UserDetails {

@@ -1,6 +1,6 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.web.dto.requests.UpdatePerson;
+import com.isd.libr.web.dto.requests.UpdatePersonRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,8 +37,8 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UpdatePerson person) {
-        personService.updateUser(id, person);
+    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UpdatePersonRequest request) {
+        personService.updateUser(id, request);
         return ResponseEntity.ok().build();
     }
 }

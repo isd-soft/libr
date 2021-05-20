@@ -1,11 +1,10 @@
 package com.isd.libr.service;
 
 import com.isd.libr.web.dto.PersonDto;
-import com.isd.libr.web.dto.requests.UpdatePerson;
+import com.isd.libr.web.dto.requests.UpdatePersonRequest;
 import com.isd.libr.web.entity.Person;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PersonService {
     List<PersonDto> findAll();
@@ -14,5 +13,5 @@ public interface PersonService {
 
     void deletePersonById(long id);
 
-    void updateUser(long id, UpdatePerson person);
+    void updateUser(long id, UpdatePersonRequest request);
 }

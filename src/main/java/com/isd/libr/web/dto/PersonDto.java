@@ -17,6 +17,7 @@ public class PersonDto {
     private String lastName;
     private String phone;
     private int age;
+    private String role;
 
     public static PersonDto from(Person person) {
         PersonDto result = new PersonDto();
@@ -26,6 +27,7 @@ public class PersonDto {
         result.setLastName(person.getLastName());
         result.setPhone(person.getPhone());
         result.setAge(person.getAge());
+        result.setRole(person.getRole());
         return result;
     }
 }

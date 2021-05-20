@@ -1,17 +1,19 @@
 package com.isd.libr.web.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "book")
 @Getter
 @Setter
-//@ToString
+@Builder
+@AllArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,7 +29,7 @@ public class Book {
     @ElementCollection
     @CollectionTable(name = "industry_identifiers", joinColumns = @JoinColumn(name = "book_id"))
     @Column(name = "industry_identifier")
-    private List<String> industryIdentifiers = new ArrayList<>();
+    private List<HashMap<String, String>> industryIdentifiers;
     private Integer pageCount;
     @ElementCollection
     @CollectionTable(name = "categories", joinColumns = @JoinColumn(name = "book_id"))
@@ -39,12 +41,14 @@ public class Book {
     @ElementCollection
     @CollectionTable(name = "image_links", joinColumns = @JoinColumn(name = "book_id"))
     @Column(name = "image_link")
-    private List<String> imageLinks;
+    private Map<String, String> imageLinks = new HashMap<>();
     private String language;
     private String previewLink;
 
     @OneToMany(mappedBy = "book")
     private List<BookAction> actions = new ArrayList<>();
+
+    protected Book() {}
 
     @Override
     public boolean equals(Object o) {

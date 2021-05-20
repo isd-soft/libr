@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +25,8 @@ public class BookDto {
     private int averageRating;
     private String language;
     private Status status;
+    private List<HashMap<String, String>> industryIdentifiers;
+    private Map<String, String> imageLinks;
 
     public static BookDto from(Book book) {
         BookDto result = new BookDto();
@@ -34,6 +38,8 @@ public class BookDto {
         result.setCategories(book.getCategories());
         result.setAverageRating(book.getAverageRating());
         result.setLanguage(book.getLanguage());
+        result.setIndustryIdentifiers(book.getIndustryIdentifiers());
+        result.setImageLinks(book.getImageLinks());
         return result;
     }
 }

@@ -2,6 +2,7 @@ package com.isd.libr.web.controller;
 
 import com.isd.libr.service.BookService;
 import com.isd.libr.web.dto.BookDto;
+import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.entity.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.Optional;
 public class BookController {
     private final BookService bookService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<BookDto> listBooks() {
         return bookService.findAll();
     }
@@ -31,8 +32,8 @@ public class BookController {
         bookService.deleteBookById(id);
     }
 
-    @PostMapping
-    public void saveBook(Book book) {
-        bookService.save(book);
+    @PostMapping("/")
+    public void saveBook(@RequestBody CreateBookRequest request) {
+        bookService.save(request);
     }
 }
