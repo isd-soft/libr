@@ -1,18 +1,18 @@
 package com.isd.libr.web.controller;
 
+import com.isd.libr.web.dto.requests.UpdatePerson;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isd.libr.service.PersonService;
-import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.PersonDto;
 import com.isd.libr.web.entity.Person;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -34,5 +34,11 @@ public class PersonController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable ("id") long id){
         personService.deletePersonById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UpdatePerson person) {
+        personService.updateUser(id, person);
+        return ResponseEntity.ok().build();
     }
 }

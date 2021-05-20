@@ -1,6 +1,7 @@
 package com.isd.libr.service;
 
 import com.isd.libr.web.dto.PersonDto;
+import com.isd.libr.web.dto.requests.UpdatePerson;
 import com.isd.libr.web.entity.Person;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface PersonService {
     void save(Person person);
 
     void deletePersonById(long id);
+
+    void updateUser(long id, UpdatePerson person);
 }
