@@ -18,18 +18,18 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/all")
-    public List<UserDto> listPerson() {
+    public List<UserDto> listUser() {
         return userService.findAll();
     }
 
     @PostMapping("/")
-    public void savePerson(@RequestBody User user) {
+    public void saveUser(@RequestBody User user) {
         userService.save(user);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable ("id") long id){
-        userService.deletePersonById(id);
+        userService.deleteUserById(id);
     }
 
     @PutMapping("/{id}")
