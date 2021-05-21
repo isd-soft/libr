@@ -52,6 +52,9 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<BookAction> actions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "book")
+    private List<Vote> votes = new ArrayList<>();
+
     protected Book() {}
 
     @Override

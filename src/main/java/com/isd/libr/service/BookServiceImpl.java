@@ -1,8 +1,6 @@
 package com.isd.libr.service;
 
 import com.isd.libr.repo.BookRepository;
-import com.isd.libr.repo.CommentRepository;
-import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.entity.Book;
@@ -17,15 +15,13 @@ import java.util.List;
 class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final UserRepository userRepository;
-    private final CommentRepository commentRepository;
 
     @Override
     public List<BookDto> findAll() {
         List<Book> books = bookRepository.findAll();
         List<BookDto> bookDtos = new ArrayList<>();
-        for (Book bookItem:
-             books) {
+        for (Book bookItem :
+                books) {
             BookDto bookDto = BookDto.from(bookItem, bookItem.getComments());
             bookDtos.add(bookDto);
         }
