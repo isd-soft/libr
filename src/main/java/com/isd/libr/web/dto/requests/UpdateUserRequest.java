@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class UpdatePersonRequest {
+public class UpdateUserRequest {
     private String email;
     private Integer age;
     private String firstName;
@@ -17,12 +17,12 @@ public class UpdatePersonRequest {
     private String role;
 
     @JsonCreator
-    public UpdatePersonRequest(@JsonProperty String email,
-                               @JsonProperty Integer age,
-                               @JsonProperty String firstName,
-                               @JsonProperty String lastName,
-                               @JsonProperty String phone,
-                               @JsonProperty String role) {
+    public UpdateUserRequest(@JsonProperty String email,
+                             @JsonProperty Integer age,
+                             @JsonProperty String firstName,
+                             @JsonProperty String lastName,
+                             @JsonProperty String phone,
+                             @JsonProperty String role) {
         this.email = email;
         this.age = age;
         this.firstName = firstName;

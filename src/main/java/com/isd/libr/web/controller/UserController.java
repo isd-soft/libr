@@ -2,7 +2,7 @@ package com.isd.libr.web.controller;
 
 import com.isd.libr.service.UserService;
 import com.isd.libr.web.dto.UserDto;
-import com.isd.libr.web.dto.requests.UpdatePersonRequest;
+import com.isd.libr.web.dto.requests.UpdateUserRequest;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UpdatePersonRequest request) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UpdateUserRequest request) {
         userService.updateUser(id, request);
         return ResponseEntity.ok().build();
     }

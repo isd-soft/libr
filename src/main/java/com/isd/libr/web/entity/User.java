@@ -32,7 +32,7 @@ public class User implements UserDetails {
     private String phone;
 
     //relation missing one to many vlad mihalcea
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "user")
     private List<BookAction> actions = new ArrayList<>();
 
     @OneToMany(mappedBy = "book")

@@ -2,7 +2,7 @@ package com.isd.libr.service;
 
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.UserDto;
-import com.isd.libr.web.dto.requests.UpdatePersonRequest;
+import com.isd.libr.web.dto.requests.UpdateUserRequest;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(long id, UpdatePersonRequest request) {
+    public void updateUser(long id, UpdateUserRequest request) {
         User user = userRepository.getById(id);
         user.setEmail(request.getEmail());
         user.setAge(request.getAge());
