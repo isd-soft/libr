@@ -1,6 +1,7 @@
 package com.isd.libr.service;
 
 import com.isd.libr.web.dto.BookDto;
+import com.isd.libr.web.dto.requests.AddCommentRequest;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.entity.Book;
 
@@ -13,5 +14,6 @@ public interface BookService {
     void save(CreateBookRequest request);
 
     void deleteBookById(long id);
+
 
 }

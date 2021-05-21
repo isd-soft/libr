@@ -45,6 +45,10 @@ public class Book {
     private String language;
     private String previewLink;
 
+
+    @OneToMany(mappedBy = "book")
+    private List<Comment> comments = new ArrayList<>();
+
     @OneToMany(mappedBy = "book")
     private List<BookAction> actions = new ArrayList<>();
 

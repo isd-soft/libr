@@ -1,13 +1,22 @@
 package com.isd.libr.service;
 
 import com.isd.libr.repo.BookRepository;
+import com.isd.libr.repo.CommentRepository;
+import com.isd.libr.repo.PersonRepository;
 import com.isd.libr.web.dto.BookDto;
+import com.isd.libr.web.dto.CommentDto;
+import com.isd.libr.web.dto.requests.AddCommentRequest;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.entity.Book;
+import com.isd.libr.web.entity.Comment;
+import com.isd.libr.web.entity.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -15,10 +24,19 @@ import java.util.stream.Collectors;
 class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final PersonRepository personRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public List<BookDto> findAll() {
-        return bookRepository.findAll().stream().map(BookDto::from).collect(Collectors.toList());
+        List<Book> books = bookRepository.findAll();
+        List<BookDto> bookDtos = new ArrayList<>();
+        for (Book bookItem:
+             books) {
+            BookDto bookDto = BookDto.from(bookItem, bookItem.getComments());
+            bookDtos.add(bookDto);
+        }
+        return bookDtos;
     }
 
     @Override
@@ -47,6 +65,8 @@ class BookServiceImpl implements BookService {
     public void deleteBookById(long id) {
         bookRepository.deleteById(id);
     }
+
+
 }
 
 

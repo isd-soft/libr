@@ -35,6 +35,9 @@ public class Person implements UserDetails {
     @OneToMany(mappedBy = "person")
     private List<BookAction> actions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "book")
+    private List<Comment> comments = new ArrayList<>();
+
     public Integer getAge() {
         return age;
     }
