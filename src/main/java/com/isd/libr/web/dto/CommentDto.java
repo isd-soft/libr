@@ -11,18 +11,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommentDto {
+    private UserDto userDto;
     private Long id;
     private BookDto bookDto;
-    private PersonDto personDto;
     private String comment;
 
     public static CommentDto from(Comment comment) {
-        PersonDto personDto = PersonDto.from(comment.getPerson());
+        UserDto userDto = UserDto.from(comment.getUser());
         BookDto bookDto = BookDto.from(comment.getBook());
         CommentDto result = new CommentDto();
         result.setId(comment.getId());
         result.setBookDto(bookDto);
-        result.setPersonDto(personDto);
+        result.setUserDto(userDto);
         result.setComment(comment.getComment());
         return result;
     }

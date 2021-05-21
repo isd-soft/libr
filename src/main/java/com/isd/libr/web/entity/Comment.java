@@ -16,11 +16,13 @@ public class Comment {
     private Long id;
     private String comment;
     @ManyToOne
-    @EqualsAndHashCode.Exclude @ToString.Exclude
-    @JoinColumn(name = "person_id", nullable = false, updatable = false)
-    private Person person;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
+    private User user;
     @ManyToOne
-    @EqualsAndHashCode.Exclude @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinColumn(name = "book_id", nullable = false, updatable = false)
     private Book book;
 

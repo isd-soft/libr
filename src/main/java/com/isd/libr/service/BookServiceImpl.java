@@ -2,29 +2,22 @@ package com.isd.libr.service;
 
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.CommentRepository;
-import com.isd.libr.repo.PersonRepository;
+import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.BookDto;
-import com.isd.libr.web.dto.CommentDto;
-import com.isd.libr.web.dto.requests.AddCommentRequest;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.entity.Book;
-import com.isd.libr.web.entity.Comment;
-import com.isd.libr.web.entity.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
     private final CommentRepository commentRepository;
 
     @Override

@@ -2,7 +2,6 @@ package com.isd.libr.web.dto;
 
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.Comment;
-import com.isd.libr.web.entity.Person;
 import com.isd.libr.web.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
