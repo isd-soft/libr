@@ -18,7 +18,7 @@ public class BookAction {
     private Long id;
     //relation missing, research many to one
     @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false, updatable = false)
+    @JoinColumn(name = "users_id", nullable = false, updatable = false)
     private User user;
     //relation missing, research many to one
     @ManyToOne
