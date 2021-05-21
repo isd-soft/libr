@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.isd.libr.web.entity.Person;
+import com.isd.libr.web.entity.User;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,13 +35,13 @@ class TokenServiceImpl implements TokenService {
         this.authenticationService = authenticationService;
     }
 
-    public String createToken(Person person) {
+    public String createToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             Date now = new Date();
             return "Bearer " + JWT.create()
-                    .withClaim("username", person.getUsername())
-                    .withClaim("userId", person.getId().toString())
+                    .withClaim("username", user.getUsername())
+                    .withClaim("userId", user.getId().toString())
                     .withExpiresAt(new Date(now.getTime() + TOKEN_VALIDITY))
                     .sign(algorithm);
         } catch (JWTCreationException exception) {

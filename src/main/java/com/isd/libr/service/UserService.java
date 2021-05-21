@@ -1,15 +1,15 @@
 package com.isd.libr.service;
 
-import com.isd.libr.web.dto.PersonDto;
+import com.isd.libr.web.dto.UserDto;
 import com.isd.libr.web.dto.requests.UpdatePersonRequest;
-import com.isd.libr.web.entity.Person;
+import com.isd.libr.web.entity.User;
 
 import java.util.List;
 
-public interface PersonService {
-    List<PersonDto> findAll();
+public interface UserService {
+    List<UserDto> findAll();
 
-    void save(Person person);
+    void save(User user);
 
     void deletePersonById(long id);
 

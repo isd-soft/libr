@@ -1,12 +1,10 @@
 package com.isd.libr.web.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +19,7 @@ public class BookAction {
     //relation missing, research many to one
     @ManyToOne
     @JoinColumn(name = "person_id", nullable = false, updatable = false)
-    private Person person;
+    private User user;
     //relation missing, research many to one
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false, updatable = false)
@@ -31,8 +29,8 @@ public class BookAction {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    public BookAction(Person person, Book book, LocalDateTime actionDate, Status status) {
-        this.person = person;
+    public BookAction(User user, Book book, LocalDateTime actionDate, Status status) {
+        this.user = user;
         this.book = book;
         this.actionDate = actionDate;
         this.status = status;
@@ -43,10 +41,10 @@ public class BookAction {
     public boolean equals(Object o) {
         if (this == o) return true;
 
-        if (!(o instanceof Person))
+        if (!(o instanceof User))
             return false;
 
-        Person other = (Person) o;
+        User other = (User) o;
 
         return id != null &&
                 id.equals(other.getId());

@@ -6,7 +6,7 @@ import com.isd.libr.service.TokenService;
 import com.isd.libr.web.dto.requests.LoginRequest;
 import com.isd.libr.web.dto.requests.RegisterRequest;
 import com.isd.libr.web.dto.requests.UpdatePasswordRequest;
-import com.isd.libr.web.entity.Person;
+import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
         String passwd = passwordEncoder.encode(request.getPasswd());
-        Person user = authenticationService.create(request, passwd);
+        User user = authenticationService.create(request, passwd);
         return ResponseEntity.ok(user);
     }
 
@@ -41,10 +41,10 @@ public class AuthenticationController {
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         if (authentication.isAuthenticated()) {
-            Person person = (Person) authentication.getPrincipal();
+            User user = (User) authentication.getPrincipal();
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Bearer", tokenService.createToken(person));
-            return ResponseEntity.ok().headers(headers).body(person);
+            headers.add("Bearer", tokenService.createToken(user));
+            return ResponseEntity.ok().headers(headers).body(user);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

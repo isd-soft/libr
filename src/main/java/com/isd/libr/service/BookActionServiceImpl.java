@@ -2,15 +2,15 @@ package com.isd.libr.service;
 
 import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.BookRepository;
-import com.isd.libr.repo.PersonRepository;
+import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.BookActionDto;
 import com.isd.libr.web.dto.BookDto;
-import com.isd.libr.web.dto.PersonDto;
+import com.isd.libr.web.dto.UserDto;
+import com.isd.libr.web.dto.requests.UpdateBooksStatusRequest;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.BookAction;
-import com.isd.libr.web.entity.Person;
 import com.isd.libr.web.entity.Status;
-import com.isd.libr.web.dto.requests.UpdateBooksStatusRequest;
+import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ import java.util.List;
 class BookActionServiceImpl implements BookActionService {
     private final BookActionRepository bookActionRepository;
     private final BookRepository bookRepository;
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<BookAction> getByStatus(Status status) {
@@ -33,17 +33,17 @@ class BookActionServiceImpl implements BookActionService {
     @Override
     @Transactional
     public BookActionDto updateStatus(UpdateBooksStatusRequest request) {
-        Person person = personRepository.getById(request.getPersonId());
+        User user = userRepository.getById(request.getPersonId());
         Book book = bookRepository.getById(request.getBookId());
-        BookAction bookAction = new BookAction(person, book, LocalDateTime.now(), Status.valueOf(request.getNewStatus()));
+        BookAction bookAction = new BookAction(user, book, LocalDateTime.now(), Status.valueOf(request.getNewStatus()));
         BookAction updatedBookAction = bookActionRepository.save(bookAction);
-        // mapping Person object inside the updatedBookAction to PersonDto object
-        PersonDto personDto = PersonDto.from(updatedBookAction.getPerson());
+        // mapping User object inside the updatedBookAction to UserDto object
+        UserDto userDto = UserDto.from(updatedBookAction.getUser());
         // mapping Book object inside the updatedBookAction to BookDto object
         // mapping Book object inside the updatedBookAction to BookDto object
         BookDto bookDto = BookDto.from(updatedBookAction.getBook());
         // mapping BookAction object with all data provided above
-        return BookActionDto.from(updatedBookAction, personDto, bookDto);
+        return BookActionDto.from(updatedBookAction, userDto, bookDto);
 
     }
 

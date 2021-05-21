@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @Table(name = "person")
 @Setter
-public class Person implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -46,17 +46,7 @@ public class Person implements UserDetails {
         return actions;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (!(o instanceof Person))
-            return false;
-
-        Person other = (Person) o;
-
-        return id != null &&
-                id.equals(other.getId());
+    protected User() {
     }
 
     public String getFirstName() {
@@ -84,7 +74,17 @@ public class Person implements UserDetails {
         return getClass().hashCode();
     }
 
-    protected Person() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof User))
+            return false;
+
+        User other = (User) o;
+
+        return id != null &&
+                id.equals(other.getId());
     }
 
     @Override
