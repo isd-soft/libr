@@ -17,6 +17,7 @@ public class LibrApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LibrApplication.class, args);
+
 	}
 
 //	@Bean

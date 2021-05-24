@@ -8,12 +8,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 class AuthenticationServiceImpl implements UserDetailsService, AuthenticationService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User create(RegisterRequest request, String password) {
         User user = User.builder()
@@ -29,12 +31,13 @@ class AuthenticationServiceImpl implements UserDetailsService, AuthenticationSer
     }
 
     @Override
-    public void updatePassword(long id, String hashedNewPassword) throws SamePasswordException {
+    public void updatePassword(long id, String rawPassword) throws SamePasswordException {
         User user = userRepository.getById(id);
-        if (user.getPassword().equals(hashedNewPassword)) {
+        if (passwordEncoder.matches(rawPassword,user.getPassword())) {
             throw new SamePasswordException("New and old passwords must be different");
         }
-        user.setPassword(hashedNewPassword);
+        String hashedPassword = passwordEncoder.encode(rawPassword);
+        user.setPassword(hashedPassword);
         userRepository.save(user);
     }
 
