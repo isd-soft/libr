@@ -1,5 +1,7 @@
 package com.isd.libr.web.controller;
 
+import com.isd.libr.repo.BookRepository;
+import com.isd.libr.repo.UserRepository;
 import com.isd.libr.service.AuthenticationService;
 import com.isd.libr.service.SamePasswordException;
 import com.isd.libr.service.TokenService;
@@ -27,6 +29,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
@@ -52,7 +55,12 @@ public class AuthenticationController {
     @PutMapping("/password/{id}")
     public ResponseEntity<?> updatePassword(@PathVariable("id") long id, @RequestBody UpdatePasswordRequest updatePasswordRequest) {
         try {
-            authenticationService.updatePassword(id, updatePasswordRequest.getNewPassword());
+            User user = userRepository.getById(id);
+            if (passwordEncoder.matches(updatePasswordRequest.getNewPassword(),user.getPassword())) {
+                throw new SamePasswordException("New and old passwords must be different");
+            }
+            String hashedPassword = passwordEncoder.encode(updatePasswordRequest.getNewPassword());
+            authenticationService.updatePassword(id, hashedPassword);
         } catch (SamePasswordException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

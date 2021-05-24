@@ -5,10 +5,7 @@ import com.isd.libr.service.VoteService;
 import com.isd.libr.web.dto.requests.AddVoteRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,11 +15,8 @@ public class VoteController {
 
     @PostMapping("/")
     public ResponseEntity<?> addVote(@RequestBody AddVoteRequest request) {
-        try {
-            voteService.vote(request);
-        } catch (RepeatedVoteException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        voteService.vote(request);
         return ResponseEntity.ok().build();
     }
+
 }

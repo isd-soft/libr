@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class AuthenticationServiceImpl implements UserDetailsService, AuthenticationService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public User create(RegisterRequest request, String password) {
         User user = User.builder()
@@ -31,12 +30,8 @@ class AuthenticationServiceImpl implements UserDetailsService, AuthenticationSer
     }
 
     @Override
-    public void updatePassword(long id, String rawPassword) throws SamePasswordException {
+    public void updatePassword(long id, String hashedPassword) {
         User user = userRepository.getById(id);
-        if (passwordEncoder.matches(rawPassword,user.getPassword())) {
-            throw new SamePasswordException("New and old passwords must be different");
-        }
-        String hashedPassword = passwordEncoder.encode(rawPassword);
         user.setPassword(hashedPassword);
         userRepository.save(user);
     }

@@ -35,27 +35,12 @@ public class BookDto {
 
     public static BookDto from(Book book, List<Comment> comments) {
         List<CommentDto> commentDtos = new ArrayList<>();
-        for (Comment comment:
-             comments) {
+        for (Comment comment : comments) {
             CommentDto commentDto = CommentDto.from(comment);
             commentDtos.add(commentDto);
         }
-        Integer votes = 0;
-        for (Vote vote:
-             book.getVotes()) {
-            votes += vote.getVote();
-        }
-        BookDto result = new BookDto();
-        result.setTitle(book.getTitle());
-        result.setAuthors(book.getAuthors());
-        result.setPublishedDate(book.getPublishedDate());
-        result.setDescription(book.getDescription());
-        result.setPageCount(book.getPageCount());
-        result.setCategories(book.getCategories());
-        result.setAverageRating(book.getAverageRating());
-        result.setLanguage(book.getLanguage());
-        result.setIndustryIdentifiers(book.getIndustryIdentifiers());
-        result.setImageLinks(book.getImageLinks());
+        int votes = book.getVotes().stream().map(Vote::getVote).mapToInt(Integer::intValue).sum();
+        BookDto result = from(book);
         result.setComments(commentDtos);
         result.setVote(votes);
         return result;

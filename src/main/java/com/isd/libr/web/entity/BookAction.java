@@ -16,15 +16,12 @@ public class BookAction {
     @Id
     @GeneratedValue
     private Long id;
-    //relation missing, research many to one
     @ManyToOne
     @JoinColumn(name = "users_id", nullable = false, updatable = false)
     private User user;
-    //relation missing, research many to one
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false, updatable = false)
     private Book book;
-    //research one to many bidirectional approach
     private LocalDateTime actionDate;
     @Enumerated(EnumType.STRING)
     private Status status;

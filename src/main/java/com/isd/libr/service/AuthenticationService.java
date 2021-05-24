@@ -8,5 +8,5 @@ public interface AuthenticationService extends UserDetailsService {
     User create(RegisterRequest request, String password);
 
 
-    void updatePassword(long id, String hashedPassword) throws SamePasswordException;
+    void updatePassword(long id, String hashedPassword);
 }
