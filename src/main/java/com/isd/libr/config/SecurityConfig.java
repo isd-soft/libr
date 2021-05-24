@@ -38,11 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public JavaMailSender javaMailSender(){
-        return new JavaMailSenderImpl();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
