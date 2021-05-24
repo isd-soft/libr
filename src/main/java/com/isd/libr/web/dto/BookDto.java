@@ -3,6 +3,7 @@ package com.isd.libr.web.dto;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.Comment;
 import com.isd.libr.web.entity.Status;
+import com.isd.libr.web.entity.Vote;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class BookDto {
     private List<HashMap<String, String>> industryIdentifiers;
     private Map<String, String> imageLinks;
     private List<CommentDto> comments;
+    private Integer vote;
 
     public static BookDto from(Book book, List<Comment> comments) {
         List<CommentDto> commentDtos = new ArrayList<>();
@@ -37,6 +39,11 @@ public class BookDto {
              comments) {
             CommentDto commentDto = CommentDto.from(comment);
             commentDtos.add(commentDto);
+        }
+        Integer votes = 0;
+        for (Vote vote:
+             book.getVotes()) {
+            votes += vote.getVote();
         }
         BookDto result = new BookDto();
         result.setTitle(book.getTitle());
@@ -50,6 +57,7 @@ public class BookDto {
         result.setIndustryIdentifiers(book.getIndustryIdentifiers());
         result.setImageLinks(book.getImageLinks());
         result.setComments(commentDtos);
+        result.setVote(votes);
         return result;
     }
 
