@@ -1,10 +1,10 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.service.AuthenticationService;
 import com.isd.libr.service.SamePasswordException;
 import com.isd.libr.service.TokenService;
+import com.isd.libr.service.UserService;
 import com.isd.libr.web.dto.requests.LoginRequest;
 import com.isd.libr.web.dto.requests.RegisterRequest;
 import com.isd.libr.web.dto.requests.UpdatePasswordRequest;
@@ -29,7 +29,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
@@ -53,21 +53,15 @@ public class AuthenticationController {
     }
 
     @PutMapping("/password/{id}")
-    public ResponseEntity<?> updatePassword(@PathVariable("id") long id, @RequestBody UpdatePasswordRequest updatePasswordRequest) {
-        try {
-            User user = userRepository.getById(id);
-            if (passwordEncoder.matches(updatePasswordRequest.getNewPassword(),user.getPassword())) {
-                throw new SamePasswordException("New and old passwords must be different");
-            }
-            String hashedPassword = passwordEncoder.encode(updatePasswordRequest.getNewPassword());
-            authenticationService.updatePassword(id, hashedPassword);
-        } catch (SamePasswordException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity<?> updatePassword(@PathVariable("id") long id, @RequestBody UpdatePasswordRequest updatePasswordRequest) throws SamePasswordException {
+        User user = userService.getById(id);
+        if (passwordEncoder.matches(updatePasswordRequest.getNewPassword(), user.getPassword())) {
+            throw new SamePasswordException("New and old passwords must be different");
         }
+        String hashedPassword = passwordEncoder.encode(updatePasswordRequest.getNewPassword());
+        authenticationService.updatePassword(id, hashedPassword);
         return ResponseEntity.ok().build();
     }
-
-
 
 
 }
