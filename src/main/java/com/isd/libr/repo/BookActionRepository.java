@@ -12,7 +12,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookActionRepository extends JpaRepository<BookAction, Long> {
+
     List<BookAction> getAllByStatus(Status status);
+
 
     BookAction getFirstByBookOrderByActionDateDesc(Book book);
 
