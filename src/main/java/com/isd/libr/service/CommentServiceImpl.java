@@ -20,7 +20,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void addComment(AddCommentRequest request) {
         Book book = bookRepository.getById(request.getBookId());
-        User user = userRepository.getById(request.getPersonId());
+        User user = userRepository.getById(request.getUserId());
         Comment newComment = Comment.builder()
                 .book(book)
                 .user(user)

@@ -33,7 +33,7 @@ class BookActionServiceImpl implements BookActionService {
     @Override
     @Transactional
     public BookActionDto updateStatus(UpdateBooksStatusRequest request) {
-        User user = userRepository.getById(request.getPersonId());
+        User user = userRepository.getById(request.getUserId());
         Book book = bookRepository.getById(request.getBookId());
         BookAction bookAction = new BookAction(user, book, LocalDateTime.now(), Status.valueOf(request.getNewStatus()));
         BookAction updatedBookAction = bookActionRepository.save(bookAction);

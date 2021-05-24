@@ -22,7 +22,7 @@ import java.util.Map;
 @Service
 class TokenServiceImpl implements TokenService {
 
-    @Value("${jwt.token.secret")
+    @Value("${jwt.token.secret}")
     private String TOKEN_SECRET;
     @Getter
     @Value("${jwt.token.validity}")

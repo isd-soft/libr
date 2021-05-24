@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,6 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final AuthenticationService authenticationService;
     private final TokenService tokenService;
-    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
@@ -51,14 +51,14 @@ public class AuthenticationController {
 
     @PutMapping("/password/{id}")
     public ResponseEntity<?> updatePassword(@PathVariable("id") long id, @RequestBody UpdatePasswordRequest updatePasswordRequest) {
-        String hashedPassword = passwordEncoder.encode(updatePasswordRequest.getNewPassword());
         try {
-            authenticationService.updatePassword(id, hashedPassword);
+            authenticationService.updatePassword(id, updatePasswordRequest.getNewPassword());
         } catch (SamePasswordException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok().build();
-
     }
+
+
 
 }

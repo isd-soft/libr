@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 @Data
 public class UpdateBooksStatusRequest {
     private Long bookId;
-    private Long personId;
+    private Long userId;
     private String newStatus;
 
     @JsonCreator
 
     public UpdateBooksStatusRequest(@JsonProperty Long bookId,
-                                    @JsonProperty Long personId,
+                                    @JsonProperty Long userId,
                                     @JsonProperty String newStatus) {
         this.bookId = bookId;
-        this.personId = personId;
+        this.userId = userId;
         this.newStatus = newStatus;
     }
 }

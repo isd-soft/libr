@@ -31,7 +31,6 @@ public class User implements UserDetails {
     private String role;
     private String phone;
 
-    //relation missing one to many vlad mihalcea
     @OneToMany(mappedBy = "user")
     private List<BookAction> actions = new ArrayList<>();
 
