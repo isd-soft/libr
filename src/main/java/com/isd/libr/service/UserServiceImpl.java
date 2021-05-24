@@ -30,6 +30,17 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getById(long id) throws UserNotFoundException {
+        User user = userRepository.getById(id);
+        if (user == null) {
+            throw new UserNotFoundException(
+                    String.format("User with ID [%s] not found", id)
+            );
+        }
+        return user;
+    }
+
+    @Override
     @Transactional
     public void deleteUserById(long id) {
         User user = userRepository.getById(id);

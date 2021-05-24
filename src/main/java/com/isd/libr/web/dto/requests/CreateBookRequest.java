@@ -31,7 +31,7 @@ public class CreateBookRequest {
     public CreateBookRequest(@JsonProperty("title") String title,
                              @JsonProperty("authors") List<String> authors,
                              @JsonProperty("publisher") String publisher,
-                             @JsonProperty("publisherDate") String publishedDate,
+                             @JsonProperty("publishedDate") String publishedDate,
                              @JsonProperty("description") String description,
                              @JsonProperty("industryIdentifiers") List<HashMap<String, String>> industryIdentifiers,
                              @JsonProperty("pageCount") Integer pageCount,
