@@ -1,6 +1,5 @@
-package com.isd.libr.infrastructure;
+package com.isd.libr.service;
 
-import com.isd.libr.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
