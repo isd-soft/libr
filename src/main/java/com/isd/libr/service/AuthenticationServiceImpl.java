@@ -11,12 +11,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 class AuthenticationServiceImpl implements UserDetailsService, AuthenticationService {
     private final UserRepository userRepository;
 
     public User create(RegisterRequest request, String password) {
+        Optional<User> existingUser = userRepository.findByEmail(request.getEmail());
+        if (existingUser.isPresent()) {
+            throw new UserAlreadyExistsException(String.format("User with [%s] already exists! Consider logging in.", request.getEmail()));
+        }
         User user = User.builder()
                 .email(request.getEmail())
                 .firstName(request.getFirstName())
