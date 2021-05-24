@@ -3,6 +3,7 @@ package com.isd.libr.repo;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.Status;
+import com.isd.libr.web.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +16,7 @@ public interface BookActionRepository extends JpaRepository<BookAction, Long> {
 
     BookAction getFirstByBookOrderByActionDateDesc(Book book);
 
-    List<BookAction> getAllByBookId(long bookId);
+   void deleteAllByUser(User user);
 
     @Query(nativeQuery = true, value = "select actions_ranked.*, extract(day from now() - actions_ranked.action_date) as days " +
             "from (select ba.*, ROW_NUMBER() OVER(PARTITION BY ba.book_id ORDER BY ba.action_date desc) " +

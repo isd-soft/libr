@@ -1,12 +1,15 @@
 package com.isd.libr.service;
 
+import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.UserDto;
 import com.isd.libr.web.dto.requests.UpdateUserRequest;
+import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final BookActionRepository bookActionRepository;
 
     @Override
     public List<UserDto> findAll() {
@@ -26,7 +30,10 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUserById(long id) {
+        User user = userRepository.getById(id);
+        bookActionRepository.deleteAllByUser(user);
         userRepository.deleteById(id);
     }
 
