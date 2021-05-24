@@ -25,6 +25,7 @@ public class Book {
     private List<String> authors = new ArrayList<>();
     private String publisher;
     private String publishedDate;
+    @Lob
     private String description;
     @ElementCollection
     @CollectionTable(name = "industry_identifiers", joinColumns = @JoinColumn(name = "book_id"))

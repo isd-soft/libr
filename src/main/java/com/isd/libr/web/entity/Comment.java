@@ -14,6 +14,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Lob
     private String comment;
     @ManyToOne
     @EqualsAndHashCode.Exclude

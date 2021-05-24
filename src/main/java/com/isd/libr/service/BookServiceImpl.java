@@ -7,6 +7,7 @@ import com.isd.libr.web.entity.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,12 @@ class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void save(CreateBookRequest request) {
+    @Transactional
+    public void save(CreateBookRequest request) throws BookDuplicateException {
+        Book existingBook = bookRepository.getByTitle(request.getTitle());
+        if (existingBook != null) {
+            throw new BookDuplicateException("This book is already in our database");
+        }
         Book book = Book.builder()
                 .title(request.getTitle())
                 .authors(request.getAuthors())
