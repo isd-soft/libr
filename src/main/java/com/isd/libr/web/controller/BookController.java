@@ -23,6 +23,12 @@ import java.util.Optional;
 public class BookController {
     private final BookService bookService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getBookById(@PathVariable("id") long id){
+        BookDto book = bookService.getById(id);
+        return ResponseEntity.ok(book);
+    }
+
     @GetMapping("/all")
     public List<BookDto> listBooks() {
         return bookService.findAll();

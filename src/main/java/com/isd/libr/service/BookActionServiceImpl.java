@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -33,23 +34,21 @@ class BookActionServiceImpl implements BookActionService {
     @Override
     @Transactional
     public BookActionDto updateStatus(UpdateBooksStatusRequest request) {
-        User user = userRepository.getById(request.getUserId());
-        Book book = bookRepository.getById(request.getBookId());
-        BookAction bookAction = new BookAction(user, book, LocalDateTime.now(), Status.valueOf(request.getNewStatus()));
+        Optional<User> user = userRepository.findById(request.getUserId());
+        if (user.isEmpty()) {
+            throw new UserNotFoundException(String.format("User with ID [%s] not found", request.getUserId()));
+        }
+        Optional<Book> book = bookRepository.findById(request.getBookId());
+        if (book.isEmpty()) {
+            throw new BookNotFoundException(String.format("Book with ID [%s] not found", request.getBookId()));
+        }
+        BookAction bookAction = new BookAction(user.get(), book.get(), LocalDateTime.now(), Status.valueOf(request.getNewStatus()));
         BookAction updatedBookAction = bookActionRepository.save(bookAction);
-        // mapping User object inside the updatedBookAction to UserDto object
         UserDto userDto = UserDto.from(updatedBookAction.getUser());
-        // mapping Book object inside the updatedBookAction to BookDto object
-        // mapping Book object inside the updatedBookAction to BookDto object
         BookDto bookDto = BookDto.from(updatedBookAction.getBook());
-        // mapping BookAction object with all data provided above
         return BookActionDto.from(updatedBookAction, userDto, bookDto);
 
     }
-
-
-
-
 
 
 }

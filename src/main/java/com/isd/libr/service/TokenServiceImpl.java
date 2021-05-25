@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.isd.libr.web.entity.User;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 class TokenServiceImpl implements TokenService {
 
     @Value("${jwt.token.secret}")
@@ -28,12 +30,6 @@ class TokenServiceImpl implements TokenService {
     @Value("${jwt.token.validity}")
     private Integer TOKEN_VALIDITY;
 
-    private final AuthenticationServiceImpl authenticationService;
-
-    @Autowired
-    public TokenServiceImpl(AuthenticationServiceImpl authenticationService) {
-        this.authenticationService = authenticationService;
-    }
 
     public String createToken(User user) {
         try {
@@ -60,16 +56,12 @@ class TokenServiceImpl implements TokenService {
             result.put("email", jwt.getClaim("username").asString());
             result.put("id", jwt.getClaim("userId").asString());
             return result;
-        } catch (JWTVerificationException exception) {
-            exception.printStackTrace();
+        } catch (JWTVerificationException e) {
+            e.printStackTrace();
             return null;
         }
     }
 
-    public Authentication getAuthentication(String token) {
-        Map<String, String> userData = getUserDataFromToken(token);
-        UserDetails userDetails = authenticationService.loadUserByUsername(userData.get("email"));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-    }
+
 
 }

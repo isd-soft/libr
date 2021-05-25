@@ -1,10 +1,9 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.repo.UserRepository;
 import com.isd.libr.service.AuthenticationService;
 import com.isd.libr.service.SamePasswordException;
 import com.isd.libr.service.TokenService;
-import com.isd.libr.service.UserService;
+import com.isd.libr.web.dto.UserLoginDto;
 import com.isd.libr.web.dto.requests.LoginRequest;
 import com.isd.libr.web.dto.requests.RegisterRequest;
 import com.isd.libr.web.dto.requests.UpdatePasswordRequest;
@@ -25,43 +24,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-    private final AuthenticationManager authenticationManager;
     private final AuthenticationService authenticationService;
-    private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
-        String passwd = passwordEncoder.encode(request.getPasswd());
-        User user = authenticationService.create(request, passwd);
-        return ResponseEntity.ok(user);
-    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        if (authentication.isAuthenticated()) {
-            User user = (User) authentication.getPrincipal();
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Bearer", tokenService.createToken(user));
-            return ResponseEntity.ok().headers(headers).body(user);
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        UserLoginDto authenticatedUser = authenticationService.authenticate(loginRequest);
+        return ResponseEntity.ok(authenticatedUser);
     }
 
-    @PutMapping("/password/{id}")
-    public ResponseEntity<?> updatePassword(@PathVariable("id") long id, @RequestBody UpdatePasswordRequest updatePasswordRequest) throws SamePasswordException {
-        User user = userService.getById(id);
-        if (passwordEncoder.matches(updatePasswordRequest.getNewPassword(), user.getPassword())) {
-            throw new SamePasswordException("New and old passwords must be different");
-        }
-        String hashedPassword = passwordEncoder.encode(updatePasswordRequest.getNewPassword());
-        authenticationService.updatePassword(id, hashedPassword);
-        return ResponseEntity.ok().build();
-    }
+
 
 
 }

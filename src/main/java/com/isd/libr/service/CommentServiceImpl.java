@@ -10,6 +10,9 @@ import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
@@ -18,12 +21,19 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
     @Override
+    @Transactional
     public void addComment(AddCommentRequest request) {
-        Book book = bookRepository.getById(request.getBookId());
-        User user = userRepository.getById(request.getUserId());
+        Optional<Book> book = bookRepository.findById(request.getBookId());
+        if (book.isEmpty()) {
+            throw new BookNotFoundException(String.format("Book with ID [%s] not found", request.getBookId()));
+        }
+        Optional<User> user = userRepository.findById(request.getUserId());
+        if (user.isEmpty()) {
+            throw new UserNotFoundException(String.format("User with ID [%s] not found", request.getUserId()));
+        }
         Comment newComment = Comment.builder()
-                .book(book)
-                .user(user)
+                .book(book.get())
+                .user(user.get())
                 .comment(request.getComment())
                 .build();
         commentRepository.save(newComment);

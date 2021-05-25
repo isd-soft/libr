@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,16 @@ class BookServiceImpl implements BookService {
             bookDtos.add(bookDto);
         }
         return bookDtos;
+    }
+
+    @Override
+    @Transactional
+    public BookDto getById(long id) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isEmpty()) {
+            throw new BookNotFoundException(String.format("Book with ID [%s] not found", id));
+        }
+        return BookDto.from(book.get(), book.get().getComments());
     }
 
     @Override

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,18 +25,24 @@ public class VoteServiceImpl implements VoteService {
         long userId = request.getUserId();
         long bookId = request.getBookId();
         int voteNumber = request.getVote();
-        Book book = bookRepository.getById(bookId);
-        User user = userRepository.getById(userId);
-        if (checkForRepeatedVote(book, user)) {
+        Optional<Book> book = bookRepository.findById(bookId);
+        if (book.isEmpty()) {
+            throw new BookNotFoundException(String.format("Book with ID [%s] not found", request.getBookId()));
+        }
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException(String.format("User with ID [%s] not found", request.getUserId()));
+        }
+        if (checkForRepeatedVote(book.get(), user.get())) {
             throw new RepeatedVoteException("This user already voted this book");
         }
         Vote vote = Vote.builder()
-                .book(book)
-                .user(user)
+                .book(book.get())
+                .user(user.get())
                 .vote(voteNumber)
                 .build();
         voteRepository.save(vote);
-        return book.getSumOfVotes();
+        return book.get().getSumOfVotes();
     }
 
     private boolean checkForRepeatedVote(Book book, User user) {

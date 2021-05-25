@@ -1,9 +1,15 @@
 package com.isd.libr.config;
 
 
+import com.isd.libr.service.AuthenticationService;
 import com.isd.libr.service.TokenService;
+import com.isd.libr.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -13,13 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
+    private final UserService userService;
 
-    public JwtFilter(TokenService tokenService) {
-        this.tokenService = tokenService;
-    }
 
 
     @Override
@@ -47,8 +52,10 @@ public class JwtFilter extends OncePerRequestFilter {
         } else {
             request.setAttribute("userId", userId);
             request.setAttribute("username", userEmail);
-            Authentication authentication = tokenService.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserDetails userDetails = userService.loadUserByUsername(userData.get("email"));
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,
+                    "", userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             filterChain.doFilter(request, response);
         }
     }

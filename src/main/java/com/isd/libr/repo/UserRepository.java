@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(nativeQuery = true, value ="select email from users where role = 'ADMIN'")
     String findEmailByRole();
-    List<User> findAll();
 
-    User getById(Long id);
+    Optional<User> findById(long id);
+
 }

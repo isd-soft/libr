@@ -3,6 +3,7 @@ package com.isd.libr.web.dto;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.Comment;
 import com.isd.libr.web.entity.Status;
+import com.isd.libr.web.entity.Vote;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +19,14 @@ import java.util.Map;
 @Getter
 @Setter
 public class BookDto {
-    private long id;
+    private Long id;
     private String title;
     private List<String> authors;
     private String publishedDate;
     private String description;
-    private int pageCount;
+    private Integer pageCount;
     private List<String> categories;
-    private int averageRating;
+    private Integer averageRating;
     private String language;
     private Status status;
     private List<HashMap<String, String>> industryIdentifiers;

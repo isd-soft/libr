@@ -2,6 +2,7 @@ package com.isd.libr.web.controller;
 
 import com.isd.libr.service.*;
 import com.isd.libr.web.dto.ErrorDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,5 +35,15 @@ public class GlobalControllerAdvice {
     @ExceptionHandler
     public ResponseEntity<?> handleUserAlreadyExistsException(UserAlreadyExistsException e) {
         return ResponseEntity.badRequest().body(ErrorDto.from(e.getMessage()));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<?> handleBookNotFoundException(BookNotFoundException e) {
+        return ResponseEntity.badRequest().body(ErrorDto.from(e.getMessage()));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<?> handleAuthenticationFailedException(AuthenticationFailedException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorDto.from(e.getMessage()));
     }
 }

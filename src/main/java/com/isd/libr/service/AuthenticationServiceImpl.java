@@ -2,49 +2,45 @@ package com.isd.libr.service;
 
 
 import com.isd.libr.repo.UserRepository;
+import com.isd.libr.web.dto.UserLoginDto;
+import com.isd.libr.web.dto.requests.LoginRequest;
 import com.isd.libr.web.dto.requests.RegisterRequest;
+import com.isd.libr.web.dto.requests.UpdatePasswordRequest;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-class AuthenticationServiceImpl implements UserDetailsService, AuthenticationService {
-    private final UserRepository userRepository;
+class AuthenticationServiceImpl implements AuthenticationService {
 
-    public User create(RegisterRequest request, String password) {
-        Optional<User> existingUser = userRepository.findByEmail(request.getEmail());
-        if (existingUser.isPresent()) {
-            throw new UserAlreadyExistsException(String.format("User with [%s] already exists! Consider logging in.", request.getEmail()));
+    private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
+
+    @Override
+    public UserLoginDto authenticate(LoginRequest loginRequest) throws AuthenticationFailedException {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
+                        loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        if (authentication.isAuthenticated()) {
+            User user = (User) authentication.getPrincipal();
+            return UserLoginDto.from(user, tokenService.createToken(user));
+        } else {
+            throw new AuthenticationFailedException("Couldn't authenticate this user");
         }
-        User user = User.builder()
-                .email(request.getEmail())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .age(request.getAge())
-                .password(password)
-                .role(request.getRole())
-                .phone(request.getPhone())
-                .build();
-        return userRepository.save(user);
     }
 
-    @Override
-    public void updatePassword(long id, String hashedPassword) {
-        User user = userRepository.getById(id);
-        user.setPassword(hashedPassword);
-        userRepository.save(user);
-    }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email [%s] not found", email)));
-    }
 }
