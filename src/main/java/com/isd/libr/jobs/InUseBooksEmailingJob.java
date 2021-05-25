@@ -50,4 +50,3 @@ class InUseBooksEmailingJob {
    emailService.sendSimpleMessage(messageToAdmin);
         }
 }
-

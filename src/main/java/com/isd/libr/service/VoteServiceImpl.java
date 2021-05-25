@@ -20,7 +20,7 @@ public class VoteServiceImpl implements VoteService {
     private final UserRepository userRepository;
 
     @Override
-    public void vote(AddVoteRequest request) throws RepeatedVoteException {
+    public int vote(AddVoteRequest request) throws RepeatedVoteException {
         long userId = request.getUserId();
         long bookId = request.getBookId();
         int voteNumber = request.getVote();
@@ -35,6 +35,7 @@ public class VoteServiceImpl implements VoteService {
                 .vote(voteNumber)
                 .build();
         voteRepository.save(vote);
+        return book.getSumOfVotes();
     }
 
     private boolean checkForRepeatedVote(Book book, User user) {

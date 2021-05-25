@@ -28,12 +28,12 @@ public class BookController {
         return bookService.findAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@RequestParam("id") Long id) {
         bookService.deleteBookById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping("/save")
     public void saveBook(@RequestBody CreateBookRequest request) {
         bookService.save(request);
     }

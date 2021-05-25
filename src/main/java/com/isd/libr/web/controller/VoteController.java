@@ -1,5 +1,6 @@
 package com.isd.libr.web.controller;
 
+import com.isd.libr.service.BookService;
 import com.isd.libr.service.RepeatedVoteException;
 import com.isd.libr.service.VoteService;
 import com.isd.libr.web.dto.requests.AddVoteRequest;
@@ -13,10 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class VoteController {
     private final VoteService voteService;
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<?> addVote(@RequestBody AddVoteRequest request) {
-        voteService.vote(request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(voteService.vote(request));
     }
 
 }

@@ -25,7 +25,7 @@ public class Book {
     private List<String> authors = new ArrayList<>();
     private String publisher;
     private String publishedDate;
-    @Lob
+//    @Lob
     private String description;
     @ElementCollection
     @CollectionTable(name = "industry_identifiers", joinColumns = @JoinColumn(name = "book_id"))
@@ -76,5 +76,8 @@ public class Book {
         return getClass().hashCode();
     }
 
+    public int getSumOfVotes() {
+        return getVotes().stream().map(Vote::getVote).mapToInt(Integer::intValue).sum();
+    }
 }
 
