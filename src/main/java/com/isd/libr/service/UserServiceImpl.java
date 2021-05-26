@@ -80,7 +80,7 @@ class UserServiceImpl implements UserService {
         if (user.isEmpty()) {
             throw new UserNotFoundException(String.format("User with ID [%s] not found", id));
         }
-        bookActionRepository.deleteAllByUser(user.get());
+        bookActionRepository.deleteAllByUser(user);
         userRepository.deleteById(id);
     }
 

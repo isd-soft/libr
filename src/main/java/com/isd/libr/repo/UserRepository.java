@@ -10,9 +10,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
-    @Query(nativeQuery = true, value ="select email from users where role = 'ADMIN'")
-    String findEmailByRole();
+    List<User> findByRole(String role);
 
-    Optional<User> findById(long id);
 
 }

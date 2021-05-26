@@ -23,13 +23,14 @@ import java.util.Optional;
 public class BookController {
     private final BookService bookService;
 
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookById(@PathVariable("id") long id){
         BookDto book = bookService.getById(id);
         return ResponseEntity.ok(book);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<BookDto> listBooks() {
         return bookService.findAll();
     }
@@ -39,7 +40,7 @@ public class BookController {
         bookService.deleteBookById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public void saveBook(@RequestBody CreateBookRequest request) {
         bookService.save(request);
     }

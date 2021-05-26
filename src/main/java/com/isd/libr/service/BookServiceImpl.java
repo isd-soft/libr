@@ -43,8 +43,8 @@ class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void save(CreateBookRequest request) throws BookDuplicateException {
-        Book existingBook = bookRepository.getByTitle(request.getTitle());
-        if (existingBook != null) {
+        Optional<Book> existingBook = bookRepository.getByTitle(request.getTitle());
+        if (existingBook.isPresent()) {
             throw new BookDuplicateException("This book is already in our database");
         }
         Book book = Book.builder()
