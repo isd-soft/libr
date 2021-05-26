@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.*;
@@ -25,7 +26,8 @@ public class Book {
     private List<String> authors = new ArrayList<>();
     private String publisher;
     private String publishedDate;
-    /*@Lob*/
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
     @ElementCollection
     @CollectionTable(name = "industry_identifiers", joinColumns = @JoinColumn(name = "book_id"))
