@@ -1,14 +1,20 @@
 package com.isd.libr.service;
 
+import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.BookRepository;
+import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.entity.Book;
+import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.Status;
+import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +24,11 @@ import java.util.Optional;
 class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final BookActionRepository bookActionRepository;
+    private final UserRepository userRepository;
 
-    @Transactional
     @Override
+    @Transactional
     public List<BookDto> findAll() {
         List<Book> books = bookRepository.findAll();
         List<BookDto> bookDtos = new ArrayList<>();
@@ -66,6 +74,8 @@ class BookServiceImpl implements BookService {
                 .previewLink(request.getPreviewLink())
                 .build();
         bookRepository.save(book);
+        Optional<User> byId = userRepository.findById(request.getUserId());
+        bookActionRepository.save(new BookAction(byId.get(),book, LocalDateTime.now(), Status.SUBMITTED));
     }
 
 

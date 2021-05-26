@@ -12,12 +12,12 @@ insert into public.users (id, age, email, first_name, last_name, password, phone
 insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9996, 35, 'test3@gmail.com', 'test', 'test', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
 insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9995, 35, 'test4@gmail.com', 'test', 'test', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
 
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (9999, '2021-05-17 22:15:13.000000', 'SUBMITTED', 9999, 9999);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (1, '2021-05-17 22:15:13.000000', 'SUBMITTED', 9999, 9998);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (2, '2021-04-17 22:15:14.000000', 'IN_USE', 9999, 9998);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (3, '2021-02-17 22:15:15.000000', 'IN_USE', 1111, 9997);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (4, '2021-03-17 22:15:16.000000', 'IN_LIBRARY', 2222, 9997);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (5, '2021-04-27 22:15:17.000000', 'IN_USE', 3333, 9996);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (6, '2021-04-17 22:15:17.000000', 'IN_LIBRARY', 4444, 9996);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (7, '2021-04-24 22:15:17.000000', 'IN_USE', 5555, 9995);
-insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (8, '2021-04-17 22:15:17.000000', 'IN_USE', 6666, 9995);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (99994, '2021-05-17 22:15:13.000000', 'SUBMITTED', 9999, 9999);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (145644, '2021-05-17 22:15:13.000000', 'SUBMITTED', 9999, 9998);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (456624, '2021-04-17 22:15:14.000000', 'IN_USE', 9999, 9998);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (4564563, '2021-02-17 22:15:15.000000', 'IN_USE', 1111, 9997);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (4456435, '2021-03-17 22:15:16.000000', 'IN_LIBRARY', 2222, 9997);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (5345345, '2021-04-27 22:15:17.000000', 'IN_USE', 3333, 9996);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (3453456, '2021-04-17 22:15:17.000000', 'IN_LIBRARY', 4444, 9996);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (3453457, '2021-04-24 22:15:17.000000', 'IN_USE', 5555, 9995);
+insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (3453458, '2021-04-17 22:15:17.000000', 'IN_USE', 6666, 9995);

@@ -26,6 +26,7 @@ public class CreateBookRequest {
     private Map<String, String> imageLinks;
     private String language;
     private String previewLink;
+    private Long userId;
 
     @JsonCreator
     public CreateBookRequest(@JsonProperty("title") String title,
@@ -41,7 +42,9 @@ public class CreateBookRequest {
                              @JsonProperty("maturityRating") String maturityRating,
                              @JsonProperty("imageLinks") Map<String, String> imageLinks,
                              @JsonProperty("language") String language,
-                             @JsonProperty("previewLink") String previewLink) {
+                             @JsonProperty("previewLink") String previewLink,
+                             @JsonProperty("userId") Long userId
+    ) {
         this.title = title;
         this.authors = authors;
         this.publisher = publisher;
@@ -56,5 +59,6 @@ public class CreateBookRequest {
         this.imageLinks = imageLinks;
         this.language = language;
         this.previewLink = previewLink;
+        this.userId = userId;
     }
 }
