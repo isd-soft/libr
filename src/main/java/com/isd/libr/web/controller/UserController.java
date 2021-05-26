@@ -29,7 +29,7 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<UserDto> listUser() {
         return userService.findAll();
     }

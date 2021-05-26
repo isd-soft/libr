@@ -4,6 +4,7 @@ import com.isd.libr.repo.BookRepository;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.entity.Book;
+import com.isd.libr.web.entity.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    @Transactional
     @Override
     public List<BookDto> findAll() {
         List<Book> books = bookRepository.findAll();
@@ -71,6 +73,8 @@ class BookServiceImpl implements BookService {
     public void deleteBookById(long id) {
         bookRepository.deleteById(id);
     }
+
+
 
 
 }

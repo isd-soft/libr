@@ -81,5 +81,12 @@ public class Book {
     public int getSumOfVotes() {
         return getVotes().stream().map(Vote::getVote).mapToInt(Integer::intValue).sum();
     }
+
+    public Status getLastStatus() {
+        BookAction bookAction = actions.stream()
+                .sorted(Comparator.comparing(BookAction::getActionDate)
+                        .reversed()).findFirst().orElseThrow(NoSuchFieldError::new);
+        return bookAction.getStatus();
+    }
 }
 

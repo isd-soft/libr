@@ -47,8 +47,8 @@ class BookActionServiceImpl implements BookActionService {
         UserDto userDto = UserDto.from(updatedBookAction.getUser());
         BookDto bookDto = BookDto.from(updatedBookAction.getBook());
         return BookActionDto.from(updatedBookAction, userDto, bookDto);
-
     }
+
 
 
 }

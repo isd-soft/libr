@@ -23,9 +23,8 @@ import java.util.Optional;
 public class BookController {
     private final BookService bookService;
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<?> getBookById(@PathVariable("id") long id){
+    public ResponseEntity<?> getBookById(@PathVariable("id") Long id){
         BookDto book = bookService.getById(id);
         return ResponseEntity.ok(book);
     }
@@ -44,5 +43,6 @@ public class BookController {
     public void saveBook(@RequestBody CreateBookRequest request) {
         bookService.save(request);
     }
+
 
 }

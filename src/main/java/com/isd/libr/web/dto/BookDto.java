@@ -60,6 +60,7 @@ public class BookDto {
         result.setLanguage(book.getLanguage());
         result.setIndustryIdentifiers(book.getIndustryIdentifiers());
         result.setImageLinks(book.getImageLinks());
+        result.setStatus(book.getLastStatus());
         return result;
     }
 }
