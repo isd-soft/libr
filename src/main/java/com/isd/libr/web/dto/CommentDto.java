@@ -28,7 +28,7 @@ public class CommentDto {
         result.setBookDto(bookDto);
         result.setUserDto(userDto);
         result.setComment(comment.getComment());
-        result.setDate(comment.getDateTime());
+        result.setDate(comment.getDate());
         return result;
     }
 
