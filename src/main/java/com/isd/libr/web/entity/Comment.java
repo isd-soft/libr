@@ -27,12 +27,10 @@ public class Comment {
     @ToString.Exclude
     @JoinColumn(name = "book_id", nullable = false, updatable = false)
     private Book book;
-    private LocalDateTime date;
+    private LocalDateTime date = LocalDateTime.now();
 
     protected Comment() {}
 
-    public LocalDateTime getDateTime(){
-        return LocalDateTime.now();
-    }
+
 
 }
