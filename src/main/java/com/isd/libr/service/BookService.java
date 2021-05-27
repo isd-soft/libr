@@ -6,6 +6,8 @@ import com.isd.libr.web.dto.requests.CreateBookRequest;
 import java.util.List;
 
 public interface BookService {
+    List<BookDto> listBooksWithNotStatusRejected();
+
     List<BookDto> findAll();
 
     BookDto getById(long id);

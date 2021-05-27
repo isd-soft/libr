@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,13 +29,26 @@ class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public List<BookDto> findAll() {
+    public List<BookDto> listBooksWithNotStatusRejected() {
 
-        List<Book> books = bookRepository.findAllBooksByStatusesGreaterThenApproved();
+        List<Book> books = bookRepository.listBooksWithNotStatusRejected();
         List<BookDto> bookDtos = new ArrayList<>();
         for (Book bookItem :
                 books) {
             BookDto bookDto = BookDto.from(bookItem, bookItem.getComments());
+            bookDtos.add(bookDto);
+        }
+        bookDtos.sort(Comparator.comparing(BookDto::getVote).reversed());
+        return bookDtos;
+    }
+
+    @Override
+    @Transactional
+    public List<BookDto> findAll() {
+        List<Book> books = bookRepository.findAll();
+        List<BookDto> bookDtos = new ArrayList<>();
+        for (Book book : books) {
+            BookDto bookDto = BookDto.from(book, book.getComments());
             bookDtos.add(bookDto);
         }
         return bookDtos;
@@ -75,7 +89,7 @@ class BookServiceImpl implements BookService {
                 .build();
         bookRepository.save(book);
         Optional<User> byId = userRepository.findById(request.getUserId());
-        bookActionRepository.save(new BookAction(byId.get(),book, LocalDateTime.now(), Status.SUBMITTED));
+        bookActionRepository.save(new BookAction(byId.get(), book, LocalDateTime.now(), Status.SUBMITTED));
     }
 
 
@@ -83,8 +97,6 @@ class BookServiceImpl implements BookService {
     public void deleteBookById(long id) {
         bookRepository.deleteById(id);
     }
-
-
 
 
 }

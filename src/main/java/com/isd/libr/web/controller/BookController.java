@@ -2,20 +2,12 @@ package com.isd.libr.web.controller;
 
 import com.isd.libr.service.BookService;
 import com.isd.libr.web.dto.BookDto;
-import com.isd.libr.web.dto.requests.AddCommentRequest;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
-import com.isd.libr.web.entity.Book;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreFilter;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -29,9 +21,15 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    @GetMapping()
-    public List<BookDto> listBooks() {
-        return bookService.findAll();
+    @GetMapping("/filtered")
+    public List<BookDto> listBooksWithNotStatusRejected() {
+        return bookService.listBooksWithNotStatusRejected();
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        List<BookDto> books = bookService.findAll();
+        return ResponseEntity.ok(books);
     }
 
     @DeleteMapping("/delete/{id}")

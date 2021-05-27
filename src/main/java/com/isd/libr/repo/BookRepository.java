@@ -17,8 +17,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             "from book_action ba " +
             "order by ba.action_date desc) as actions_ranked join book b on b.id=actions_ranked.book_id  " +
             "where actions_ranked.row_number=1  " +
-            "and actions_ranked.status in ('IN_USE', 'IN_LIBRARY')")
-    List<Book> findAllBooksByStatusesGreaterThenApproved();
+            "and actions_ranked.status not in ('REJECTED')")
+    List<Book> listBooksWithNotStatusRejected();
 
 
 }
