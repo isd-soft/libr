@@ -12,15 +12,12 @@ public class EmailRequest {
 
     private EmailType emailType;
     private Long userId;
-    private String bookTitle;
 
     @JsonCreator
-    public EmailRequest (@JsonProperty EmailType emailType,
-                         @JsonProperty Long userId,
-                         @JsonProperty String bookTitle) {
+    public EmailRequest (@JsonProperty String emailType,
+                         @JsonProperty Long userId) {
 
-        this.bookTitle = bookTitle;
-        this.emailType = emailType;
+        this.emailType = EmailType.valueOf(emailType);
         this.userId = userId;
 
     }
