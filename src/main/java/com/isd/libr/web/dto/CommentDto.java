@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class CommentDto {
     private Long id;
     private BookDto bookDto;
     private String comment;
-    private LocalDateTime date;
+    private String date;
 
     public static CommentDto from(Comment comment) {
         UserDto userDto = UserDto.from(comment.getUser());
@@ -28,7 +29,7 @@ public class CommentDto {
         result.setBookDto(bookDto);
         result.setUserDto(userDto);
         result.setComment(comment.getComment());
-        result.setDate(comment.getDate());
+        result.setDate(comment.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         return result;
     }
 
