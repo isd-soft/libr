@@ -35,6 +35,7 @@ public class CommentServiceImpl implements CommentService {
         Comment newComment = Comment.builder()
                 .book(book.get())
                 .user(user.get())
+                .date(LocalDateTime.now())
                 .comment(request.getComment())
                 .date(LocalDateTime.now())
                 .build();
