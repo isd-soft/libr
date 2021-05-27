@@ -16,6 +16,8 @@ public interface BookActionRepository extends JpaRepository<BookAction, Long> {
 
     List<BookAction> getAllByStatus(Status status);
 
+    void deleteAllByBookId(Long bookId);
+
 
     BookAction getFirstByBookOrderByActionDateDesc(Book book);
 

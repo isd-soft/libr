@@ -41,7 +41,7 @@ class EmailServiceImpl implements EmailService {
         message.setFrom(from);
         message.setTo(user.get().getEmail());
         message.setSubject("Notification");
-        message.setText( "" + type);
+        message.setText(request.getBookTitle() + " has now new status: " + type);
         emailSender.send(message);
     }
 

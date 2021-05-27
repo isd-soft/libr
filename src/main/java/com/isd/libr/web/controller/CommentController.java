@@ -4,14 +4,12 @@ import com.isd.libr.service.CommentService;
 import com.isd.libr.web.dto.requests.AddCommentRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/comments")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CommentController {
     private final CommentService commentService;
 

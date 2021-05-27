@@ -3,6 +3,7 @@ package com.isd.libr.web.controller;
 import com.isd.libr.service.BookService;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
+import com.isd.libr.web.dto.requests.UpdateBookRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
@@ -19,6 +21,12 @@ public class BookController {
     public ResponseEntity<?> getBookById(@PathVariable("id") Long id){
         BookDto book = bookService.getById(id);
         return ResponseEntity.ok(book);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateBook(@PathVariable("id") Long id, @RequestBody UpdateBookRequest request) {
+        BookDto updatedBook = bookService.updateBook(id, request);
+        return ResponseEntity.ok(updatedBook);
     }
 
     @GetMapping("/filtered")
@@ -32,8 +40,8 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void delete(@RequestParam("id") Long id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
         bookService.deleteBookById(id);
     }
 

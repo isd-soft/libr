@@ -5,6 +5,7 @@ import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
+import com.isd.libr.web.dto.requests.UpdateBookRequest;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.Status;
@@ -89,13 +90,43 @@ class BookServiceImpl implements BookService {
                 .build();
         bookRepository.save(book);
         Optional<User> byId = userRepository.findById(request.getUserId());
+        if (byId.isEmpty()) {
+            throw new UserNotFoundException(String.format("User with [%s] not found", request.getUserId()));
+        }
         bookActionRepository.save(new BookAction(byId.get(), book, LocalDateTime.now(), Status.SUBMITTED));
     }
 
 
     @Override
+    @Transactional
     public void deleteBookById(long id) {
+        bookActionRepository.deleteAllByBookId(id);
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public BookDto updateBook(Long id, UpdateBookRequest request) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isEmpty()) {
+            throw new BookNotFoundException(String.format("Book with ID [%s] not found", id));
+        }
+        Book book = optionalBook.get();
+        book.setTitle(request.getTitle());
+        book.setAuthors(request.getAuthors());
+        book.setPublisher(request.getPublisher());
+        book.setPublishedDate(request.getPublishedDate());
+        book.setDescription(request.getDescription());
+        book.setIndustryIdentifiers(request.getIndustryIdentifiers());
+        book.setPageCount(request.getPageCount());
+        book.setCategories(request.getCategories());
+        book.setAverageRating(request.getAverageRating());
+        book.setMaturityRating(request.getMaturityRating());
+        book.setImageLinks(request.getImageLinks());
+        book.setLanguage(request.getLanguage());
+        book.setPreviewLink(request.getPreviewLink());
+        Book updatedBook = bookRepository.save(book);
+        return BookDto.from(updatedBook);
     }
 
 
