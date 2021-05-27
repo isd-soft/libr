@@ -3,6 +3,7 @@ package com.isd.libr.web.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -26,6 +27,12 @@ public class Comment {
     @ToString.Exclude
     @JoinColumn(name = "book_id", nullable = false, updatable = false)
     private Book book;
+    private LocalDateTime date;
 
     protected Comment() {}
+
+    public LocalDateTime getDateTime(){
+        return LocalDateTime.now();
+    }
+
 }
