@@ -10,7 +10,6 @@ import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.Status;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,7 +29,8 @@ class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public List<BookDto> findAll() {
-        List<Book> books = bookRepository.findAll();
+
+        List<Book> books = bookRepository.findAllBooksByStatusesGreaterThenApproved();
         List<BookDto> bookDtos = new ArrayList<>();
         for (Book bookItem :
                 books) {
