@@ -88,8 +88,8 @@ public class Book {
 
     public Status getLastStatus() {
         BookAction bookAction = actions.stream()
-                .sorted(Comparator.comparing(BookAction::getActionDate)
-                        .reversed()).findFirst().orElseThrow(NoSuchFieldError::new);
+                .max(Comparator.comparing(BookAction::getActionDate))
+                .orElseThrow(NoSuchFieldError::new);
         return bookAction.getStatus();
     }
 
