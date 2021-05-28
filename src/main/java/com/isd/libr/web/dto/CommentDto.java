@@ -29,7 +29,8 @@ public class CommentDto {
         result.setBookDto(bookDto);
         result.setUserDto(userDto);
         result.setComment(comment.getComment());
-        result.setDate(comment.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        result.setDate(comment.getDate()
+                .format(DateTimeFormatter.ofPattern("yyyy MM dd HH mm")));
         return result;
     }
 

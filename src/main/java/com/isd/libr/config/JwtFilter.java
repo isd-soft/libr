@@ -4,6 +4,7 @@ package com.isd.libr.config;
 import com.isd.libr.service.AuthenticationService;
 import com.isd.libr.service.TokenService;
 import com.isd.libr.service.UserService;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,12 +26,10 @@ public class JwtFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
     private final UserService userService;
 
-
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal( HttpServletRequest request,
+                                     HttpServletResponse response,
+                                     FilterChain filterChain) throws ServletException, IOException {
         String token = getTokenFromRequest(request);
 
         if (token == null) {
