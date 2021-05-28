@@ -2,7 +2,7 @@ package com.isd.libr.web.dto.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.isd.libr.web.entity.EmailType;
+import com.isd.libr.web.entity.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,15 +10,19 @@ import lombok.NoArgsConstructor;
 @Data
 public class EmailRequest {
 
-    private EmailType emailType;
+    private Status status;
     private Long userId;
+    private Long bookId;
 
     @JsonCreator
-    public EmailRequest (@JsonProperty String emailType,
-                         @JsonProperty Long userId) {
+    public EmailRequest (@JsonProperty String status,
+                         @JsonProperty Long userId,
+                         @JsonProperty Long bookId)
+    {
 
-        this.emailType = EmailType.valueOf(emailType);
+        this.status = Status.valueOf(status);
         this.userId = userId;
+        this.bookId = bookId;
 
     }
 
