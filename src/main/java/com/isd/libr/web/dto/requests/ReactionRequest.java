@@ -8,17 +8,17 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class ReactionVoteRequest {
+public class ReactionRequest {
     private Long userId;
     private Long bookId;
     private ReactionType type;
 
     @JsonCreator
-    public ReactionVoteRequest(@JsonProperty Long userId,
-                               @JsonProperty Long bookId,
-                               @JsonProperty ReactionType type) {
+    public ReactionRequest(@JsonProperty Long userId,
+                           @JsonProperty Long bookId,
+                           @JsonProperty String type) {
         this.userId = userId;
         this.bookId = bookId;
-        this.type = type;
+        this.type = ReactionType.valueOf(type);
     }
 }

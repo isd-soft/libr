@@ -58,7 +58,11 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<Vote> votes = new ArrayList<>();
 
-    protected Book() {}
+    @OneToMany(mappedBy = "book")
+    private List<Reaction> reactions = new ArrayList<>();
+
+    protected Book() {
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -88,5 +92,30 @@ public class Book {
                         .reversed()).findFirst().orElseThrow(NoSuchFieldError::new);
         return bookAction.getStatus();
     }
+
+    public Map<String, Integer> getReactions() {
+        int laugh = 0;
+        int sad = 0;
+        int heart = 0;
+        Map<String, Integer> result = new HashMap<>();
+        for (Reaction reaction : reactions) {
+            switch (reaction.getReactionType()) {
+                case SAD:
+                    sad++;
+                    break;
+                case HEART:
+                    heart++;
+                    break;
+                case LAUGH:
+                    laugh++;
+                    break;
+            }
+        }
+        result.put("SAD", sad);
+        result.put("LAUGH", laugh);
+        result.put("HEART", heart);
+        return result;
+    }
+
 }
 

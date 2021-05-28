@@ -30,4 +30,6 @@ public class Reaction {
     private Book book;
 
     protected Reaction() {}
+
+
 }
