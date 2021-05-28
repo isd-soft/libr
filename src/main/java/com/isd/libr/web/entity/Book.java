@@ -9,6 +9,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.*;
 
+import static com.isd.libr.web.entity.ReactionType.*;
+
 @Entity
 @Table(name = "book")
 @Getter
@@ -93,27 +95,17 @@ public class Book {
         return bookAction.getStatus();
     }
 
-    public Map<String, Integer> getReactions() {
-        int laugh = 0;
-        int sad = 0;
-        int heart = 0;
-        Map<String, Integer> result = new HashMap<>();
-        for (Reaction reaction : reactions) {
-            switch (reaction.getReactionType()) {
-                case SAD:
-                    sad++;
-                    break;
-                case HEART:
-                    heart++;
-                    break;
-                case LAUGH:
-                    laugh++;
-                    break;
-            }
-        }
-        result.put("SAD", sad);
-        result.put("LAUGH", laugh);
-        result.put("HEART", heart);
+    public Map<ReactionType, Long> getReactions() {
+        Map<ReactionType, Long> result = new HashMap<>();
+        long laughCount = reactions.stream()
+                .filter(r -> r.getReactionType() == ReactionType.LAUGH).count();
+        long heartCount = reactions.stream()
+                .filter(r -> r.getReactionType() == ReactionType.HEART).count();
+        long sadCount = reactions.stream()
+                .filter(r -> r.getReactionType() == SAD).count();
+        result.put(SAD, sadCount);
+        result.put(LAUGH, laughCount);
+        result.put(HEART, heartCount);
         return result;
     }
 

@@ -2,6 +2,7 @@ package com.isd.libr.web.dto;
 
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.Comment;
+import com.isd.libr.web.entity.ReactionType;
 import com.isd.libr.web.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public class BookDto {
     private Map<String, String> imageLinks;
     private List<CommentDto> comments;
     private Integer vote;
-    private Map<String, Integer> reactions;
+    private Map<ReactionType, Long> reactions;
 
     public static BookDto from(Book book, List<Comment> comments) {
         List<CommentDto> commentDtos = new ArrayList<>();
@@ -41,7 +42,7 @@ public class BookDto {
             commentDtos.add(commentDto);
         }
         int votes = book.getSumOfVotes();
-        Map<String, Integer> reactions = book.getReactions();
+        Map<ReactionType, Long> reactions = book.getReactions();
         BookDto result = from(book);
         result.setComments(commentDtos);
         result.setVote(votes);
