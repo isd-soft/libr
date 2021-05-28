@@ -6,11 +6,11 @@ insert into public.book (id, average_rating, description, language, maturity_rat
 insert into public.book (id, average_rating, description, language, maturity_rating, page_count, preview_link, published_date, publisher, rating_count, title) VALUES (5555, 3, 'description', 'language', 'maturityRating', 500, 'previewLink', 'published_date', 'publisher', 5, 'BB');
 insert into public.book (id, average_rating, description, language, maturity_rating, page_count, preview_link, published_date, publisher, rating_count, title) VALUES (6666, 3, 'description', 'language', 'maturityRating', 500, 'previewLink', 'published_date', 'publisher', 5, 'BB');
 
-insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9999, 35, 'mariacojocari302@gmail.com', 'test', 'test', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'ADMIN');
-insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9998, 35, 'gherta.nicolai@gmail.com', 'test', 'test', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'ADMIN');
-insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9997, 35, 'test2@gmail.com', 'test', 'test', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
-insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9996, 35, 'test3@gmail.com', 'test', 'test', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
-insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9995, 35, 'test4@gmail.com', 'test', 'test', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
+insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9999, 35, 'mariacojocari302@gmail.com', 'Maria', 'Maria', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'ADMIN');
+insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9998, 35, 'test@gmail.com', 'Bob', 'Bob', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'ADMIN');
+insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9997, 35, 'mariacojocari302@gmail.com', 'John', 'Smith', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
+insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9996, 35, 'test3@gmail.com', 'Jim', 'Jim', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
+insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9995, 35, 'test4@gmail.com', 'Anna', 'Anna', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
 
 insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (99994, '2021-05-17 22:15:13.000000', 'SUBMITTED', 9999, 9999);
 insert into public.book_action (id, action_date, status, book_id, users_id) VALUES (145644, '2021-05-17 22:15:13.000000', 'SUBMITTED', 9999, 9998);

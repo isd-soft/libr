@@ -19,6 +19,7 @@ public class BookActionDto {
     private String status;
     private LocalDateTime actionDate;
 
+
     public static BookActionDto from(BookAction bookAction, UserDto userDto, BookDto bookDto) {
         BookActionDto result = new BookActionDto();
         result.setId(bookAction.getId());
@@ -28,4 +29,7 @@ public class BookActionDto {
         result.setActionDate(bookAction.getActionDate());
         return result;
     }
+
+
+
 }

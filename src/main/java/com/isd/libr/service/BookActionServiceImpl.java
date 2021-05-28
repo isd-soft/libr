@@ -4,6 +4,7 @@ import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.web.dto.BookActionDto;
+import com.isd.libr.web.dto.BookActionInfoDto;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.UserDto;
 import com.isd.libr.web.dto.requests.UpdateBooksStatusRequest;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +51,16 @@ class BookActionServiceImpl implements BookActionService {
         return BookActionDto.from(updatedBookAction, userDto, bookDto);
     }
 
+     public BookActionInfoDto getInfo(Long id){
+        BookAction bookAction = bookActionRepository.findLastActionByBookId(id);
+        String userFirstName = bookAction.getUser().getFirstName();
+        String userLastName = bookAction.getUser().getLastName();
+        String status = bookAction.getStatus().toString();
+        String date = bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy MM dd HH mm"));
+        return BookActionInfoDto.from(userFirstName,userLastName,status,date);
+    }
+     }
 
 
-}
+
+

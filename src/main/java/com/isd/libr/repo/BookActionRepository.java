@@ -1,5 +1,6 @@
 package com.isd.libr.repo;
 
+import com.isd.libr.web.dto.BookActionDto;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.Status;
@@ -18,8 +19,10 @@ public interface BookActionRepository extends JpaRepository<BookAction, Long> {
 
     void deleteAllByBookId(Long bookId);
 
+    @Query(nativeQuery = true,value = "Select * from book_action where book_id = :bookId " +
+            "order by action_date desc limit 1")
+     BookAction findLastActionByBookId (Long bookId);
 
-    BookAction getFirstByBookOrderByActionDateDesc(Book book);
 
     void deleteAllByUser(Optional<User> user);
 
