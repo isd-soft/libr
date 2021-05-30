@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class BookActionDto {
     private BookDto books;
     private UserDto users;
     private String status;
-    private LocalDateTime actionDate;
+    private String actionDate;
 
 
     public static BookActionDto from(BookAction bookAction, UserDto userDto, BookDto bookDto) {
@@ -26,7 +27,7 @@ public class BookActionDto {
         result.setUsers(userDto);
         result.setBooks(bookDto);
         result.setStatus(String.valueOf(bookAction.getStatus()));
-        result.setActionDate(bookAction.getActionDate());
+        result.setActionDate(bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         return result;
     }
 

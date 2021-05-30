@@ -97,14 +97,6 @@ class BookServiceImpl implements BookService {
         sendSubmittedEmail(book);
     }
 
-    private void sendSubmittedEmail(Book book) {
-        String[] admins = userRepository.findByRole("ADMIN")
-                .stream().map(User::getEmail)
-                .toArray(String[]::new);
-        String text = String.format(" The book %s submitted", book.getTitle());
-        emailService.sendEmailNotification(text, admins);
-    }
-
 
     @Override
     @Transactional
@@ -144,6 +136,13 @@ class BookServiceImpl implements BookService {
     }
 
 
+    private void sendSubmittedEmail(Book book) {
+        String[] admins = userRepository.findByRole("ADMIN")
+                .stream().map(User::getEmail)
+                .toArray(String[]::new);
+        String text = String.format(" The book %s submitted", book.getTitle());
+        emailService.sendEmailNotification(text, admins);
+    }
 }
 
 
