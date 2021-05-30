@@ -14,7 +14,5 @@ public interface BookActionService {
 
     BookActionDto updateStatus(UpdateBooksStatusRequest request);
 
-
-
     BookActionInfoDto getInfo(Long id, Status status);
 }

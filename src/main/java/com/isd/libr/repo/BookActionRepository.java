@@ -19,9 +19,9 @@ public interface BookActionRepository extends JpaRepository<BookAction, Long> {
 
     void deleteAllByBookId(Long bookId);
 
-    @Query(nativeQuery = true,value = "Select * from book_action where book_id = :bookId " +
+    @Query(nativeQuery = true,value = "Select * from book_action where book_id = :bookId and status =:status " +
             "order by action_date desc limit 1")
-     BookAction findLastActionByBookId (Long bookId);
+     BookAction findLastActionByBookIdAndStatus (Long bookId,Status status);
 
 
     void deleteAllByUser(Optional<User> user);

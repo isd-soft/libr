@@ -30,7 +30,7 @@ public class CommentDto {
         result.setUserDto(userDto);
         result.setComment(comment.getComment());
         result.setDate(comment.getDate()
-                .format(DateTimeFormatter.ofPattern("yyyy MM dd HH mm")));
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         return result;
     }
 

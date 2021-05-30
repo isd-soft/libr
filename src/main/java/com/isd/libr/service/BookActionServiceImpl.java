@@ -60,7 +60,7 @@ class BookActionServiceImpl implements BookActionService {
     }
 
      public BookActionInfoDto getInfo(Long id , Status status){
-        BookAction bookAction = bookActionRepository.findLastActionByBookId(id);
+        BookAction bookAction = bookActionRepository.findLastActionByBookIdAndStatus(id,status);
         String userFirstName = bookAction.getUser().getFirstName();
         String userLastName = bookAction.getUser().getLastName();
         String date = bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
