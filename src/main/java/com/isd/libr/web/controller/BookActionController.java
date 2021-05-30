@@ -35,7 +35,7 @@ public class BookActionController {
 
     @GetMapping("/{status}/book/{id}")
     public ResponseEntity<?> getInfoByBookId(BookInfoRequest request) {
-     BookActionInfoDto bookActionInfoDto = bookActionService.getInfo(request.getId(),request.getStatus());
+     BookActionInfoDto bookActionInfoDto = bookActionService.getInfo(request);
      return ResponseEntity.ok(bookActionInfoDto);
     }
 }

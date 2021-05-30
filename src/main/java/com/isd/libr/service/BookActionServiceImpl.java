@@ -7,6 +7,7 @@ import com.isd.libr.web.dto.BookActionDto;
 import com.isd.libr.web.dto.BookActionInfoDto;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.UserDto;
+import com.isd.libr.web.dto.requests.BookInfoRequest;
 import com.isd.libr.web.dto.requests.UpdateBooksStatusRequest;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.BookAction;
@@ -59,12 +60,13 @@ class BookActionServiceImpl implements BookActionService {
         return BookActionDto.from(updatedBookAction, userDto, bookDto);
     }
 
-     public BookActionInfoDto getInfo(Long id , Status status){
-        BookAction bookAction = bookActionRepository.findLastActionByBookIdAndStatus(id,status);
+     public BookActionInfoDto getInfo(BookInfoRequest request){
+        BookAction bookAction = bookActionRepository.findLastActionByBookIdAndStatus(request.getId(),request.getStatus().toString());
         String userFirstName = bookAction.getUser().getFirstName();
         String userLastName = bookAction.getUser().getLastName();
         String date = bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        return BookActionInfoDto.from(userFirstName,userLastName,date);
+        String actualStatus =bookAction.getStatus().toString();
+        return BookActionInfoDto.from(userFirstName,userLastName,date,actualStatus);
     }
      }
 

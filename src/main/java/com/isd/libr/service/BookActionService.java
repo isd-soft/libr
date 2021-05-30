@@ -4,7 +4,6 @@ import com.isd.libr.web.dto.BookActionDto;
 import com.isd.libr.web.dto.BookActionInfoDto;
 import com.isd.libr.web.dto.requests.BookInfoRequest;
 import com.isd.libr.web.dto.requests.UpdateBooksStatusRequest;
-import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.Status;
 
 import java.util.List;
@@ -14,5 +13,5 @@ public interface BookActionService {
 
     BookActionDto updateStatus(UpdateBooksStatusRequest request);
 
-    BookActionInfoDto getInfo(Long id, Status status);
+    BookActionInfoDto getInfo(BookInfoRequest request);
 }
