@@ -10,7 +10,7 @@ import com.isd.libr.web.entity.Status;
 import java.util.List;
 
 public interface BookActionService {
-    List<BookAction> getByStatus(Status status);
+    List<BookActionDto> getByStatus(Status status);
 
     BookActionDto updateStatus(UpdateBooksStatusRequest request);
 

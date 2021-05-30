@@ -46,14 +46,14 @@ public class BookController {
         bookService.deleteBookById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public void saveBook(@RequestBody CreateBookRequest request) {
         bookService.save(request);
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<?> getAllUniqueCategories() {
-        List<Map<String, Integer>> categories = bookService.getAllUniqueCategories();
+    public ResponseEntity<?> getAllSortedUniqueCategories() {
+        List<Map<String, Integer>> categories = bookService.getAllSortedUniqueCategories();
         return ResponseEntity.ok(categories);
     }
 }

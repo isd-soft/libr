@@ -4,7 +4,6 @@ import com.isd.libr.web.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,6 +22,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> listBooksWithNotStatusRejected();
 
     @Query(nativeQuery = true, value = "select category, count(book_id) from categories group by category order by count(book_id) desc")
-    List<Map<String, Integer>> getAllUniqueCategories();
+    List<Map<String, Integer>> getAllSortedUniqueCategories();
 
 }

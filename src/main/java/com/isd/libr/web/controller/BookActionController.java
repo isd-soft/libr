@@ -23,7 +23,7 @@ public class BookActionController {
 
     @GetMapping("/{status}")
     public ResponseEntity<?> getSubmittedBooks(@PathVariable Status status) {
-        List<BookAction> actions = bookActionService.getByStatus(status);
+        List<BookActionDto> actions = bookActionService.getByStatus(status);
         return ResponseEntity.ok(actions);
     }
 

@@ -66,11 +66,14 @@ class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void save(CreateBookRequest request) throws BookDuplicateException {
-        bookRepository.getByTitle(request.getTitle())
-                .orElseThrow(() -> new BookDuplicateException("This book is already in our database"));
-        User userThatRequestedTheBook = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new UserNotFoundException(String.format("User with [%s] not found",
-                        request.getUserId())));
+        Optional<Book> existsBook = bookRepository.getByTitle(request.getTitle());
+        if (existsBook.isPresent()) {
+            throw new BookDuplicateException("This book is already in our library or requested");
+        }
+        Optional<User> existsUser = userRepository.findById(request.getUserId());
+        if (existsUser.isEmpty()) {
+            throw new UserNotFoundException(String.format("User with ID [%s] not found", request.getUserId()));
+        }
         Book book = Book.builder()
                 .title(request.getTitle())
                 .authors(request.getAuthors())
@@ -88,7 +91,7 @@ class BookServiceImpl implements BookService {
                 .previewLink(request.getPreviewLink())
                 .build();
         bookRepository.save(book);
-
+        User userThatRequestedTheBook = existsUser.get();
         bookActionRepository.save(new BookAction(userThatRequestedTheBook,
                 book, LocalDateTime.now(), Status.SUBMITTED));
         sendSubmittedEmail(book);
@@ -136,8 +139,8 @@ class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Map<String, Integer>> getAllUniqueCategories() {
-        return bookRepository.getAllUniqueCategories();
+    public List<Map<String, Integer>> getAllSortedUniqueCategories() {
+        return bookRepository.getAllSortedUniqueCategories();
     }
 
 

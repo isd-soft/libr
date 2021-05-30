@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +30,15 @@ class BookActionServiceImpl implements BookActionService {
     private final UserRepository userRepository;
 
     @Override
-    public List<BookAction> getByStatus(Status status) {
-        return bookActionRepository.getAllByStatus(status);
+    public List<BookActionDto> getByStatus(Status status) {
+        List<BookAction> bookActions = bookActionRepository.getAllByStatus(status);
+        List<BookActionDto> bookActionDtos = new ArrayList<>();
+        for (BookAction action: bookActions) {
+            UserDto userDto = UserDto.from(action.getUser());
+            BookDto bookDto = BookDto.from(action.getBook());
+            bookActionDtos.add(BookActionDto.from(action, userDto, bookDto));
+        }
+        return bookActionDtos;
     }
 
     @Override
