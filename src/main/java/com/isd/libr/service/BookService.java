@@ -5,6 +5,7 @@ import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.dto.requests.UpdateBookRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BookService {
     List<BookDto> listBooksWithNotStatusRejected();
@@ -18,4 +19,6 @@ public interface BookService {
     void deleteBookById(long id);
 
     BookDto updateBook(Long id, UpdateBookRequest request);
+
+    List<Map<String, Integer>> getAllUniqueCategories();
 }

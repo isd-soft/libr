@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,11 +46,15 @@ public class BookController {
         bookService.deleteBookById(id);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public void saveBook(@RequestBody CreateBookRequest request) {
         bookService.save(request);
     }
 
-
+    @GetMapping("/categories")
+    public ResponseEntity<?> getAllUniqueCategories() {
+        List<Map<String, Integer>> categories = bookService.getAllUniqueCategories();
+        return ResponseEntity.ok(categories);
+    }
 }
 

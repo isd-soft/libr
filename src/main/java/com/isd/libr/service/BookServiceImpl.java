@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -127,6 +124,11 @@ class BookServiceImpl implements BookService {
         book.setPreviewLink(request.getPreviewLink());
         Book updatedBook = bookRepository.save(book);
         return BookDto.from(updatedBook);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getAllUniqueCategories() {
+        return bookRepository.getAllUniqueCategories();
     }
 
 
