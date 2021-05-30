@@ -86,6 +86,14 @@ class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(long id, UpdateUserRequest request) {
+        Optional<User> optionalUserByEmail = userRepository.findByEmail(request.getEmail());
+        if (optionalUserByEmail.isPresent()
+                && !optionalUserByEmail.get().getFirstName().equals(request.getFirstName())
+                && !optionalUserByEmail.get().getLastName().equals(request.getLastName())
+                && !optionalUserByEmail.get().getPhone().equals(request.getPhone())) {
+            throw new UserAlreadyExistsException(String.format("[%s] already exists! Consider another one.", request.getEmail()));
+        }
+
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
             throw new UserNotFoundException(String.format("User with ID [%s] not found", id));
