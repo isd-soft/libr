@@ -51,13 +51,12 @@ class BookActionServiceImpl implements BookActionService {
         return BookActionDto.from(updatedBookAction, userDto, bookDto);
     }
 
-     public BookActionInfoDto getInfo(Long id){
+     public BookActionInfoDto getInfo(Long id , Status status){
         BookAction bookAction = bookActionRepository.findLastActionByBookId(id);
         String userFirstName = bookAction.getUser().getFirstName();
         String userLastName = bookAction.getUser().getLastName();
-        String status = bookAction.getStatus().toString();
-        String date = bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy MM dd HH mm"));
-        return BookActionInfoDto.from(userFirstName,userLastName,status,date);
+        String date = bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return BookActionInfoDto.from(userFirstName,userLastName,date);
     }
      }
 

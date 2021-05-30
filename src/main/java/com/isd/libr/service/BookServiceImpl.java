@@ -24,6 +24,7 @@ class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookActionRepository bookActionRepository;
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     @Override
     @Transactional
@@ -65,10 +66,11 @@ class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void save(CreateBookRequest request) throws BookDuplicateException {
-        Optional<Book> existingBook = bookRepository.getByTitle(request.getTitle());
-        if (existingBook.isPresent()) {
-            throw new BookDuplicateException("This book is already in our database");
-        }
+        bookRepository.getByTitle(request.getTitle())
+                .orElseThrow(() -> new BookDuplicateException("This book is already in our database"));
+        User userThatRequestedTheBook = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with [%s] not found",
+                        request.getUserId())));
         Book book = Book.builder()
                 .title(request.getTitle())
                 .authors(request.getAuthors())
@@ -86,11 +88,18 @@ class BookServiceImpl implements BookService {
                 .previewLink(request.getPreviewLink())
                 .build();
         bookRepository.save(book);
-        Optional<User> byId = userRepository.findById(request.getUserId());
-        if (byId.isEmpty()) {
-            throw new UserNotFoundException(String.format("User with [%s] not found", request.getUserId()));
-        }
-        bookActionRepository.save(new BookAction(byId.get(), book, LocalDateTime.now(), Status.SUBMITTED));
+
+        bookActionRepository.save(new BookAction(userThatRequestedTheBook,
+                book, LocalDateTime.now(), Status.SUBMITTED));
+        sendSubmittedEmail(book);
+    }
+
+    private void sendSubmittedEmail(Book book) {
+        String[] admins = userRepository.findByRole("ADMIN")
+                .stream().map(User::getEmail)
+                .toArray(String[]::new);
+        String text = String.format(" The book %s submitted", book.getTitle());
+        emailService.sendEmailNotification(text, admins);
     }
 
 

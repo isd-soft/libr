@@ -4,6 +4,7 @@ import com.isd.libr.service.BookActionService;
 import com.isd.libr.web.dto.BookActionDto;
 import com.isd.libr.web.dto.BookActionInfoDto;
 import com.isd.libr.web.dto.BookDto;
+import com.isd.libr.web.dto.requests.BookInfoRequest;
 import com.isd.libr.web.dto.requests.UpdateBooksStatusRequest;
 import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.Status;
@@ -32,9 +33,9 @@ public class BookActionController {
         return ResponseEntity.ok(updatedBookAction);
     }
 
-    @GetMapping("/info/{id}")
-    public ResponseEntity<?> getInfoByBookId(@PathVariable("id") Long id) {
-     BookActionInfoDto bookActionInfoDto = bookActionService.getInfo(id);
+    @GetMapping("/{status}/book/{id}")
+    public ResponseEntity<?> getInfoByBookId(BookInfoRequest request) {
+     BookActionInfoDto bookActionInfoDto = bookActionService.getInfo(request.getId(),request.getStatus());
      return ResponseEntity.ok(bookActionInfoDto);
     }
 }
