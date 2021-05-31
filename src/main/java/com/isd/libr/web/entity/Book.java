@@ -61,7 +61,7 @@ public class Book {
     private List<Vote> votes = new ArrayList<>();
 
     @OneToMany(mappedBy = "book")
-    private List<Reaction> reactions = new ArrayList<>();
+    private List<BookReaction> bookReactions = new ArrayList<>();
 
     protected Book() {
     }
@@ -95,13 +95,13 @@ public class Book {
         return bookAction.getStatus();
     }
 
-    public Map<ReactionType, Long> getReactions() {
+    public Map<ReactionType, Long> getBookReactions() {
         Map<ReactionType, Long> result = new HashMap<>();
-        long laughCount = reactions.stream()
+        long laughCount = bookReactions.stream()
                 .filter(r -> r.getReactionType() == ReactionType.LAUGH).count();
-        long heartCount = reactions.stream()
+        long heartCount = bookReactions.stream()
                 .filter(r -> r.getReactionType() == ReactionType.HEART).count();
-        long sadCount = reactions.stream()
+        long sadCount = bookReactions.stream()
                 .filter(r -> r.getReactionType() == SAD).count();
         result.put(SAD, sadCount);
         result.put(LAUGH, laughCount);

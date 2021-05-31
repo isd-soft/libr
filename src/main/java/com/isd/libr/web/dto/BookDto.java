@@ -42,7 +42,7 @@ public class BookDto {
             commentDtos.add(commentDto);
         }
         int votes = book.getSumOfVotes();
-        Map<ReactionType, Long> reactions = book.getReactions();
+        Map<ReactionType, Long> reactions = book.getBookReactions();
         BookDto result = from(book);
         result.setComments(commentDtos);
         result.setVote(votes);

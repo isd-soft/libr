@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @Builder
-@Table(name = "reaction")
-public class Reaction {
+@Table(name = "comment_reaction")
+public class CommentReaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
@@ -26,10 +26,11 @@ public class Reaction {
     @ManyToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JoinColumn(name = "book_id", nullable = false, updatable = false)
-    private Book book;
+    @JoinColumn(name = "comment_id", nullable = false, updatable = false)
+    private Comment comment;
 
-    protected Reaction() {}
 
+    protected CommentReaction() {
+    }
 
 }
