@@ -19,9 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -34,7 +32,7 @@ class BookActionServiceImpl implements BookActionService {
     public List<BookActionDto> getByStatus(Status status) {
         List<BookAction> bookActions = bookActionRepository.getAllByStatus(status.name());
         List<BookActionDto> bookActionDtos = new ArrayList<>();
-        for (BookAction action: bookActions) {
+        for (BookAction action : bookActions) {
             UserDto userDto = UserDto.from(action.getUser());
             BookDto bookDto = BookDto.from(action.getBook());
             bookActionDtos.add(BookActionDto.from(action, userDto, bookDto));
@@ -60,15 +58,37 @@ class BookActionServiceImpl implements BookActionService {
         return BookActionDto.from(updatedBookAction, userDto, bookDto);
     }
 
-     public BookActionInfoDto getInfo(BookInfoRequest request){
-        BookAction bookAction = bookActionRepository.findLastActionByBookIdAndStatus(request.getId(),request.getStatus().toString());
+    public BookActionInfoDto getInfo(BookInfoRequest request) {
+        BookAction bookAction = bookActionRepository.findLastActionByBookIdAndStatus(request.getId(), request.getStatus().toString());
         String userFirstName = bookAction.getUser().getFirstName();
         String userLastName = bookAction.getUser().getLastName();
         String date = bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        String actualStatus =bookAction.getStatus().toString();
-        return BookActionInfoDto.from(userFirstName,userLastName,date,actualStatus);
+        String actualStatus = bookAction.getStatus().toString();
+        return BookActionInfoDto.from(userFirstName, userLastName, date, actualStatus);
     }
-     }
+
+    @Override
+    public List<BookActionDto> getAllSubmissionActionsLastMonthForDashboard() {
+        List<BookAction> allSubmissionActionsLastMonthForDashboard = bookActionRepository.getAllSubmissionActionsLastMonthForDashboard();
+        List<BookActionDto> bookDtos = new ArrayList<>();
+        for (BookAction action: allSubmissionActionsLastMonthForDashboard) {
+            UserDto userDto = UserDto.from(action.getUser());
+            BookDto bookDto = BookDto.from(action.getBook());
+            bookDtos.add(BookActionDto.from(action, userDto, bookDto));
+        }
+        return bookDtos;
+    }
+
+    @Override
+    public Map<String, Integer> getAllSubmittedAndInLibrary() {
+        Integer submitted = bookActionRepository.countByStatus(Status.SUBMITTED);
+        Integer inLibrary = bookActionRepository.countByStatus(Status.IN_LIBRARY);
+        Map<String, Integer> result = new HashMap<>();
+        result.put("SUBMITTED", submitted);
+        result.put("IN_LIBRARY", inLibrary);
+        return result;
+    }
+}
 
 
 

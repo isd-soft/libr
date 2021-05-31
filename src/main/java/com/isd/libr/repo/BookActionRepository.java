@@ -41,5 +41,11 @@ public interface BookActionRepository extends JpaRepository<BookAction, Long> {
             "and actions_ranked.status='IN_USE'")
     List<BookAction> findAllInUseOlderThen(@Param("ageInDays") int ageInDays);
 
+    @Query(nativeQuery = true, value = "select * from book_action ba " +
+            "where ba.action_date > current_date - interval '1 month' " +
+            "and ba.status = 'SUBMITTED'")
+    List<BookAction> getAllSubmissionActionsLastMonthForDashboard();
 
+
+    Integer countByStatus(Status status);
 }

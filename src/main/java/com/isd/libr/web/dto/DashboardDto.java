@@ -2,24 +2,26 @@ package com.isd.libr.web.dto;
 
 import lombok.*;
 
+import java.util.List;
+import java.util.Map;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 public class DashboardDto {
 
-     private int usersCount;
-     private int booksCount;
-     private int votesCount;
-     private int heartsPerBook;
-     private int laughsPerBook;
-     private int sadPerBook;
-     private int submittedPerWeek;
-     private int booksPerCategory;
-     private String mostUpVotedBook;
-     private String mostDownVotedBook;
-     private int allSubmittedBooks;
-     private int allInLibraryBooks;
+     private Integer usersCount;
+     private Integer booksCount;
+     private Integer votesCount;
+     private Integer heartsPerBook;
+     private Integer laughsPerBook;
+     private Integer sadPerBook;
+     private List<BookActionDto> submittedPerWeek;
+     private List<Map<String, Integer>> booksPerCategory;
+     private BookDto mostUpVotedBook;
+     private BookDto mostDownVotedBook;
+     private Map<String, Integer> allSubmittedAndInLibraryBooks;
 
 
      }
