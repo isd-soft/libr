@@ -45,6 +45,11 @@ public class VoteServiceImpl implements VoteService {
         return book.get().getSumOfVotes();
     }
 
+    @Override
+    public Integer countVotes() {
+        return voteRepository.countVotesById();
+    }
+
     private boolean checkForRepeatedVote(Book book, User user) {
         List<Vote> votes = voteRepository.getAllByBookAndUser(book, user);
         return !votes.isEmpty();

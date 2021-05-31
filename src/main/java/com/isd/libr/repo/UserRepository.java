@@ -12,5 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByRole(String role);
 
+    Integer countUsersByIdGreaterThan(Long start);
+
 
 }

@@ -21,4 +21,6 @@ public interface BookService {
     BookDto updateBook(Long id, UpdateBookRequest request);
 
     List<Map<String, Integer>> getAllSortedUniqueCategories();
+
+    Integer countBooks();
 }

@@ -49,7 +49,6 @@ public class BookController {
     @PostMapping
     public void saveBook(@RequestBody CreateBookRequest request) {
         bookService.save(request);
-
     }
 
     @GetMapping("/categories")

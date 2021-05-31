@@ -24,4 +24,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(nativeQuery = true, value = "select category, count(book_id) from categories group by category order by count(book_id) desc")
     List<Map<String, Integer>> getAllSortedUniqueCategories();
 
+
+      Integer countBooksByIdGreaterThan(Long start);
 }

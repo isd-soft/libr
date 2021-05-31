@@ -25,6 +25,7 @@ public interface UserService extends UserDetailsService {
 
     void updateUser(long id, UpdateUserRequest request);
 
-
     UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
+
+    Integer countUsers();
 }

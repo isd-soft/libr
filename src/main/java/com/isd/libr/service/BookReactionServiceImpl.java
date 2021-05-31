@@ -41,6 +41,11 @@ public class BookReactionServiceImpl implements BookReactionService {
                 .build();
         bookReactionRepository.save(bookReaction);
     }
+
+    @Override
+    public Integer countReactionTypes(ReactionType type) {
+        return bookReactionRepository.countReactionType(type.toString());
+    }
 }
 
 

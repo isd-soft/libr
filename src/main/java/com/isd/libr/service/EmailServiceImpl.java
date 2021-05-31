@@ -40,7 +40,6 @@ class EmailServiceImpl implements EmailService {
         message.setText(text);
         return message;
     }
-
 }
 
 

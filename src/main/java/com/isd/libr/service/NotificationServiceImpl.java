@@ -20,9 +20,11 @@ public class NotificationServiceImpl implements NotificationService {
     @Transactional
     public void sendNotification(EmailRequest request) {
         User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new UserNotFoundException(String.format("User with id %d doesn't exist ", request.getUserId())));
+                .orElseThrow(() -> new UserNotFoundException(String.format
+                        ("User with id %d doesn't exist ", request.getUserId())));
         Book affectedBook = bookRepository.findById(request.getBookId())
-                .orElseThrow(null);
+                .orElseThrow(()-> new BookNotFoundException(String.format
+                        ("Book with id %d doesn't exist ", request.getBookId())));
         String text = String.format(" The book %s changed into %s",
                 affectedBook.getTitle(),
                 request.getStatus());

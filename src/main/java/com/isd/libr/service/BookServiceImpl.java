@@ -143,6 +143,12 @@ class BookServiceImpl implements BookService {
         String text = String.format(" The book %s submitted", book.getTitle());
         emailService.sendEmailNotification(text, admins);
     }
+
+
+    @Override
+    public Integer countBooks() {
+        return bookRepository.countBooksByIdGreaterThan(0L);
+    }
 }
 
 
