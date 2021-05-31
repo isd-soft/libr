@@ -100,6 +100,29 @@ class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
+    public void create(CreateBookRequest request) {
+        Book book = Book.builder()
+                .title(request.getTitle())
+                .authors(request.getAuthors())
+                .publisher(request.getPublisher())
+                .publishedDate(request.getPublishedDate())
+                .description(request.getDescription())
+                .industryIdentifiers(request.getIndustryIdentifiers())
+                .pageCount(request.getPageCount())
+                .categories(request.getCategories())
+                .averageRating(request.getAverageRating())
+                .ratingCount(request.getPageCount())
+                .maturityRating(request.getMaturityRating())
+                .imageLinks(request.getImageLinks())
+                .language(request.getLanguage())
+                .previewLink(request.getPreviewLink())
+                .build();
+        bookRepository.save(book);
+    }
+
+
+    @Override
+    @Transactional
     public void deleteBookById(long id) {
         bookActionRepository.deleteAllByBookId(id);
         bookRepository.deleteById(id);
