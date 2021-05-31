@@ -32,7 +32,7 @@ class BookActionServiceImpl implements BookActionService {
 
     @Override
     public List<BookActionDto> getByStatus(Status status) {
-        List<BookAction> bookActions = bookActionRepository.getAllByStatus(status);
+        List<BookAction> bookActions = bookActionRepository.getAllByStatus(status.name());
         List<BookActionDto> bookActionDtos = new ArrayList<>();
         for (BookAction action: bookActions) {
             UserDto userDto = UserDto.from(action.getUser());
