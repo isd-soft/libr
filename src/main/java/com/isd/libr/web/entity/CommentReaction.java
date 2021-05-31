@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Table(name = "comment_reaction")
 public class CommentReaction {
@@ -29,8 +30,5 @@ public class CommentReaction {
     @JoinColumn(name = "comment_id", nullable = false, updatable = false)
     private Comment comment;
 
-
-    protected CommentReaction() {
-    }
 
 }

@@ -15,7 +15,13 @@ import java.util.Optional;
 
 public interface BookActionRepository extends JpaRepository<BookAction, Long> {
 
-    List<BookAction> getAllByStatus(Status status);
+    @Query(nativeQuery = true, value="select actions_ranked.* " +
+            "from (select ba.*, ROW_NUMBER() OVER (PARTITION BY ba.book_id ORDER BY ba.action_date desc) " +
+            "      from book_action ba " +
+            "      order by ba.action_date desc) as actions_ranked " +
+            "where actions_ranked.row_number = 1 " +
+            "  and actions_ranked.status = :status")
+    List<BookAction> getAllByStatus(@Param("status") String status);
 
     void deleteAllByBookId(Long bookId);
 
