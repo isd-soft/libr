@@ -9,17 +9,18 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.isd.libr.web.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation for {@link TokenService}
+ *
+ * @author Grosu Kirill
+ */
 @Service
 @RequiredArgsConstructor
 class TokenServiceImpl implements TokenService {
@@ -61,7 +62,6 @@ class TokenServiceImpl implements TokenService {
             return null;
         }
     }
-
 
 
 }

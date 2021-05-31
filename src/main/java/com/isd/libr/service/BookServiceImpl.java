@@ -17,6 +17,11 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * Implementation for {@link BookService}
+ *
+ * @author Grosu Kirill
+ */
 @Service
 @RequiredArgsConstructor
 class BookServiceImpl implements BookService {

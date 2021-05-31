@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation for {@link VoteService}
+ *
+ * @author Grosu Kirill
+ */
 @Service
 @RequiredArgsConstructor
 public class VoteServiceImpl implements VoteService {

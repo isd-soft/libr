@@ -14,6 +14,11 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * Implementation for {@link CommentService}
+ *
+ * @author Grosu Kirill
+ */
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {

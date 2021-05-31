@@ -21,6 +21,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Implementation for {@link BookActionService}
+ *
+ * @author Grosu Kirill
+ */
 @RequiredArgsConstructor
 @Service
 class BookActionServiceImpl implements BookActionService {
@@ -71,7 +76,7 @@ class BookActionServiceImpl implements BookActionService {
     public List<BookActionDto> getAllSubmissionActionsLastMonthForDashboard() {
         List<BookAction> allSubmissionActionsLastMonthForDashboard = bookActionRepository.getAllSubmissionActionsLastMonthForDashboard();
         List<BookActionDto> bookDtos = new ArrayList<>();
-        for (BookAction action: allSubmissionActionsLastMonthForDashboard) {
+        for (BookAction action : allSubmissionActionsLastMonthForDashboard) {
             UserDto userDto = UserDto.from(action.getUser());
             BookDto bookDto = BookDto.from(action.getBook());
             bookDtos.add(BookActionDto.from(action, userDto, bookDto));

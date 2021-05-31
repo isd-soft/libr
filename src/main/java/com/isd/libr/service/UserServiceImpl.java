@@ -9,7 +9,6 @@ import com.isd.libr.web.dto.requests.UpdateUserRequest;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -118,6 +117,7 @@ class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email [%s] not found", email)));
     }
+
     @Override
     public Integer countUsers() {
         return userRepository.countUsersByIdGreaterThan(0L);

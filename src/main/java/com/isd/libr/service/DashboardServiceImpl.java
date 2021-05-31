@@ -4,7 +4,6 @@ import com.isd.libr.web.dto.BookActionDto;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.DashboardDto;
 import com.isd.libr.web.entity.ReactionType;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implementation for {@link DashboardService}
+ *
+ * @author Grosu Kirill
+ */
 @Service
 @RequiredArgsConstructor
 public class DashboardServiceImpl implements DashboardService {
