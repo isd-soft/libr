@@ -51,10 +51,6 @@ public class BookController {
         bookService.save(request);
     }
 
-    @PostMapping("/manually")
-    public void create(@RequestBody CreateBookRequest request) {
-        bookService.create(request);
-    }
 
     @GetMapping("/categories")
     public ResponseEntity<?> getAllSortedUniqueCategories() {

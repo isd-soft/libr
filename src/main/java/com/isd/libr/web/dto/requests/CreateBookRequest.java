@@ -27,6 +27,7 @@ public class CreateBookRequest {
     private String language;
     private String previewLink;
     private Long userId;
+    private Boolean isManuallyAdded = false;
 
     @JsonCreator
     public CreateBookRequest(@JsonProperty("title") String title,
@@ -43,8 +44,8 @@ public class CreateBookRequest {
                              @JsonProperty("imageLinks") Map<String, String> imageLinks,
                              @JsonProperty("language") String language,
                              @JsonProperty("previewLink") String previewLink,
-                             @JsonProperty("userId") Long userId
-    ) {
+                             @JsonProperty("userId") Long userId,
+                             @JsonProperty("isManuallyAdded") Boolean isManuallyAdded) {
         this.title = title;
         this.authors = authors;
         this.publisher = publisher;
@@ -60,5 +61,6 @@ public class CreateBookRequest {
         this.language = language;
         this.previewLink = previewLink;
         this.userId = userId;
+        this.isManuallyAdded = isManuallyAdded;
     }
 }

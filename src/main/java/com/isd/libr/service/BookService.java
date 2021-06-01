@@ -60,23 +60,6 @@ public interface BookService {
     void save(CreateBookRequest request);
 
     /**
-     * Creates an object of class {@link Book} from provided data and inserts it into database. Used for creating Book from data provided manually.
-     *
-     * @param request object of type {@link CreateBookRequest} with fields: <ul>
-     *                <li>Title</li>
-     *                <li>Authors</li>
-     *                <li>Publisher</li>
-     *                <li>PublishedDate</li>
-     *                <li>Description</li>
-     *                <li>PageCount</li>
-     *                <li>ImageLinks</li>
-     *                <li>etc.</li>
-     *                </ul>
-     * @since 1.0
-     */
-    void create(CreateBookRequest request);
-
-    /**
      * Deletes an instance of Book in database if present by providing it's id.
      *
      * @param id unique identifier for {@link Book} that will be used to delete a specific Book instance.

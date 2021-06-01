@@ -96,35 +96,18 @@ class BookServiceImpl implements BookService {
                 .previewLink(request.getPreviewLink())
                 .build();
         bookRepository.save(book);
-        User userThatRequestedTheBook = existsUser.get();
-        bookActionRepository.save(new BookAction(userThatRequestedTheBook,
-                book, LocalDateTime.now(), Status.SUBMITTED));
+        if (request.getIsManuallyAdded()) {
+            User userThatRequestedTheBook = existsUser.get();
+            bookActionRepository.save(new BookAction(userThatRequestedTheBook,
+                    book, LocalDateTime.now(), Status.IN_LIBRARY));
+        }
+        if (!request.getIsManuallyAdded()) {
+            User userThatRequestedTheBook = existsUser.get();
+            bookActionRepository.save(new BookAction(userThatRequestedTheBook,
+                    book, LocalDateTime.now(), Status.SUBMITTED));
+        }
         sendSubmittedEmail(book);
     }
-
-
-    @Override
-    @Transactional
-    public void create(CreateBookRequest request) {
-        Book book = Book.builder()
-                .title(request.getTitle())
-                .authors(request.getAuthors())
-                .publisher(request.getPublisher())
-                .publishedDate(request.getPublishedDate())
-                .description(request.getDescription())
-                .industryIdentifiers(request.getIndustryIdentifiers())
-                .pageCount(request.getPageCount())
-                .categories(request.getCategories())
-                .averageRating(request.getAverageRating())
-                .ratingCount(request.getPageCount())
-                .maturityRating(request.getMaturityRating())
-                .imageLinks(request.getImageLinks())
-                .language(request.getLanguage())
-                .previewLink(request.getPreviewLink())
-                .build();
-        bookRepository.save(book);
-    }
-
 
     @Override
     @Transactional
