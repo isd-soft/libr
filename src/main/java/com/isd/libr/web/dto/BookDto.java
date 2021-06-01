@@ -22,18 +22,22 @@ public class BookDto {
     private Long id;
     private String title;
     private List<String> authors;
+    private String publisher;
     private String publishedDate;
     private String description;
     private Integer pageCount;
     private List<String> categories;
     private Integer averageRating;
+    private Integer ratingsCount;
     private String language;
     private Status status;
+    private String maturityRating;
     private List<HashMap<String, String>> industryIdentifiers;
     private Map<String, String> imageLinks;
     private List<CommentDto> comments;
     private Integer vote;
     private Map<ReactionType, Long> reactions;
+    private String previewLink;
 
     public static BookDto from(Book book, List<Comment> comments) {
         List<CommentDto> commentDtos = new ArrayList<>();
@@ -64,6 +68,10 @@ public class BookDto {
         result.setIndustryIdentifiers(book.getIndustryIdentifiers());
         result.setImageLinks(book.getImageLinks());
         result.setStatus(book.getLastStatus());
+        result.setPublisher(book.getPublisher());
+        result.setMaturityRating(book.getMaturityRating());
+        result.setRatingsCount(book.getRatingCount());
+        result.setPreviewLink(book.getPreviewLink());
         return result;
     }
 }
