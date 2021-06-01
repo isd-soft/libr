@@ -1,5 +1,4 @@
 package com.isd.libr.config;
-
 import org.assertj.core.util.Lists;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -23,18 +22,13 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
-@EnableAutoConfiguration
-public class SwaggerConfig  extends WebMvcConfigurationSupport {
+public class SwaggerConfig {
     @Bean
     public Docket automaticApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())
-                .securitySchemes(Lists.newArrayList(apiKey()))
-                .securityContexts(Lists.newArrayList(securityContext()))
                 .apiInfo(apiInfo());
     }
 
@@ -48,36 +42,5 @@ public class SwaggerConfig  extends WebMvcConfigurationSupport {
                 .version("1.0-SNAPSHOT")
                 .build();
     }
-
-    @Bean
-    SecurityContext securityContext() {
-        return SecurityContext.builder()
-                .forPaths(PathSelectors.any())
-                .securityReferences(defaultAuth())
-                .build();
-    }
-
-    List<SecurityReference> defaultAuth() {
-        AuthorizationScope authorizationScope
-                = new AuthorizationScope("global", "accessEverything");
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        return Lists.newArrayList(
-                new SecurityReference("JWT", authorizationScopes));
-    }
-
-    private ApiKey apiKey() {
-        return new ApiKey("JWT", "Authorization", "header");
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
-
 
 }
