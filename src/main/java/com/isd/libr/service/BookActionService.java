@@ -54,7 +54,7 @@ public interface BookActionService {
      *
      * @return list a {@link BookAction} converted into Data Transfer Objects.
      */
-    List<BookActionDto> getAllSubmissionActionsLastMonthForDashboard();
+    Map<Integer, Integer> getAllSubmissionActionsLastMonthForDashboard();
 
     /**
      * Used for creating statistics endpoint. Returns amount of books with statuses <i>SUBMITTED</i> and <i>IN_LIBRARY</i>

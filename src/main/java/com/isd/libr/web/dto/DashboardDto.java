@@ -17,7 +17,7 @@ public class DashboardDto {
      private Integer heartsPerBook;
      private Integer laughsPerBook;
      private Integer sadPerBook;
-     private List<BookActionDto> submittedPerWeek;
+     private Map<Integer, Integer> submittedPerWeek;
      private List<Map<String, Integer>> booksPerCategory;
      private BookDto mostUpVotedBook;
      private BookDto mostDownVotedBook;

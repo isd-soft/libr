@@ -17,8 +17,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.WeekFields;
 import java.util.*;
 
 /**
@@ -73,15 +78,21 @@ class BookActionServiceImpl implements BookActionService {
     }
 
     @Override
-    public List<BookActionDto> getAllSubmissionActionsLastMonthForDashboard() {
-        List<BookAction> allSubmissionActionsLastMonthForDashboard = bookActionRepository.getAllSubmissionActionsLastMonthForDashboard();
-        List<BookActionDto> bookDtos = new ArrayList<>();
-        for (BookAction action : allSubmissionActionsLastMonthForDashboard) {
-            UserDto userDto = UserDto.from(action.getUser());
-            BookDto bookDto = BookDto.from(action.getBook());
-            bookDtos.add(BookActionDto.from(action, userDto, bookDto));
+    public Map<Integer, Integer> getAllSubmissionActionsLastMonthForDashboard() {
+        List<Object[]> queryResult = bookActionRepository.getAllSubmissionActionsLastMonthForDashboard();
+        Map<Integer, Integer> mappedResult = new HashMap<>();
+        for (Object[] obj : queryResult ) {
+            mappedResult.put(((Double) obj[0]).intValue(), ((BigInteger) obj[1]).intValue());
         }
-        return bookDtos;
+        Map<Integer, Integer> result = new HashMap<>();
+        LocalDate start = LocalDate.now().minusWeeks(4);
+        LocalDate end = LocalDate.now();
+        while(!start.isEqual(end)){
+            int currentWeekNumber = start.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+            result.put(currentWeekNumber, mappedResult.getOrDefault(currentWeekNumber, 0));
+            start = start.plusWeeks(1);
+        }
+        return result;
     }
 
     @Override

@@ -15,8 +15,8 @@ import java.time.format.DateTimeFormatter;
 @Setter
 public class BookActionDto {
     private Long id;
-    private BookDto books;
-    private UserDto users;
+    private BookDto book;
+    private UserDto user;
     private String status;
     private String actionDate;
 
@@ -24,8 +24,8 @@ public class BookActionDto {
     public static BookActionDto from(BookAction bookAction, UserDto userDto, BookDto bookDto) {
         BookActionDto result = new BookActionDto();
         result.setId(bookAction.getId());
-        result.setUsers(userDto);
-        result.setBooks(bookDto);
+        result.setUser(userDto);
+        result.setBook(bookDto);
         result.setStatus(String.valueOf(bookAction.getStatus()));
         result.setActionDate(bookAction.getActionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         return result;

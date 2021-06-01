@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface BookActionRepository extends JpaRepository<BookAction, Long> {
@@ -41,10 +42,11 @@ public interface BookActionRepository extends JpaRepository<BookAction, Long> {
             "and actions_ranked.status='IN_USE'")
     List<BookAction> findAllInUseOlderThen(@Param("ageInDays") int ageInDays);
 
-    @Query(nativeQuery = true, value = "select * from book_action ba " +
+    @Query(nativeQuery = true, value = "select extract('week' FROM ba.action_date) week, count(ba.id) from book_action ba " +
             "where ba.action_date > current_date - interval '1 month' " +
-            "and ba.status = 'SUBMITTED'")
-    List<BookAction> getAllSubmissionActionsLastMonthForDashboard();
+            "  and ba.status = 'SUBMITTED' " +
+            "group by extract('week' FROM ba.action_date)")
+    List<Object[]> getAllSubmissionActionsLastMonthForDashboard();
 
 
     Integer countByStatus(Status status);

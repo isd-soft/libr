@@ -36,7 +36,7 @@ public class DashboardServiceImpl implements DashboardService {
         Integer laughReactionsCount = bookReactionService.countReactionTypes(ReactionType.LAUGH);
         Integer sadReactionsCount = bookReactionService.countReactionTypes(ReactionType.SAD);
         List<Map<String, Integer>> booksPerCategory = bookService.getAllSortedUniqueCategories();
-        List<BookActionDto> bookActionsLastMonth = bookActionService.getAllSubmissionActionsLastMonthForDashboard();
+        Map<Integer, Integer> bookActionsLastMonth = bookActionService.getAllSubmissionActionsLastMonthForDashboard();
         List<BookDto> bookDtos = bookService.listBooksWithNotStatusRejected();
         BookDto mostUpVoted = bookDtos.get(0);
         BookDto mostDownVoted = bookDtos.get(bookDtos.size() - 1);
