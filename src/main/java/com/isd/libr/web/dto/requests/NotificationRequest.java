@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class EmailRequest {
+public class NotificationRequest {
 
     private Status status;
     private Long userId;
     private Long bookId;
 
     @JsonCreator
-    public EmailRequest (@JsonProperty String status,
-                         @JsonProperty Long userId,
-                         @JsonProperty Long bookId)
+    public NotificationRequest(@JsonProperty String status,
+                               @JsonProperty Long userId,
+                               @JsonProperty Long bookId)
     {
 
         this.status = Status.valueOf(status);

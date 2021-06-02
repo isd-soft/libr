@@ -2,7 +2,7 @@ package com.isd.libr.service;
 
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
-import com.isd.libr.web.dto.requests.EmailRequest;
+import com.isd.libr.web.dto.requests.NotificationRequest;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,11 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 
+/**
+ * Implementation for {@link NotificationService}
+ *
+ * @author Maria Cojocari
+ */
 @Service
 @RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService {
@@ -23,7 +28,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     @Transactional
-    public void sendNotification(EmailRequest request) {
+    public void sendNotification(NotificationRequest request) {
         String sign = "Libr Team";
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(String.format

@@ -1,29 +1,20 @@
 package com.isd.libr.jobs;
 
-import ch.qos.logback.classic.pattern.EnsureExceptionHandling;
+
 import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.service.EmailService;
-import com.isd.libr.service.UserService;
-import com.isd.libr.web.entity.BookAction;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailMessage;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import javax.mail.Address;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @Component
 @RequiredArgsConstructor

@@ -14,7 +14,11 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
-
+/**
+ * Implementation for {@link EmailService}
+ *
+ * @author Maria Cojocari
+ */
 
 @Service
 @RequiredArgsConstructor
@@ -24,27 +28,6 @@ class EmailServiceImpl implements EmailService {
     private String from;
     private final JavaMailSender emailSender;
     private final SpringTemplateEngine templateEngine;
-
-//
-//        @Override
-//        public void sendWarningMessage (MimeMessage message){
-//        emailSender.send(message);
-//    }
-//
-//        @Override
-//        public void sendEmailNotification (String text, String...toEmails) throws MessagingException {
-//        MimeMessage message = crateHtmlMessage(text, toEmails);
-//        emailSender.send(message);
-//    }
-//
-//    private SimpleMailMessage createMessage(String text, String... toEmails) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom(from);
-//        message.setTo(toEmails);
-//        message.setSubject("Notification");
-//        message.setText(text);
-//        return message;
-//    }
 
 
     @Override
