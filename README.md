@@ -20,6 +20,6 @@ This application aims to automate the management of the company's internal libra
 - Tracking and requesting books
 - Email notifications (notifying the arrival of a book or about the time to return if after borrowing)
 - Voting (any user can vote for a book)
-- Dashboard for Admin (contains all the statistics on the books,users,Spring Boot Actuator)
+- Dashboard for Admin (contains all the statistics on the books, users, Spring Boot Actuator)
 
 See the [Wiki](//github.com/isd-soft/libr/wiki) page.
