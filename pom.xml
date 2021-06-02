@@ -16,15 +16,6 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	<resources>
-		<resource>
-			<filtering>true</filtering>
-			<directory>src/main/resources</directory>
-			<includes>
-				<include>application.properties</include>
-			</includes>
-		</resource>
-	</resources>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
