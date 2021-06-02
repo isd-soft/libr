@@ -1,6 +1,5 @@
 # libr - Book management system
-![Capture-removebg-preview (1)](https://user-images.githubusercontent.com/74790139/120489786-93753000-c3c0-11eb-996c-08d77e5b07ce.png)
-
+![Capture-removebg-preview (11)](https://user-images.githubusercontent.com/74790139/120490478-1b5b3a00-c3c1-11eb-9bae-e8a1ef43a3d1.png)
 
 # Intro
 
