@@ -1,4 +1,4 @@
-package com.isd.libr.serviceImpl;
+package com.isd.libr.service;
 
 import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.UserRepository;

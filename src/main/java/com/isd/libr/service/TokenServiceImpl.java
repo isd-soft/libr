@@ -1,4 +1,4 @@
-package com.isd.libr.serviceImpl;
+package com.isd.libr.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
