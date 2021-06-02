@@ -1,5 +1,6 @@
 package com.isd.libr;
 
+import com.isd.libr.jobs.EmailingJob;
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.web.entity.Book;
 import org.springframework.boot.CommandLineRunner;
@@ -20,19 +21,14 @@ public class LibrApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LibrApplication.class, args);
 
-
-
 	}
 
 //	@Bean
 //	@Transactional
-//	public CommandLineRunner commandLineRunner(BookRepository bookRepository){
+//	public CommandLineRunner commandLineRunner(EmailingJob emailingJob){
 //		return args -> {
-//			Book b = new Book();
-//			b.setTitle("BB");
-//			b.setIndustryIdentifiers(List.of("asdas", "sdfs", "sdf", "Sdfsdf"));
-//			bookRepository.save(b);
-////			System.out.println(bookRepository.findAllByTitle("BB").get(0).getIndustryIdentifiers());
+//			emailingJob.checkIfStatusInUseIsMoreDays();
 //		};
 //	}
+
 }

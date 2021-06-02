@@ -12,7 +12,10 @@ import com.isd.libr.web.entity.Status;
 import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -30,6 +33,7 @@ class BookServiceImpl implements BookService {
     private final BookActionRepository bookActionRepository;
     private final UserRepository userRepository;
     private final EmailService emailService;
+    private final TemplateEngine templateEngine;
 
     @Override
     @Transactional
@@ -106,7 +110,11 @@ class BookServiceImpl implements BookService {
             bookActionRepository.save(new BookAction(userThatRequestedTheBook,
                     book, LocalDateTime.now(), Status.SUBMITTED));
         }
-        sendSubmittedEmail(book);
+        try {
+            sendSubmittedEmail(book);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -147,12 +155,18 @@ class BookServiceImpl implements BookService {
     }
 
 
-    private void sendSubmittedEmail(Book book) {
-        String[] admins = userRepository.findByRole("ADMIN")
-                .stream().map(User::getEmail)
-                .toArray(String[]::new);
-        String text = String.format(" The book %s submitted", book.getTitle());
-        emailService.sendEmailNotification(text, admins);
+   private void sendSubmittedEmail(Book book) throws MessagingException {
+       String sign = "Libr Team";
+       String[] admins = userRepository.findByRole("ADMIN")
+               .stream().map(User::getEmail)
+               .toArray(String[]::new);
+
+       Context context = new Context();
+       context.setVariable("sign",sign);
+       context.setVariable("logo","images/logo.png");
+       context.setVariable("book",book.getTitle());
+       String templateName = templateEngine.process("notificationForAdmin.html", context);
+       emailService.sendEmailNotification("Notification",templateName,admins);
     }
 
 

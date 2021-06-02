@@ -6,9 +6,9 @@ insert into public.book (id, average_rating, description, language, maturity_rat
 insert into public.book (id, average_rating, description, language, maturity_rating, page_count, preview_link, published_date, publisher, rating_count, title) VALUES (5555, 3, 'description', 'language', 'maturityRating', 500, 'previewLink', 'published_date', 'publisher', 5, 'java');
 insert into public.book (id, average_rating, description, language, maturity_rating, page_count, preview_link, published_date, publisher, rating_count, title) VALUES (6666, 3, 'description', 'language', 'maturityRating', 500, 'previewLink', 'published_date', 'publisher', 5, 'java java');
 
-insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9999, 35, 'mariacojocari@gmail.com', 'Maria', 'Maria', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'ADMIN');
+insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9999, 35, 'mariacojocari302@gmail.com', 'Maria', 'Maria', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'ADMIN');
 insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9998, 35, 'test@gmail.com', 'Bob', 'Bob', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'ADMIN');
-insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9997, 35, 'mariacojocari@gmail.com', 'John', 'Smith', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
+insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9997, 35, 'mariacojocari302@gmail.com', 'John', 'Smith', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
 insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9996, 35, 'test3@gmail.com', 'Jim', 'Jim', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
 insert into public.users (id, age, email, first_name, last_name, password, phone, role) VALUES (9995, 35, 'test4@gmail.com', 'Anna', 'Anna', '$2a$10$DZhaQBnYmtHs9tG5qLcexOEZ4G/Uo3hCqusJj135bzx.DSMq6lgKu', '237591231', 'USER');
 

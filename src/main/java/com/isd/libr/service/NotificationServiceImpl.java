@@ -8,6 +8,10 @@ import com.isd.libr.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+import javax.mail.MessagingException;
 
 @Service
 @RequiredArgsConstructor
@@ -15,19 +19,29 @@ public class NotificationServiceImpl implements NotificationService {
     private final EmailService emailService;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final TemplateEngine templateEngine;
 
     @Override
     @Transactional
     public void sendNotification(EmailRequest request) {
+        String sign = "Libr Team";
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(String.format
                         ("User with id %d doesn't exist ", request.getUserId())));
         Book affectedBook = bookRepository.findById(request.getBookId())
                 .orElseThrow(()-> new BookNotFoundException(String.format
                         ("Book with id %d doesn't exist ", request.getBookId())));
-        String text = String.format(" The book %s changed into %s",
-                affectedBook.getTitle(),
-                request.getStatus());
-        emailService.sendEmailNotification(text, user.getEmail());
+        Context context = new Context();
+        context.setVariable("sign",sign);
+        context.setVariable("logo","images/logo.png");
+        context.setVariable("book",affectedBook.getTitle());
+        context.setVariable("status",request.getStatus());
+        String templateName = templateEngine.process("notificationForUser.html", context);
+        try {
+            emailService.sendEmailNotification("Notification",templateName,user.getEmail());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
     }
 }

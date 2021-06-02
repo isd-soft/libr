@@ -1,9 +1,12 @@
 package com.isd.libr.service;
 
-import org.springframework.mail.SimpleMailMessage;
+import org.thymeleaf.context.Context;
+
+import javax.mail.MessagingException;
 
 public interface EmailService {
-    void sendWarningMessage(SimpleMailMessage message);
 
-    void sendEmailNotification(String text, String... toEmails);
+    void sendEmailNotification(String subject, String templateName, String... toEmails) throws MessagingException;
+
+
 }
