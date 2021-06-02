@@ -9,3 +9,5 @@ This Web Application includes a system to manage major library-related functiona
 # Development
 
 # Features
+
+# Scope and mission
