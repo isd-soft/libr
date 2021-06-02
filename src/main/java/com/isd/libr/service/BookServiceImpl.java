@@ -4,6 +4,7 @@ import com.isd.libr.exceptions.BookDuplicateException;
 import com.isd.libr.exceptions.BookNotFoundException;
 import com.isd.libr.exceptions.UserNotFoundException;
 import com.isd.libr.repo.BookActionRepository;
+import com.isd.libr.repo.BookReactionRepository;
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.service.*;
@@ -38,6 +39,7 @@ class BookServiceImpl implements BookService {
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final TemplateEngine templateEngine;
+    private final BookReactionRepository bookReactionRepository;
 
     @Override
     @Transactional
@@ -125,6 +127,7 @@ class BookServiceImpl implements BookService {
     @Transactional
     public void deleteBookById(long id) {
         bookActionRepository.deleteAllByBookId(id);
+        bookReactionRepository.deleteAllByBookId(id);
         bookRepository.deleteById(id);
     }
 

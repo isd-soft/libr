@@ -11,4 +11,6 @@ public interface BookReactionRepository extends JpaRepository<BookReaction, Long
     Integer countReactionType(@Param("type") String type);
 
 
+    void deleteAllByBookId(Long bookId);
+
 }
