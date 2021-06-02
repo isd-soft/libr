@@ -15,3 +15,4 @@ After logging in Admin can search for a specific book, book issue from the home 
 Another responsibility of a Admin is to approve user request in situations where was a request for a book, i.e. books requests are to be verified. Admin have a panel to simply approve / reject books requests. The Admin ID is stored alongside each last applied status on book to keep track. The most important function of any library is to issue and return books. This system includes a panel to view all outstanding logs and a super simple panel to issue.
 
 # Scope and mission
+See the [Wiki](//https://github.com/isd-soft/libr/wiki) page.
