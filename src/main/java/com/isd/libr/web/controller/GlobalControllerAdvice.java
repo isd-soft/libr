@@ -1,6 +1,6 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.service.*;
+import com.isd.libr.exceptions.*;
 import com.isd.libr.web.dto.ErrorDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

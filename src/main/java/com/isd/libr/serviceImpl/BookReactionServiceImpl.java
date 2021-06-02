@@ -1,8 +1,11 @@
-package com.isd.libr.service;
+package com.isd.libr.serviceImpl;
 
 import com.isd.libr.repo.BookReactionRepository;
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
+import com.isd.libr.exceptions.BookNotFoundException;
+import com.isd.libr.service.BookReactionService;
+import com.isd.libr.exceptions.UserNotFoundException;
 import com.isd.libr.web.dto.requests.BookReactionRequest;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.BookReaction;

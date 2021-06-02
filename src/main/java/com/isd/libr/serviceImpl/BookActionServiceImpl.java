@@ -1,8 +1,11 @@
-package com.isd.libr.service;
+package com.isd.libr.serviceImpl;
 
 import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
+import com.isd.libr.service.BookActionService;
+import com.isd.libr.exceptions.BookNotFoundException;
+import com.isd.libr.exceptions.UserNotFoundException;
 import com.isd.libr.web.dto.BookActionDto;
 import com.isd.libr.web.dto.BookActionInfoDto;
 import com.isd.libr.web.dto.BookDto;
@@ -20,10 +23,8 @@ import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
-import java.time.temporal.WeekFields;
 import java.util.*;
 
 /**

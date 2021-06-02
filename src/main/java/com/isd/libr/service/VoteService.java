@@ -1,6 +1,7 @@
 package com.isd.libr.service;
 
 
+import com.isd.libr.exceptions.RepeatedVoteException;
 import com.isd.libr.web.dto.requests.AddVoteRequest;
 import com.isd.libr.web.entity.Vote;
 

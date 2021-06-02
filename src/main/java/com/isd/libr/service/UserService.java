@@ -1,5 +1,6 @@
 package com.isd.libr.service;
 
+import com.isd.libr.exceptions.SamePasswordException;
 import com.isd.libr.web.dto.UserDto;
 import com.isd.libr.web.dto.requests.RegisterRequest;
 import com.isd.libr.web.dto.requests.UpdatePasswordRequest;

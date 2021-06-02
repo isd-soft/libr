@@ -1,7 +1,11 @@
-package com.isd.libr.service;
+package com.isd.libr.serviceImpl;
 
 import com.isd.libr.repo.BookActionRepository;
 import com.isd.libr.repo.UserRepository;
+import com.isd.libr.exceptions.SamePasswordException;
+import com.isd.libr.exceptions.UserAlreadyExistsException;
+import com.isd.libr.exceptions.UserNotFoundException;
+import com.isd.libr.service.UserService;
 import com.isd.libr.web.dto.UserDto;
 import com.isd.libr.web.dto.requests.RegisterRequest;
 import com.isd.libr.web.dto.requests.UpdatePasswordRequest;

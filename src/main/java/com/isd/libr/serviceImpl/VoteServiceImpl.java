@@ -1,8 +1,12 @@
-package com.isd.libr.service;
+package com.isd.libr.serviceImpl;
 
 import com.isd.libr.repo.BookRepository;
 import com.isd.libr.repo.UserRepository;
 import com.isd.libr.repo.VoteRepository;
+import com.isd.libr.exceptions.BookNotFoundException;
+import com.isd.libr.exceptions.RepeatedVoteException;
+import com.isd.libr.exceptions.UserNotFoundException;
+import com.isd.libr.service.VoteService;
 import com.isd.libr.web.dto.requests.AddVoteRequest;
 import com.isd.libr.web.entity.Book;
 import com.isd.libr.web.entity.User;

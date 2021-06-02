@@ -1,4 +1,4 @@
-package com.isd.libr.service;
+package com.isd.libr.exceptions;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 

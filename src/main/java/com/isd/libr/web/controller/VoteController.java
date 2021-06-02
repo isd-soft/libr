@@ -1,7 +1,5 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.service.BookService;
-import com.isd.libr.service.RepeatedVoteException;
 import com.isd.libr.service.VoteService;
 import com.isd.libr.web.dto.requests.AddVoteRequest;
 import lombok.RequiredArgsConstructor;

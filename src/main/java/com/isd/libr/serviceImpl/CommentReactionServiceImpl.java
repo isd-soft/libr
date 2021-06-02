@@ -1,8 +1,10 @@
-package com.isd.libr.service;
+package com.isd.libr.serviceImpl;
 
 import com.isd.libr.repo.CommentReactionRepository;
 import com.isd.libr.repo.CommentRepository;
 import com.isd.libr.repo.UserRepository;
+import com.isd.libr.service.CommentReactionService;
+import com.isd.libr.exceptions.UserNotFoundException;
 import com.isd.libr.web.dto.requests.CommentReactionRequest;
 import com.isd.libr.web.entity.Comment;
 import com.isd.libr.web.entity.CommentReaction;

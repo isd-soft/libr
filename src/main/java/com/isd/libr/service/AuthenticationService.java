@@ -1,5 +1,6 @@
 package com.isd.libr.service;
 
+import com.isd.libr.exceptions.AuthenticationFailedException;
 import com.isd.libr.web.dto.UserLoginDto;
 import com.isd.libr.web.dto.requests.LoginRequest;
 import com.isd.libr.web.entity.User;

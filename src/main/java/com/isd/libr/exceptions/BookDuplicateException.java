@@ -1,4 +1,4 @@
-package com.isd.libr.service;
+package com.isd.libr.exceptions;
 
 public class BookDuplicateException extends RuntimeException {
     public BookDuplicateException(String message) {

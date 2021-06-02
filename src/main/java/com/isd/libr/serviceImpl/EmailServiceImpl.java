@@ -1,5 +1,6 @@
-package com.isd.libr.service;
+package com.isd.libr.serviceImpl;
 
+import com.isd.libr.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;

@@ -1,4 +1,4 @@
-package com.isd.libr.service;
+package com.isd.libr.exceptions;
 
 public class AuthenticationFailedException extends RuntimeException {
     public AuthenticationFailedException(String message) {

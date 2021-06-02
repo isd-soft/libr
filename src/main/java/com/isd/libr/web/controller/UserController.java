@@ -1,7 +1,7 @@
 
 package com.isd.libr.web.controller;
 
-import com.isd.libr.service.SamePasswordException;
+import com.isd.libr.exceptions.SamePasswordException;
 import com.isd.libr.service.UserService;
 import com.isd.libr.web.dto.UserDto;
 import com.isd.libr.web.dto.requests.RegisterRequest;

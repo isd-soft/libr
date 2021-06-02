@@ -1,4 +1,4 @@
-package com.isd.libr.service;
+package com.isd.libr.serviceImpl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.isd.libr.service.TokenService;
 import com.isd.libr.web.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
