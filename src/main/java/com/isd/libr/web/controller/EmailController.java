@@ -1,12 +1,9 @@
 package com.isd.libr.web.controller;
 
-import com.isd.libr.service.BookActionService;
-import com.isd.libr.service.EmailService;
 import com.isd.libr.service.NotificationService;
-import com.isd.libr.web.dto.requests.EmailRequest;
+import com.isd.libr.web.dto.requests.NotificationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +14,7 @@ public class EmailController {
     private final NotificationService notificationService;
 
     @PostMapping
-    public ResponseEntity<?> sendNotification(@RequestBody EmailRequest request){
+    public ResponseEntity<?> sendNotification(@RequestBody NotificationRequest request){
         notificationService.sendNotification(request);
         return ResponseEntity.ok().build();
     }
