@@ -8,6 +8,7 @@ libr is an Internet based application that can be accessed throughout the intern
 This Web Application includes a system to manage major library-related functionalities such as finding books, issuing books, returning books, hold requests, tracking books, and fine collection.
 
 # Development
+The backend of the system is developed on Spring Boot Framework. The front end is built on Angular and Bootstrap.
 
 # Features
 
