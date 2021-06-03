@@ -86,8 +86,8 @@ class BookActionServiceImpl implements BookActionService {
             mappedResult.put(((Double) obj[0]).intValue(), ((BigInteger) obj[1]).intValue());
         }
         Map<Integer, Integer> result = new HashMap<>();
-        LocalDate start = LocalDate.now().minusWeeks(4);
-        LocalDate end = LocalDate.now();
+        LocalDate start = LocalDate.now().minusWeeks(4).plusDays(1);
+        LocalDate end = LocalDate.now().plusDays(1);
         while(!start.isEqual(end)){
             int currentWeekNumber = start.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
             result.put(currentWeekNumber, mappedResult.getOrDefault(currentWeekNumber, 0));
