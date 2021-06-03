@@ -37,13 +37,9 @@ public class NotificationServiceImpl implements NotificationService {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(String.format
                         ("User with id %d doesn't exist ", request.getUserId())));
-        Book affectedBook = bookRepository.findById(request.getBookId())
-                .orElseThrow(()-> new BookNotFoundException(String.format
-                        ("Book with id %d doesn't exist ", request.getBookId())));
         Context context = new Context();
         context.setVariable("sign",sign);
         context.setVariable("logo","images/logo.png");
-        context.setVariable("book",affectedBook.getTitle());
         context.setVariable("status",request.getStatus());
         String templateName = templateEngine.process("notificationForUser.html", context);
         try {

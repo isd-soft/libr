@@ -12,18 +12,14 @@ public class NotificationRequest {
 
     private Status status;
     private Long userId;
-    private Long bookId;
 
     @JsonCreator
     public NotificationRequest(@JsonProperty String status,
-                               @JsonProperty Long userId,
-                               @JsonProperty Long bookId)
+                               @JsonProperty Long userId)
     {
 
         this.status = Status.valueOf(status);
         this.userId = userId;
-        this.bookId = bookId;
-
     }
 
 
