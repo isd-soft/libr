@@ -3,18 +3,12 @@ package com.isd.libr.service;
 import com.isd.libr.exceptions.BookDuplicateException;
 import com.isd.libr.exceptions.BookNotFoundException;
 import com.isd.libr.exceptions.UserNotFoundException;
-import com.isd.libr.repo.BookActionRepository;
-import com.isd.libr.repo.BookReactionRepository;
-import com.isd.libr.repo.BookRepository;
-import com.isd.libr.repo.UserRepository;
+import com.isd.libr.repo.*;
 import com.isd.libr.service.*;
 import com.isd.libr.web.dto.BookDto;
 import com.isd.libr.web.dto.requests.CreateBookRequest;
 import com.isd.libr.web.dto.requests.UpdateBookRequest;
-import com.isd.libr.web.entity.Book;
-import com.isd.libr.web.entity.BookAction;
-import com.isd.libr.web.entity.Status;
-import com.isd.libr.web.entity.User;
+import com.isd.libr.web.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
@@ -40,6 +34,9 @@ class BookServiceImpl implements BookService {
     private final EmailService emailService;
     private final TemplateEngine templateEngine;
     private final BookReactionRepository bookReactionRepository;
+    private final VoteRepository voteRepository;
+    private final CommentReactionRepository commentReactionRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     @Transactional
@@ -128,6 +125,9 @@ class BookServiceImpl implements BookService {
     public void deleteBookById(long id) {
         bookActionRepository.deleteAllByBookId(id);
         bookReactionRepository.deleteAllByBookId(id);
+        voteRepository.deleteAllByBookId(id);
+        commentReactionRepository.deleteAllByBookId(id);
+        commentRepository.deleteAllByBookId(id);
         bookRepository.deleteById(id);
     }
 

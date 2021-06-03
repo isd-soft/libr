@@ -3,7 +3,10 @@ package com.isd.libr.service;
 
 import com.isd.libr.exceptions.RepeatedVoteException;
 import com.isd.libr.web.dto.requests.AddVoteRequest;
+import com.isd.libr.web.entity.User;
 import com.isd.libr.web.entity.Vote;
+
+import java.util.Optional;
 
 /**
  * VoteService is an interface of {@link Vote} entity.
@@ -29,4 +32,6 @@ public interface VoteService {
      * @return number of all votes present in database.
      */
     Integer countVotes();
+
+    void deleteByUser(Optional<User> user);
 }

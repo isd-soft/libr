@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface CommentReactionRepository extends JpaRepository<CommentReaction, Long> {
     void deleteAllByUser(Optional<User> user);
+
+    void deleteAllByBookId(long id);
 }

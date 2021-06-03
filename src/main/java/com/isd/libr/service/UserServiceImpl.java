@@ -36,6 +36,7 @@ class UserServiceImpl implements UserService {
     private final CommentService commentService;
     private final BookReactionService bookReactionService;
     private final CommentReactionService commentReactionService;
+    private final VoteService voteService;
 
     @Override
     public List<UserDto> findAll() {
@@ -95,6 +96,7 @@ class UserServiceImpl implements UserService {
         commentReactionService.deleteByUser(user);
         bookReactionService.deleteByUser(user);
         commentService.deleteByUser(user);
+        voteService.deleteByUser(user);
         userRepository.deleteById(id);
     }
 

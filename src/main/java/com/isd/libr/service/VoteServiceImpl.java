@@ -59,6 +59,11 @@ public class VoteServiceImpl implements VoteService {
         return voteRepository.countVotesById();
     }
 
+    @Override
+    public void deleteByUser(Optional<User> user) {
+        voteRepository.deleteAllByUser(user);
+    }
+
     private boolean checkForRepeatedVote(Book book, User user) {
         List<Vote> votes = voteRepository.getAllByBookAndUser(book, user);
         return !votes.isEmpty();
