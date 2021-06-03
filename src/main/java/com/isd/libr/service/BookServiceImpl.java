@@ -35,7 +35,6 @@ class BookServiceImpl implements BookService {
     private final TemplateEngine templateEngine;
     private final BookReactionRepository bookReactionRepository;
     private final VoteRepository voteRepository;
-    private final CommentReactionRepository commentReactionRepository;
     private final CommentRepository commentRepository;
 
     @Override
@@ -126,7 +125,6 @@ class BookServiceImpl implements BookService {
         bookActionRepository.deleteAllByBookId(id);
         bookReactionRepository.deleteAllByBookId(id);
         voteRepository.deleteAllByBookId(id);
-        commentReactionRepository.deleteAllByBookId(id);
         commentRepository.deleteAllByBookId(id);
         bookRepository.deleteById(id);
     }

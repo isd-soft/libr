@@ -34,7 +34,7 @@ public class Comment {
     @JoinColumn(name = "book_id", nullable = false, updatable = false)
     private Book book;
     private LocalDateTime date = LocalDateTime.now();
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "comment", orphanRemoval = true)
     private List<CommentReaction> commentReactions = new ArrayList<>();
 
     protected Comment() {
