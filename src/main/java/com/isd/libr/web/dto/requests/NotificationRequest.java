@@ -14,7 +14,7 @@ public class NotificationRequest {
     private Long userId;
 
     @JsonCreator
-    public NotificationRequest(@JsonProperty String status,
+    public NotificationRequest(@JsonProperty("emailType") String status,
                                @JsonProperty Long userId)
     {
 
