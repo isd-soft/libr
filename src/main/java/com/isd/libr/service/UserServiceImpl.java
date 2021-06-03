@@ -33,6 +33,9 @@ class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BookActionRepository bookActionRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CommentService commentService;
+    private final BookReactionService bookReactionService;
+    private final CommentReactionService commentReactionService;
 
     @Override
     public List<UserDto> findAll() {
@@ -89,6 +92,9 @@ class UserServiceImpl implements UserService {
             throw new UserNotFoundException(String.format("User with ID [%s] not found", id));
         }
         bookActionRepository.deleteAllByUser(user);
+        commentReactionService.deleteByUser(user);
+        bookReactionService.deleteByUser(user);
+        commentService.deleteByUser(user);
         userRepository.deleteById(id);
     }
 

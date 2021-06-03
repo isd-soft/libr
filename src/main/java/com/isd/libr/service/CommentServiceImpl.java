@@ -49,4 +49,9 @@ public class CommentServiceImpl implements CommentService {
                 .build();
         commentRepository.save(newComment);
     }
+
+    @Override
+    public void deleteByUser(Optional<User> user) {
+        commentRepository.deleteAllByUser(user);
+    }
 }

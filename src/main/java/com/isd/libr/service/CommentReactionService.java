@@ -1,6 +1,9 @@
 package com.isd.libr.service;
 
 import com.isd.libr.web.dto.requests.CommentReactionRequest;
+import com.isd.libr.web.entity.User;
+
+import java.util.Optional;
 
 /**
  * BookReactionService is an interface for {@link com.isd.libr.web.entity.CommentReaction} entity.
@@ -20,4 +23,6 @@ public interface CommentReactionService {
      *                               </ul>
      */
     void react(CommentReactionRequest commentReactionRequest);
+
+    void deleteByUser(Optional<User> user);
 }

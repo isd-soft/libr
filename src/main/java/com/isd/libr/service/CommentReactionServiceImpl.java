@@ -42,4 +42,9 @@ public class CommentReactionServiceImpl implements CommentReactionService {
                 .build();
         commentReactionRepository.save(commentReaction);
     }
+
+    @Override
+    public void deleteByUser(Optional<User> user) {
+        commentReactionRepository.deleteAllByUser(user);
+    }
 }

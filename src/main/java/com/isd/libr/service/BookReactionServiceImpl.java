@@ -49,6 +49,11 @@ public class BookReactionServiceImpl implements BookReactionService {
     public Integer countReactionTypes(ReactionType type) {
         return bookReactionRepository.countReactionType(type.toString());
     }
+
+    @Override
+    public void deleteByUser(Optional<User> user) {
+        bookReactionRepository.deleteAllByUser(user);
+    }
 }
 
 

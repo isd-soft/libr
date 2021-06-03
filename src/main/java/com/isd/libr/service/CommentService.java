@@ -1,6 +1,9 @@
 package com.isd.libr.service;
 
 import com.isd.libr.web.dto.requests.AddCommentRequest;
+import com.isd.libr.web.entity.User;
+
+import java.util.Optional;
 
 /**
  * CommentService is an interface for {@link com.isd.libr.web.entity.Comment}
@@ -20,4 +23,6 @@ public interface CommentService {
      *                </ul>
      */
     void addComment(AddCommentRequest request);
+
+    void deleteByUser(Optional<User> user);
 }

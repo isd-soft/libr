@@ -2,6 +2,9 @@ package com.isd.libr.service;
 
 import com.isd.libr.web.dto.requests.BookReactionRequest;
 import com.isd.libr.web.entity.ReactionType;
+import com.isd.libr.web.entity.User;
+
+import java.util.Optional;
 
 /**
  * BookReactionService is an interface for {@link com.isd.libr.web.entity.BookReaction} entity.
@@ -31,4 +34,6 @@ public interface BookReactionService {
      * @return number of total reactions of provided type.
      */
     Integer countReactionTypes(ReactionType type);
+
+    void deleteByUser(Optional<User> user);
 }
