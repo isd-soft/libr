@@ -1,0 +1,172 @@
+body {
+  background: rgb(39, 39, 39);
+  min-height: 1000px !important;
+}
+
+.sort-container {
+  display: flex;
+  width: 50%;
+  margin-left: auto;
+}
+
+.checkbox-order {
+  margin-left: 5px;
+}
+
+input:checked + .checkbox-order .badge {
+  background-color: #0d6efd!important;
+}
+
+.button-order {
+  border: 0;
+  padding: 2px;
+  background: #6c757d!important;
+  display: flex;
+  border-radius: 1.25em;
+}
+
+.main-container {
+  min-height: 92vh;
+}
+
+.search-card-info {
+  display: flex;
+}
+
+.btn-request {
+  width: 100px;
+  height: 40px;
+}
+
+.short-card-info {
+  display: flex;
+}
+
+.search-card-container {
+  background-color: #93a598;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.math-form-field {
+  width: 78%;
+  z-index: 1;
+  margin: 0 10%;
+}
+
+.field-description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.drop-down-search {
+  position: relative;
+  width: 76%;
+  overflow: auto;
+  height: 500px;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+  border: 1px solid #d3d9de;
+  background-color: #edeef0;
+}
+
+.button-container {
+  padding-top: 25px;
+}
+
+.button-x {
+  z-index: 1;
+  position: relative;
+  bottom: 30px;
+  right: 15px;
+}
+
+.container-max-width {
+  max-width: 100%;
+}
+
+.card {
+  margin: 0 auto;
+  background-color: 	white;
+  padding: 10px;
+  /*border-bottom: 1px lightgrey solid;*/
+}
+
+.info {
+  display: flex;
+}
+
+.desctiption-text-hidden {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.imgSize {
+  height: 180px;
+  width: auto;
+  margin: auto 0;
+}
+
+.cardWrapper {
+  display: flex;
+}
+
+.infoWrapper {
+  padding-left: 15px;
+  width: 100%;
+}
+
+.button {
+  margin-left: auto;
+  text-align: center;
+}
+
+.infoCard {
+  margin-right: 0%;
+  width: 50%;
+}
+
+.textColor {
+  font-weight:bold;
+}
+
+.container-button-vote {
+  display: grid;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.btn-vote {
+  padding: 0;
+}
+
+.vote-info {
+  font-size: 3em;
+  font-family: 'Roboto';
+  font-weight: bold;
+  text-align: center;
+}
+
+.status-info {
+  height: 30px;
+  font-size: 1.2rem;
+  margin: 0 auto;
+}
+
+.reaction-field {
+  margin-left: auto;
+}
+.reaction-container {
+  display: flex;
+}
+
+.categories-dropdown {
+  max-height: 306px;
+  overflow: auto;
+}

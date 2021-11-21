@@ -1,0 +1,21 @@
+﻿<div class="alert-container">
+<div *ngFor="let alert of alerts" class="alert {{cssClass(alert)}}" style="z-index: 99999; ">
+    <a class="close" (click)="removeAlert(alert)">&times;</a>
+    <span [innerHTML]="alert.message"></span>
+</div>
+</div>
+
+<style>
+  .alert {
+    /*width: 40%;*/
+  }
+
+  .alert-container {
+    position: fixed;
+    z-index: 1000;
+    width: 30%;
+    right: 0;
+    top: -22px;
+
+  }
+</style>

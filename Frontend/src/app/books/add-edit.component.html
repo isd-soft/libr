@@ -1,0 +1,271 @@
+<h1 *ngIf="isAddMode">Add Book</h1>
+<h1 *ngIf="!isAddMode">Edit Book</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+  <div *ngIf="isAddMode">
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="title">Title</label>
+        <input type="text" required formControlName="title" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label for="authors">Authors</label>
+        <input type="text" formControlName="authors" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.authors.errors }" />
+        <!--      <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Last Name is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="publisher">Publisher</label>
+        <input type="text" formControlName="publisher" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.publisher.errors }" />
+        <!--      <div *ngIf="submitted && f.publisher.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.publisher.errors.required">Publisher is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="publishedDate">Published Date</label>
+        <input type="text" formControlName="publishedDate" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.publishedDate.errors }" />
+        <!--      <div *ngIf="submitted && f.publishedDate.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.publishedDate.errors.required">PublishedDate is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="description">Description</label>
+        <input type="text" formControlName="description" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+        <!--      <div *ngIf="submitted && f.age.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Description is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="industryIdentifiers">Industry Identifiers</label>
+        <input type="text" formControlName="industryIdentifiers" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.industryIdentifiers.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="pageCount">Page count</label>
+        <input type="text" formControlName="pageCount" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.pageCount.errors }" />
+        <!--      <div *ngIf="submitted && f.pageCount.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Age is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="categories">Categories</label>
+        <input type="text" formControlName="categories" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.categories.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="averageRating">Average rating</label>
+        <input type="text" formControlName="averageRating" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.averageRating.errors }" />
+        <!--      <div *ngIf="submitted && f.averageRating.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.averageRating.errors.required">averageRating is required</div>-->
+        <!--     </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="ratingsCount">Ratings count</label>
+        <input type="text" formControlName="ratingsCount" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.ratingsCount.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="maturityRating">Maturity Rating</label>
+        <input type="text" formControlName="maturityRating" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.maturityRating.errors }" />
+        <!--      <div *ngIf="submitted && f.age.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Age is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="imageLinks">Image Links</label>
+        <input type="text" formControlName="imageLinks" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.imageLinks.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="language">Language</label>
+        <input type="text" formControlName="language" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.language.errors }" />
+        <!--      <div *ngIf="submitted && f.age.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Age is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="previewLink">Preview Link</label>
+        <input type="text" formControlName="previewLink" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.previewLink.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Save
+      </button>
+      <a routerLink="/books" class="btn btn-link">Cancel</a>
+    </div>
+  </div>
+  <div *ngIf="!isAddMode">
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="title">Title</label>
+        <input type="text" required formControlName="title" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label for="authors">Authors</label>
+        <input type="text" formControlName="authors" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.authors.errors }" />
+        <!--      <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Last Name is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="publisher">Publisher</label>
+        <input type="text" formControlName="publisher" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.publisher.errors }" />
+        <!--      <div *ngIf="submitted && f.publisher.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.publisher.errors.required">Publisher is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="publishedDate">Published Date</label>
+        <input type="text" formControlName="publishedDate" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.publishedDate.errors }" />
+        <!--      <div *ngIf="submitted && f.publishedDate.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.publishedDate.errors.required">PublishedDate is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="description">Description</label>
+        <input type="text" formControlName="description" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+        <!--      <div *ngIf="submitted && f.age.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Description is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="maturityRating">Maturity Rating</label>
+        <input type="text" formControlName="maturityRating" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.maturityRating.errors }" />
+        <!--      <div *ngIf="submitted && f.age.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Age is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="pageCount">Page count</label>
+        <input type="text" formControlName="pageCount" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.pageCount.errors }" />
+        <!--      <div *ngIf="submitted && f.pageCount.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Age is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="categories">Categories</label>
+        <input type="text" formControlName="categories" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.categories.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="averageRating">Average rating</label>
+        <input type="text" formControlName="averageRating" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.averageRating.errors }" />
+        <!--      <div *ngIf="submitted && f.averageRating.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.averageRating.errors.required">averageRating is required</div>-->
+        <!--     </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="ratingsCount">Ratings count</label>
+        <input type="text" formControlName="ratingsCount" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.ratingsCount.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="language">Language</label>
+        <input type="text" formControlName="language" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.language.errors }" />
+        <!--      <div *ngIf="submitted && f.age.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.age.errors.required">Age is required</div>-->
+        <!--      </div>-->
+      </div>
+      <div class="form-group col">
+        <label for="previewLink">Preview Link</label>
+        <input type="text" formControlName="previewLink" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.previewLink.errors }" />
+        <!--      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">-->
+        <!--        <div *ngIf="f.lastName.errors.required">Phone is required</div>-->
+        <!--      </div>-->
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Save
+      </button>
+      <a routerLink="/books" class="btn btn-link">Cancel</a>
+    </div>
+  </div>
+
+
+</form>

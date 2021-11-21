@@ -1,0 +1,43 @@
+<h1>Books</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Book</a>
+<div style="overflow: auto; width: 1200px; margin: 0;">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Authors</th>
+        <th>Publisher</th>
+        <th>Description</th>
+        <th>Page count</th>
+        <th>Categories</th>
+        <th>Average rating</th>
+        <th>Language</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{book.id}}</td>
+        <td>
+          <a routerLink="/books/{{book.id}}">{{book.title}}</a>
+        </td>
+        <td>{{book.authors}}</td>
+        <td>{{book.publisher}}</td>
+        <td class="desctiption-text-hidden">{{book.description}}</td>
+        <td>{{book.pageCount}}</td>
+        <td>{{book.categories}}</td>
+        <td>{{book.averageRating}}</td>
+        <td>{{book.language}}</td>
+        <td style="white-space: nowrap">
+          <a routerLink="edit/{{book.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+          <button (click)="deleteBook(book.id)" class="btn btn-sm btn-danger btn-delete-user">
+            <span *ngIf="book.isDeleting" class="spinner-border spinner-border-sm"></span>
+            <span *ngIf="!book.isDeleting">Delete</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
