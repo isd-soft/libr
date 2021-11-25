@@ -1,0 +1,259 @@
+﻿<div class="p-4 main-container">
+  <div class="container">
+
+    <script>
+      object.onsearch = handler;
+      function clearButton(handler) {
+        books = [];
+        condition = false;
+      }
+    </script>
+    <div style="width: 100%" class="input-group container-fluid">
+      <div class="input math-form-field">
+        <div (keyup)="showData(input.value)">
+          <input id="myInput" type="search" style="margin: 0 auto;" class="form-control rounded"
+            placeholder="Submit a book" aria-label="Search" aria-describedby="search-addon" #input />
+          <button type="button" (click)="clearArray()" class="button-x close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div *ngIf="condition" class="drop-down-search" style="position: absolute">
+            <div *ngFor="let book of books" class="container-max-width" style="padding: 10px">
+              <div class="card">
+                <div class="cardWrapper">
+                  <img class="imgSize"
+                    src="{{book.imageLinks ? book.imageLinks.thumbnail :
+                     'https://fully-booked.ap-south-1.linodeobjects.com/catalog/product/placeholder/default/book-placeholder.png'}}"
+                    alt="..">
+
+                  <div class="infoWrapper">
+                    <div class="info">
+                      <div class="infoCard">
+                        <p> <span class="textColor"> Title: </span>{{book.title ? book.title : 'n/a'}}</p>
+                        <p> <span class="textColor"> Author: </span>{{book.authors ? book.authors : 'n/a'}}</p>
+                        <p> <span class="textColor">Publisher: </span>{{book.publisher ? book.publisher : 'n/a'}}</p>
+                      </div>
+                      <div>
+                        <p> <span class="textColor"> Pages: </span>{{book.pageCount ? book.pageCount : 'n/a'}}</p>
+                        <p> <span class="textColor"> Rating: </span>{{book.averageRating ? book.averageRating : 'n/a'}}
+                        </p>
+                        <p> <span class="textColor"> Language: </span>{{book.language ? book.language : 'n/a'}}</p>
+                      </div>
+                      <div class="button">
+                        <div class="button-container">
+                          <button type="button" id="{{book.apiId}}" class="btn btn-primary" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#confirmationRequestModal-'+ book.apiId">Request</button>
+                        </div>
+                      </div>
+                      <div class="modal fade" data-bs-backdrop="false" id="confirmationRequestModal-{{book.apiId}}"
+                        tabindex="-1" role="dialog" aria-labelledby="confirmationRequestModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="confirmationRequestModalLabel">{{book.title}}</h5>
+                              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Do you want to add this book?
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" (click)="saveBook(book)">Yes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="discriptionInfo">
+                      <p><span class="textColor">Description: </span><span
+                          class="desctiption-text-hidden">{{book.description ? book.description : 'n/a'}}</span> </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <i class="fas fa-search"></i>
+      <div>
+        <label for="sort-button-in_library">
+          <span (click)="filterStatusValue('IN_LIBRARY')" class="btn btn-primary"
+            style="position: absolute; width: 14%;">
+            Books in library <span class="badge bg-secondary">{{this.booksCount}}</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row-reverse" style="padding-top: 5px; padding-bottom: 5px">
+      <div class="btn-group">
+        <button (click)="this.fetchAllCategories()" type="button" class="btn btn-primary dropdown-toggle"
+          style="border-radius: 1.25em;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Category: <span class="badge bg-secondary">{{this.orderCategory}}</span>
+        </button>
+        <div class="dropdown-menu categories-dropdown">
+          <a (click)="filterCategoryValue('All')" class="dropdown-item">All
+            <span class="badge bg-secondary">{{this.countOfAllCategories}}</span></a>
+          <span *ngFor="let category of this.categories">
+            <a (click)="filterCategoryValue(category.category.toString())"
+              class="dropdown-item">{{category.category.toString()}}
+              <span class="badge bg-secondary">{{category.count}}</span></a>
+          </span>
+          <!--        <div class="dropdown-divider"></div>-->
+        </div>
+      </div>
+    </div>
+
+    <div class="sort-container">
+      <input class="d-none" type="radio" name="flexRadioDefault" id="sort-button-all" checked>
+      <label (click)="filterStatusValue('')" class="checkbox-order" for="sort-button-all">
+        <span class="badge rounded-pill bg-light text-dark">ALL</span>
+      </label>
+      <input class="d-none" type="radio" name="flexRadioDefault" id="sort-button-submitted">
+      <label (click)="filterStatusValue('SUBMITTED')" class="checkbox-order" for="sort-button-submitted">
+        <span class="badge rounded-pill bg-light text-dark">SUBMITTED</span>
+      </label>
+      <input class="d-none" type="radio" name="flexRadioDefault" id="sort-button-approved">
+      <label (click)="filterStatusValue('APPROVED')" class="checkbox-order" for="sort-button-approved">
+        <span class="badge rounded-pill bg-light text-dark">APPROVED</span>
+      </label>
+      <input class="d-none" type="radio" name="flexRadioDefault" id="sort-button-ordered">
+      <label (click)="filterStatusValue('ORDERED')" class="checkbox-order" for="sort-button-ordered">
+        <span class="badge rounded-pill bg-secondary bg-light text-dark">ORDERED</span>
+      </label>
+      <input class="d-none" type="radio" name="flexRadioDefault" id="sort-button-in_library">
+      <label (click)="filterStatusValue('IN_LIBRARY')" class="checkbox-order" for="sort-button-in_library">
+        <span class="badge rounded-pill bg-secondary bg-light text-dark">IN_LIBRARY</span>
+      </label>
+      <input class="d-none" type="radio" name="flexRadioDefault" id="sort-button=requested">
+      <label (click)="filterStatusValue('REQUESTED')" class="checkbox-order" for="sort-button=requested">
+        <span class="badge rounded-pill bg-light text-dark">REQUESTED</span>
+      </label>
+      <input class="d-none" type="radio" name="flexRadioDefault" id="sort-button-in_use">
+      <label (click)="filterStatusValue('IN_USE')" class="checkbox-order" for="sort-button-in_use">
+        <span class="badge rounded-pill bg-light text-dark">IN_USE</span>
+      </label>
+    </div>
+
+    <div *ngFor="let book of booksData">
+      <div [ngClass]="{'d-none': (book.status !== this.orderStatus && !this.orderByCategory(book.categories)),
+      'd-block' : (this.orderStatus === '')}" class="container-max-width" style="padding: 10px">
+        <div *ngIf="(this.orderByCategory(book.categories) || this.orderCategory === 'All') &&
+         (book.status === this.orderStatus || this.orderStatus === '')" class="card">
+          <div class="cardWrapper">
+            <div class="container-button-vote">
+              <button (click)="upVote(book.id);" ng-disabled="buttonClicked" class="btn btn-success btn-vote"
+                type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" fill="currentColor"
+                  class="bi bi-arrow-up" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                </svg>
+              </button>
+              <span class="vote-info">
+                {{book.vote}}
+              </span>
+              <button type="button" class="btn btn-danger btn-vote" (click)="downVote(book.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" fill="currentColor"
+                  class="bi bi-arrow-down" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+                </svg>
+              </button>
+            </div>
+            <a routerLink="/books/{{book.id}}">
+              <img class="imgSize" width="200px" height="200px"
+                src="{{book.imageLinks.thumbnail ? book.imageLinks.thumbnail : 'https://fully-booked.ap-south-1.linodeobjects.com/catalog/product/placeholder/default/book-placeholder.png'}}"
+                alt="..">
+            </a>
+            <div class="infoWrapper">
+              <div class="info">
+                <div class="infoCard">
+                  <p> <span class="textColor"> Title: </span>
+                    <a routerLink="/books/{{book.id}}">{{book.title ? book.title : 'n/a'}}</a>
+                  </p>
+                  <p> <span class="textColor"> Author: </span>{{book.authors ? book.authors : 'n/a'}}</p>
+                  <!--                  <p> <span class="textColor"> Publisher: </span>{{book.publisher ? book.publisher : 'n/a'}}</p>-->
+                  <p> <span class="textColor"> Categories: </span><span>{{book.categories ? book.categories :
+                      'n/a'}}</span></p>
+                </div>
+                <div>
+                  <p> <span class="textColor"> Pages: </span>{{book.pageCount ? book.pageCount : 'n/a'}}</p>
+                  <p> <span class="textColor"> Rating: </span>{{book.averageRating ? book.averageRating : 'n/a'}}</p>
+                  <p> <span class="textColor"> Language: </span>{{book.language ? book.language : 'n/a'}}</p>
+                </div>
+                <div style="display: grid; margin-left: auto">
+                  <span *ngIf="this.userRole === 'USER'"
+                    class="badge rounded-pill bg-warning text-dark status-info">{{book.status}}</span>
+                  <button *ngIf="book.status === 'IN_LIBRARY' && this.userRole === 'USER'"
+                    (click)="status(book.id, 'REQUESTED')" type="button" style="margin-top: auto"
+                    class="btn btn-success">Take a book</button>
+                  <div *ngIf="this.userRole === 'ADMIN'">
+                    <div class="dropdown" style="width: 100%;">
+                      <button style="width: 100%; border-radius: 1.25em;" class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        {{book.status}}
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button *ngIf="book.status === 'SUBMITTED'" (click)="status(book.id, 'REJECTED')"
+                          class="dropdown-item">REJECTED</button>
+                        <button *ngIf="book.status === 'SUBMITTED'" (click)="status(book.id, 'APPROVED')"
+                          class="dropdown-item">APPROVED</button>
+                        <button *ngIf="book.status === 'APPROVED'" (click)="status(book.id, 'ORDERED')"
+                          class="dropdown-item">ORDERED</button>
+                        <button
+                          *ngIf="book.status === 'ORDERED' || book.status === 'RETURNED' || book.status === 'IN_USE'"
+                          (click)="status(book.id, 'IN_LIBRARY')" class="dropdown-item">IN_LIBRARY</button>
+                        <button *ngIf="book.status === 'IN_LIBRARY'" (click)="status(book.id, 'REQUESTED')"
+                          class="dropdown-item">REQUESTED</button>
+                        <button *ngIf="book.status === 'IN_LIBRARY'" (click)="status(book.id, 'IN_USE')"
+                          class="dropdown-item">IN_USE</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p><span class="textColor">Description: </span><span class="desctiption-text-hidden">{{book.description
+                    ? book.description : 'n/a'}}</span> </p>
+              </div>
+              <div class="reaction-container">
+                <div class="reaction-field">
+                  <button (click)="addBookReaction(book.id, 'HEART')" class="badge rounded-pill bg-light text-dark">
+                    <span>😍 {{book.reactions.HEART}}
+                    </span>
+                  </button>
+                  <button (click)="addBookReaction(book.id, 'LAUGH')" class="badge rounded-pill bg-light text-dark">
+                    <span>🤣 {{book.reactions.LAUGH}}
+                    </span>
+                  </button>
+                  <button (click)="addBookReaction(book.id, 'SAD')" class="badge rounded-pill bg-light text-dark">
+                    <span>😢 {{book.reactions.SAD}}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  h1 {
+    position: static;
+    top: 10%;
+    left: 10%;
+
+    font-size: 60px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background: linear-gradient(to right, #f32170, #ff6b08,
+        #cf23cf, #eedd44);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+</style>

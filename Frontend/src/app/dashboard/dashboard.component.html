@@ -1,0 +1,176 @@
+<div class="dashboard-container">
+  <div class="d-flex justify-content-between">
+    <div style="width: 49%">
+      <div class="d-flex container-round-statistic">
+        <div class="rounded-circle">
+          <div class="round-statistic-img">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px"
+              viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+              <text transform="matrix(1 0 0 1 168.7834 543.8093)">
+                <tspan x="0" y="0" fill="#FFFF00" font-family="'Verdana-Bold'" font-size="20">simpleicon.com</tspan>
+                <tspan x="-159.59" y="24" fill="#FFFF00" font-family="'Verdana'" font-size="20">Collection Of Flat Icon,
+                  Symbols And Glyph Icons</tspan>
+              </text>
+              <path fill="#020201" d="M454.426,392.582c-5.439-16.32-15.298-32.782-29.839-42.362c-27.979-18.572-60.578-28.479-92.099-39.085
+	c-7.604-2.664-15.33-5.568-22.279-9.7c-6.204-3.686-8.533-11.246-9.974-17.886c-0.636-3.512-1.026-7.116-1.228-10.661
+	c22.857-31.267,38.019-82.295,38.019-124.136c0-65.298-36.896-83.495-82.402-83.495c-45.515,0-82.403,18.17-82.403,83.468
+	c0,43.338,16.255,96.5,40.489,127.383c-0.221,2.438-0.511,4.876-0.95,7.303c-1.444,6.639-3.77,14.058-9.97,17.743
+	c-6.957,4.133-14.682,6.756-22.287,9.42c-31.521,10.605-64.119,19.957-92.091,38.529c-14.549,9.58-24.403,27.159-29.838,43.479
+	c-5.597,16.938-7.886,37.917-7.541,54.917h205.958h205.974C462.313,430.5,460.019,409.521,454.426,392.582z" />
+            </svg>
+          </div>
+          <h5 class="round-statistic-title">Users</h5>
+          <p class="round-statistic-info"><strong>{{dashboard.usersCount}}</strong></p>
+        </div>
+        <div class="rounded-circle">
+          <div class="round-statistic-img">
+            <img width="auto" height="62px"
+              src="https://res.cloudinary.com/dxn6dcenz/image/upload/v1622653987/like_PNG13_sw2gdn.png" alt="">
+          </div>
+          <h5 class="round-statistic-title">Votes</h5>
+          <p class="round-statistic-info"><strong>{{dashboard.votesCount}}</strong></p>
+        </div>
+        <div class="rounded-circle">
+          <div class="round-statistic-img" style="padding-top: 7px;">
+            <img width="auto" height="56px"
+              src="https://res.cloudinary.com/dxn6dcenz/image/upload/v1622653987/toppng.com-open-book-icon-png-download-book-black-and-white-2316x1469_acinzu.png"
+              alt="">
+          </div>
+          <h5 class="round-statistic-title">Books</h5>
+          <p class="round-statistic-info"><strong>{{dashboard.booksCount}}</strong></p>
+        </div>
+      </div>
+
+      <div class="emotion-statistic-container">
+        <h3 class="text-center">Total reactions on books</h3>
+        <div class="d-flex justify-content-around">
+          <div>
+            <p class="emoji">😍</p>
+            <h3 class="emoji-count">{{dashboard.heartsPerBook}}</h3>
+          </div>
+          <div>
+            <p class="emoji">🤣</p>
+            <h3 class="emoji-count">{{dashboard.laughsPerBook}}</h3>
+          </div>
+          <div>
+            <p class="emoji">😢</p>
+            <h3 class="emoji-count">{{dashboard.sadPerBook}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="spring-info-container">
+      <h3>System information:</h3>
+
+      <h4>Info</h4>
+      <ul>
+        <li><strong>Application name: </strong> {{this.actuatorInfo.app.name}}</li>
+        <li><strong>Description:</strong> {{this.actuatorInfo.app.description}}</li>
+        <li><strong>Application version: </strong>{{this.actuatorInfo.app.version}}</li>
+        <li><strong>Java version:</strong> {{this.actuatorInfo.app.java.version}}</li>
+      </ul>
+      <h4>Health</h4>
+      <ul>
+        <li><strong>The state of application:</strong> {{this.actuatorHealth.status}}</li>
+        <li><strong>Database:</strong> {{this.actuatorHealth.components.db.details.database}}</li>
+        <li><strong>Total diskspace: </strong>{{this.actuatorHealth.components.diskSpace.details.total}}</li>
+        <li><strong>Free diskspace: </strong>{{this.actuatorHealth.components.diskSpace.details.free}}</li>
+      </ul>
+      <h4>Metrics</h4>
+      <ul>
+        <li><strong>The number of processors available:</strong> {{this.NumberOfProcessors}}</li>
+        <li><strong>The uptime: </strong>{{this.UpTime}}</li>
+        <li><strong>Memory used: </strong>{{this.MemoryUsed}}</li>
+        <li><strong>Count of http server request: </strong>{{this.HttpRequest}}</li>
+        <li><strong>Total time of http server requests: </strong> {{this.HttpRequestTotal}}</li>
+        <li><strong>Maximum of http server requests: </strong>{{this.HttpRequestMax}}</li>
+        <li><strong>The amount of used memory: </strong>{{this.UsedMemory}}</li>
+      </ul>
+
+    </div>
+  </div>
+
+
+  <div class="d-flex justify-content-between" style="margin-top: 20px">
+    <div class="categories-statistic-container">
+      <h3 class="text-center">Number of books by category</h3>
+      <div id="chart" style="max-width: 650px;">
+        <apx-chart [series]="ChartOptionsTopCategories.series" [chart]="ChartOptionsTopCategories.chart"
+          [dataLabels]="ChartOptionsTopCategories.dataLabels" [plotOptions]="ChartOptionsTopCategories.plotOptions"
+          [yaxis]="ChartOptionsTopCategories.yaxis" [xaxis]="ChartOptionsTopCategories.xaxis"
+          [legend]="ChartOptionsTopCategories.legend" [colors]="ChartOptionsTopCategories.colors"
+          [grid]="ChartOptionsTopCategories.grid"></apx-chart>
+      </div>
+    </div>
+
+    <div class="container-categories-sub-lib" style="height: 418px">
+      <h3 class="text-center">Total SUBMITTED and IN_LIBRARY books</h3>
+      <div id="chart2" style="margin: auto;">
+        <apx-chart [series]="[this.countOfSubmittedBooks, this.countOfInlibraryBooks]" [chart]="chartOptions.chart"
+          [labels]="chartOptions.labels" [responsive]="chartOptions.responsive"></apx-chart>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between" style="margin-top: 20px">
+    <div class="categories-statistic-container">
+      <h3 class="text-center">Total SUBMITTED books per week</h3>
+      <div id="chart" style="max-width: 650px;">
+
+        <apx-chart [series]="[
+        {
+          name: 'books',
+          data: this.submittedPerWeekCount
+        }
+      ]" [chart]="ChartOptionsSubmittedPerWeek.chart" [dataLabels]="ChartOptionsSubmittedPerWeek.dataLabels"
+          [plotOptions]="ChartOptionsSubmittedPerWeek.plotOptions" [yaxis]="ChartOptionsSubmittedPerWeek.yaxis"
+          [xaxis]="ChartOptionsSubmittedPerWeek.xaxis" [legend]="ChartOptionsSubmittedPerWeek.legend"
+          [colors]="ChartOptionsSubmittedPerWeek.colors" [grid]="ChartOptionsSubmittedPerWeek.grid"></apx-chart>
+      </div>
+
+    </div>
+    <div class="container-up-down-vote">
+      <h3 class="text-center">Top up-vote/down-vote books</h3>
+      <div class="d-flex justify-content-between">
+        <div class="up-vote-container">
+          <a class="up-down-vote-title" href="books/{{this.dashboard.mostUpVotedBook.id}}">
+            <h6>{{this.dashboard.mostUpVotedBook.title}}</h6>
+          </a>
+          <a href="books/{{this.dashboard.mostUpVotedBook.id}}"><img
+              src="{{this.dashboard.mostUpVotedBook.imageLinks.thumbnail}}" alt=""></a>
+          <div class="down-vote-count">
+            <div ng-disabled="buttonClicked" class="btn-success btn-vote">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" fill="currentColor"
+                class="bi bi-arrow-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+              </svg>
+            </div>
+            <span class="up-vs-down-vote">{{this.dashboard.mostUpVotedBook.vote}}</span>
+          </div>
+        </div>
+        <div class="vs d-flex align-items-center">
+          <p style="font-size: 4rem; font-weight: bold;">VS</p>
+        </div>
+        <div class="down-vote-container">
+          <a class="up-down-vote-title" href="books/{{this.dashboard.mostDownVotedBook.id}}">
+            <h6>{{this.dashboard.mostDownVotedBook.title}}</h6>
+          </a>
+          <a href="books/{{this.dashboard.mostDownVotedBook.id}}"><img
+              src="{{this.dashboard.mostDownVotedBook.imageLinks.thumbnail}}" alt=""></a>
+          <div class="down-vote-count">
+            <div class="btn-danger btn-vote">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" fill="currentColor"
+                class="bi bi-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+              </svg>
+            </div>
+            <span class="up-vs-down-vote">{{this.dashboard.mostDownVotedBook.vote}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

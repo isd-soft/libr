@@ -1,0 +1,165 @@
+<div *ngIf="book" class="main-div">
+  <div class="card">
+    <div class="d-flex">
+      <h2 class="title">{{book.title}}</h2>
+      <span class="badge rounded-pill bg-warning text-dark vote-badge">
+      Votes <span class="badge bg-secondary">{{book.vote}}</span>
+    </span>
+    </div><div class="first-card-info">
+      <div class="img-container">
+        <img src="{{book.imageLinks.thumbnail ? book.imageLinks.thumbnail :
+        'https://fully-booked.ap-south-1.linodeobjects.com/catalog/product/placeholder/default/book-placeholder.png'}}"
+             alt="Image of book" class="img-of-book">
+      </div>
+      <div class="first-info-container">
+        <div class="info-about-book">
+          <strong>Authors</strong>
+          <p class="info-book">{{book.authors}}</p>
+        </div>
+        <div class="info-about-book">
+          <strong>Published date</strong>
+          <p class="info-book">{{book.publishedDate}}</p>
+        </div>
+<!--        <div class="info-about-book">-->
+<!--          <strong>Industry Identifiers</strong>-->
+<!--          <p class="info-book">{{book.industryIdentifiers}}</p>-->
+<!--        </div>-->
+        <div class="info-about-book">
+          <strong>Categories</strong>
+          <p class="info-book">{{book.categories}}</p>
+        </div>
+      </div>
+      <div>
+        <div class="info-about-book">
+          <strong>Pages</strong>
+          <p class="info-book">{{book.pageCount}}</p>
+        </div>
+        <div class="info-about-book">
+          <strong>Average Rating</strong>
+          <p class="info-book">{{book.averageRating}}</p>
+        </div>
+        <div class="info-about-book">
+          <strong>Language</strong>
+          <p class="info-book">{{book.language}}</p>
+        </div>
+        <div class="info-about-book">
+          <strong>IndustryIdentifiers</strong>
+          <p class="info-book">Identifier: {{book.industryIdentifiers[0].identifier}},
+        Type: {{book.industryIdentifiers[0].type}}
+          </p>
+        </div>
+      </div>
+      <div style="width: 20%">
+        <div class="info-about-book">
+          <strong>Description:</strong>
+          <p style="max-height: 208px; overflow: auto">{{book.description}}</p>
+      </div>
+    </div>
+    <div class="status-bar">
+
+    </div>
+  </div>
+
+
+    <!--      active, editable, done-->
+    <div class="md-stepper-horizontal orange">
+      <div (click)="this.bookActionResponse = null;getStatusInfo(book.id, 'SUBMITTED')" [ngClass]="{'active' : book.status === 'SUBMITTED' }" data-toggle="modal" data-target="#exampleModalCenter" class="md-step">
+        <div class="md-step-circle"></div>
+        <div class="md-step-title">SUBMITTED</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+      </div>
+      <div (click)="this.bookActionResponse = null; getStatusInfo(book.id, 'APPROVED')" [ngClass]="{'active' : book.status === 'APPROVED' }" data-toggle="modal" data-target="#exampleModalCenter" class="md-step">
+        <div class="md-step-circle"></div>
+        <div class="md-step-title">APPROVED</div>
+        <div class="md-step-optional">Optional</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+      </div>
+      <div (click)="this.bookActionResponse = null;getStatusInfo(book.id, 'ORDERED')" [ngClass]="{'active' : book.status === 'ORDERED' }" data-toggle="modal" data-target="#exampleModalCenter" class="md-step">
+        <div class="md-step-circle"></div>
+        <div class="md-step-title">ORDERED</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+      </div>
+      <div (click)="this.bookActionResponse = null;getStatusInfo(book.id, 'IN_LIBRARY')" [ngClass]="{'active' : book.status === 'IN_LIBRARY' }" data-toggle="modal" data-target="#exampleModalCenter" class="md-step">
+        <div class="md-step-circle"></div>
+        <div class="md-step-title">IN_LIBRARY</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+      </div>
+      <div (click)="this.bookActionResponse = null;getStatusInfo(book.id, 'IN_USE')" [ngClass]="{'active' : book.status === 'IN_USE'}" data-toggle="modal" data-target="#exampleModalCenter" class="md-step">
+        <div class="md-step-circle"></div>
+        <div class="md-step-title">IN_USE</div>
+        <div class="md-step-bar-left"></div>
+        <div class="md-step-bar-right"></div>
+      </div>
+
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">{{this.bookActionResponse ? this.bookActionResponse.status : 'n/a'}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div *ngIf="this.bookActionResponse != null" class="modal-body">
+              <p><strong>By: </strong>{{this.bookActionResponse.firstName}} {{this.bookActionResponse.lastName}}</p>
+              <p><strong>Date: </strong>{{this.bookActionResponse.date}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class = "card comments-container">
+    <div class="form-group textarea-container" style="width: 50%;">
+      <form [formGroup]="formComments" (ngSubmit)="onSubmit(); this.formComments.reset();">
+        <div class="form-group">
+          <label for="comment">Write a comment:</label>
+          <input type="text" formControlName="comment" name="comment" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.comment.errors }" />
+          <div *ngIf="submitted && f.comment.errors" class="invalid-feedback">
+            <div *ngIf="f.comment.errors.required">Comment is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <ul class="comments-list">
+      <li *ngFor="let comment of book.comments" class="comments-item">
+        <span style="display: flex;">
+          <strong class="comment-name">{{comment.userDto.firstName}}  {{comment.userDto.lastName}}</strong>
+          <i style="margin-left: auto">{{comment.date}}</i>
+        </span>
+        <div class="container comment-text" style="padding: 10px">{{comment.comment}}</div>
+        <div class="reaction-container">
+          <div class="reaction-field">
+            <button (click)="addCommentReaction(comment.id, 'HEART')" class="badge rounded-pill bg-light text-dark">
+                    <span>😍 {{comment.reactions.HEART}}
+                    </span>
+            </button>
+            <button (click)="addCommentReaction(comment.id, 'LAUGH')" class="badge rounded-pill bg-light text-dark">
+                    <span>🤣 {{comment.reactions.LAUGH}}
+                    </span>
+            </button >
+            <button (click)="addCommentReaction(comment.id, 'SAD')" class="badge rounded-pill bg-light text-dark">
+                    <span>😢 {{comment.reactions.SAD}}
+                    </span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
